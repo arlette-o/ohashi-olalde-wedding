@@ -12,8 +12,9 @@ import {
   CssBaseline,
   GlobalStyles,
 } from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
+
 import { CountdownTimer } from "../components/countdown";
+import LanguageMenu from "../components/languageMenu";
 
 // ─── Custom Theme ─────────────────────────────────────────────────────────────
 const weddingTheme = createTheme({
@@ -80,6 +81,9 @@ const globalStyles = (
       .location-fade {
         animation: fadeUp 1s ease 1.3s both;
       }
+        .countdown-fade {
+  animation: fadeUp 1s ease 1.6s both;
+}
     `}
   />
 );
@@ -124,8 +128,6 @@ export default function WeddingPage() {
     <ThemeProvider theme={weddingTheme}>
       <CssBaseline />
       {globalStyles}
-
-      {/* ── Full‑viewport Hero ── */}
       <Box
         sx={{
           position: "relative",
@@ -133,19 +135,21 @@ export default function WeddingPage() {
           height: "100vh",
           overflow: "hidden",
           bgcolor: "#0e0d0b",
+          backgroundImage: `url('/Kinosaki.JPG')`,
+          backgroundPosition: "top center",
         }}
       >
-        {/* Background image via CSS so we can animate it cleanly */}
         <Box
           className="hero-bg"
           sx={{
             position: "absolute",
             inset: 0,
+            backgroundImage: `url('/WeddingFrame.png')`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top center",
+            pt: "72px",
 
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
-            transformOrigin: "center center",
-            // subtle dark vignette
             "&::after": {
               content: '""',
               position: "absolute",
@@ -187,13 +191,13 @@ export default function WeddingPage() {
               sx={{ display: { xs: "none", sm: "flex" } }}
             >
               {NAV_ITEMS.map((item) => (
-                <Button key={item} disableRipple>
+                <Button key={item} disableRipple sx={{ color: " #494b25" }}>
                   {item}
                 </Button>
               ))}
             </Stack>
-
-            {/* Language icon */}
+            <LanguageMenu />
+            {/*  Language icon 
             <IconButton
               sx={{
                 border: "1px solid rgba(255,255,255,0.45)",
@@ -205,7 +209,7 @@ export default function WeddingPage() {
               }}
             >
               <LanguageIcon sx={{ fontSize: 18 }} />
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
         </AppBar>
 
@@ -230,9 +234,9 @@ export default function WeddingPage() {
             sx={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
-              fontSize: { xs: "0.8rem", md: "0.9rem" },
+              fontSize: { xs: "0.8rem", md: "1.7rem" },
               letterSpacing: "0.35em",
-              color: "rgba(255,255,255,0.75)",
+              color: "#ffffff",
               textTransform: "uppercase",
               mb: 1.5,
             }}
