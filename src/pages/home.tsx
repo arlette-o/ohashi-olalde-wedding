@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 import {
   Box,
-  Typography,
   AppBar,
   Toolbar,
   Button,
-  IconButton,
   Stack,
   createTheme,
   ThemeProvider,
   CssBaseline,
   GlobalStyles,
 } from "@mui/material";
-
-import { CountdownTimer } from "../components/countdown";
+import { Outlet, useNavigate } from "react-router-dom";
 import LanguageMenu from "../components/languageMenu";
 
-// ─── Custom Theme ─────────────────────────────────────────────────────────────
 const weddingTheme = createTheme({
   palette: {
     mode: "dark",
     primary: { main: "#e8ddd0" },
     background: { default: "#1a1610" },
   },
-  typography: {
-    fontFamily: "'Cormorant Garamond', serif",
-  },
+  typography: { fontFamily: "'Cormorant Garamond', serif" },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -43,15 +37,13 @@ const weddingTheme = createTheme({
   },
 });
 
-// ─── Google Fonts injection ────────────────────────────────────────────────────
 const globalStyles = (
   <GlobalStyles
     styles={`
       @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;600&display=swap');
 
-            *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
-
 
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(28px); }
@@ -66,29 +58,16 @@ const globalStyles = (
         to   { opacity: 1; transform: scale(1); }
       }
 
-      .hero-bg {
-        animation: scaleIn 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      }
-      .nav-fade {
-        animation: fadeIn 1.2s ease 0.4s both;
-      }
-      .date-fade {
-        animation: fadeUp 1s ease 0.7s both;
-      }
-      .title-fade {
-        animation: fadeUp 1s ease 1s both;
-      }
-      .location-fade {
-        animation: fadeUp 1s ease 1.3s both;
-      }
-        .countdown-fade {
-  animation: fadeUp 1s ease 1.6s both;
-}
+      .hero-bg       { animation: scaleIn 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+      .nav-fade      { animation: fadeIn  1.2s ease 0.4s  both; }
+      .date-fade     { animation: fadeUp  1s   ease 0.7s  both; }
+      .title-fade    { animation: fadeUp  1s   ease 1s    both; }
+      .location-fade { animation: fadeUp  1s   ease 1.3s  both; }
+      .countdown-fade{ animation: fadeUp  1s   ease 1.6s  both; }
     `}
   />
 );
 
-// ─── Monogram SVG ──────────────────────────────────────────────────────────────
 const Monogram = () => (
   <svg
     width="46"
@@ -111,12 +90,17 @@ const Monogram = () => (
   </svg>
 );
 
-// ─── Nav Items ─────────────────────────────────────────────────────────────────
-const NAV_ITEMS = ["Our Story", "Travel & Stay", "Registry", "FAQs"];
+const NAV_ITEMS = [
+  { label: "Our Story", path: "ourstory" },
+  { label: "Wedding Info", path: "weddinginfo" },
+  { label: "Travel & Stay", path: "travelstay" },
+  { label: "RSVP", path: "rsvp" },
+  { label: "FAQs", path: "faqs" },
+];
 
-// ─── Main Component ────────────────────────────────────────────────────────────
-export default function WeddingPage() {
+export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -128,142 +112,59 @@ export default function WeddingPage() {
     <ThemeProvider theme={weddingTheme}>
       <CssBaseline />
       {globalStyles}
-      <Box
+
+      <AppBar
+        className="nav-fade"
+        position="fixed"
+        elevation={0}
         sx={{
-          position: "relative",
-          width: "100vw",
-          height: "100vh",
-          overflow: "hidden",
-          bgcolor: "#0e0d0b",
-          backgroundImage: `url('/Kinosaki.JPG')`,
-          backgroundPosition: "top center",
+          left: 0,
+          right: 0,
+          width: "100%",
+          background: scrolled ? "rgba(10,9,8,0.55)" : "transparent",
+          backdropFilter: scrolled ? "blur(10px)" : "none",
+          transition: "background 0.4s ease, backdrop-filter 0.4s ease",
+          px: { xs: 2, md: 4 },
         }}
       >
-        <Box
-          className="hero-bg"
+        <Toolbar
+          disableGutters
           sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url('/WeddingFrame.png')`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "top center",
-            pt: "72px",
-
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.30) 100%)",
-            },
-          }}
-        />
-
-        {/* ── Navbar ── */}
-        <AppBar
-          className="nav-fade"
-          position="absolute"
-          elevation={0}
-          sx={{
-            background: scrolled ? "rgba(10,9,8,0.55)" : "transparent",
-            backdropFilter: scrolled ? "blur(10px)" : "none",
-            transition: "background 0.4s ease, backdrop-filter 0.4s ease",
-            px: { xs: 2, md: 4 },
+            minHeight: { xs: 64, md: 72 },
+            justifyContent: "space-between",
           }}
         >
-          <Toolbar
-            disableGutters
-            sx={{
-              minHeight: { xs: 64, md: 72 },
-              justifyContent: "space-between",
-            }}
+          <Box
+            sx={{ opacity: 0.92, cursor: "pointer" }}
+            onClick={() => navigate("/")}
           >
-            {/* Logo */}
-            <Box sx={{ opacity: 0.92 }}>
-              <Monogram />
-            </Box>
+            <Monogram />
+          </Box>
 
-            {/* Nav links */}
-            <Stack
-              direction="row"
-              spacing={{ xs: 2, md: 4 }}
-              sx={{ display: { xs: "none", sm: "flex" } }}
-            >
-              {NAV_ITEMS.map((item) => (
-                <Button key={item} disableRipple sx={{ color: " #494b25" }}>
-                  {item}
-                </Button>
-              ))}
-            </Stack>
-            <LanguageMenu />
-            {/*  Language icon 
-            <IconButton
-              sx={{
-                border: "1px solid rgba(255,255,255,0.45)",
-                borderRadius: "50%",
-                width: 38,
-                height: 38,
-                color: "rgba(255,255,255,0.85)",
-                "&:hover": { borderColor: "#fff" },
-              }}
-            >
-              <LanguageIcon sx={{ fontSize: 18 }} />
-            </IconButton> */}
-          </Toolbar>
-        </AppBar>
-
-        {/* ── Hero Copy ── */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            px: 2,
-            zIndex: 1,
-          }}
-        >
-          {/* Date */}
-          <Typography
-            className="date-fade"
-            variant="body2"
-            sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: { xs: "0.8rem", md: "1.7rem" },
-              letterSpacing: "0.35em",
-              color: "#ffffff",
-              textTransform: "uppercase",
-              mb: 1.5,
-            }}
+          <Stack
+            direction="row"
+            spacing={{ xs: 2, md: 4 }}
+            sx={{ display: { xs: "none", sm: "flex" } }}
           >
-            06 . 26 . 2027
-          </Typography>
+            {NAV_ITEMS.map((item) => (
+              <Button
+                key={item.label}
+                disableRipple
+                onClick={() => navigate(item.path)}
+                sx={{ color: " #494b25" }}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </Stack>
 
-          {/* Names */}
-          <Typography
-            className="title-fade"
-            component="h1"
-            sx={{
-              fontFamily: "'Cormorant SC', serif",
-              fontWeight: 400,
-              fontSize: { xs: "clamp(2.2rem, 8vw, 5.5rem)" },
-              lineHeight: 1.05,
-              letterSpacing: { xs: "0.06em", md: "0.1em" },
-              color: "#ffffff",
-              textShadow: "0 2px 40px rgba(0,0,0,0.3)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Arlette &amp; Taka
-          </Typography>
+          <LanguageMenu />
+        </Toolbar>
+      </AppBar>
 
-          <CountdownTimer />
-        </Box>
+      {/* Page content renders here */}
+      <Box component="main">
+        <Outlet />
       </Box>
     </ThemeProvider>
   );

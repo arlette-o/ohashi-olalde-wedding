@@ -12,7 +12,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 
 const languages = [
   { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "es", label: "Español", flag: "🇲🇽" },
+  { code: "es", label: "Español", flag: "🇲🇽`" },
   { code: "jp", label: "日本語", flag: "🇯🇵" },
 ];
 
