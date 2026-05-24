@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { CountdownTimer } from "../components/countdown";
+import { useLanguage } from "../context/languageContext";
 
 export default function Weddingpage() {
+  const { lang } = useLanguage();
   return (
     <Box
       sx={{
@@ -15,7 +17,6 @@ export default function Weddingpage() {
         backgroundPosition: "top center",
       }}
     >
-      {/* Decorative frame overlay */}
       <Box
         className="hero-bg"
         sx={{
@@ -63,7 +64,7 @@ export default function Weddingpage() {
             mb: 1.5,
           }}
         >
-          06 . 26 . 2027
+          08 . 22 . 2027
         </Typography>
 
         <Typography
@@ -80,7 +81,7 @@ export default function Weddingpage() {
             whiteSpace: "nowrap",
           }}
         >
-          Arlette &amp; Taka
+          {lang("Home.names")}
         </Typography>
 
         <CountdownTimer />

@@ -11,6 +11,7 @@ import WeddingInfo from "./pages/weddingInfo";
 import OurStory from "./pages/ourStory";
 import RSVP from "./pages/rsvp";
 import Home from "./pages/home";
+import { LanguageProvider } from "./context/languageContext";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>
+  );
 }
 
 export default App;

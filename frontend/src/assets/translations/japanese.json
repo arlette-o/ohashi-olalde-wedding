@@ -1,0 +1,42 @@
+{
+  "Home": {
+    "names": "アルレット と　駿尭",
+    "navItems": {
+      "home": "ホームページ",
+      "ourStory": "私達",
+      "weddingInfo": "結npm 婚式　内容",
+      "travelStay": "宿泊・サービス",
+      "rsvp": "予約",
+      "faqs": "情報"
+    },
+    "time": {
+      "days": "日",
+      "hours": "時間",
+      "mins": "分",
+      "sec": "秒"
+    }
+  },
+  "OurStory": {
+    "ourStory": {
+      "title": "私達の物語",
+      "content": "Taka and Arlette met in this exact hallway at Cal Poly SLO in Engineering East on the first day of their Networks lab in 2019. They had both waited until the last minute to print their lab worksheets. Arlette spotted Taka at a computer with the lab printout pulled up, she approached him and asked if he could print her a copy as well. They walked together over to the lab room and Arlette asked Taka, “Do you have a lab partner for this class?” Taka replied, “No” and Arlette asked, “Well would you like one?” and that is how Arlette and Taka became lab partners."
+    },
+    "theProposal": {
+      "title": "The Proposal",
+      "content": "Taka and Arlette booked a second trip to Japan in 2025. They went shopping in Tokyo, sightseeing in Kyoto and relaxing in Kinosaki. Taka was particularly excited for Kinosaki as he had planned to propose at this beautiful, quiet, hot spring town. He made sure to book a fancy ryokan with all the amenities and peace that money could buy. On the second day of their Kinosaki stay, November 19th, Taka asked Arlette to go for a walk in the surrounding area. They came to a quiet secluded park with a view of the whole town and mountains in the background and breathed in the crisp cool air. He asked Arlette to turn around and reached into his pocket and knelt down. Arlette turned and accepted immediately. They embraced, it was just them two in this beautiful park, only the river and mountains kept them company. The proposal was intimate, peaceful, and the ring was gorgeous."
+    }
+  },
+  "WeddingInfo": {
+    "events": {
+      "ceremony": "Ceremony",
+      "cocktailHour": "Cocktail Hour",
+      "entrance": "Entrance of the Married Couple",
+      "dinner": "Dinner",
+      "party": "Party!",
+      "end": "End of the Night"
+    }
+  },
+  "TravelandStay": {},
+  "RSVP": {},
+  "FAQs": {}
+}

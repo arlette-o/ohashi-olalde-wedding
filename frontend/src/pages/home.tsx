@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import LanguageMenu from "../components/languageMenu";
+import { useLanguage } from "../context/languageContext";
 
 const weddingTheme = createTheme({
   palette: {
@@ -90,23 +91,25 @@ const Monogram = () => (
   </svg>
 );
 
-const NAV_ITEMS = [
-  { label: "Our Story", path: "ourstory" },
-  { label: "Wedding Info", path: "weddinginfo" },
-  { label: "Travel & Stay", path: "travelstay" },
-  { label: "RSVP", path: "rsvp" },
-  { label: "FAQs", path: "faqs" },
-];
-
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const { lang } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const NAV_ITEMS = [
+    { label: lang("Home.navItems.home"), path: "/" },
+    { label: lang("Home.navItems.ourStory"), path: "ourstory" },
+    { label: lang("Home.navItems.weddingInfo"), path: "weddinginfo" },
+    { label: lang("Home.navItems.travelStay"), path: "travelstay" },
+    { label: lang("Home.navItems.rsvp"), path: "rsvp" },
+    { label: lang("Home.navItems.faqs"), path: "faqs" },
+  ];
 
   return (
     <ThemeProvider theme={weddingTheme}>

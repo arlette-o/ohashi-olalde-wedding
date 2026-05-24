@@ -1,7 +1,8 @@
 import { Box, Typography, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../context/languageContext";
 
-const WEDDING_DATE = new Date("2027-06-26T15:00:00");
+const WEDDING_DATE = new Date("2027-08-29T15:00:00");
 
 interface TimeLeft {
   days: number;
@@ -76,6 +77,7 @@ const Dot = () => (
 
 export const CountdownTimer = () => {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
+  const { lang } = useLanguage();
   return (
     <Stack
       className="countdown-fade"
@@ -83,13 +85,13 @@ export const CountdownTimer = () => {
       spacing={{ xs: 1.5, md: 2.5 }}
       sx={{ mt: 4 }}
     >
-      <CountdownUnit value={days} label="Days" />
+      <CountdownUnit value={days} label={lang("Home.time.days")} />
       <Dot />
-      <CountdownUnit value={hours} label="Hours" />
+      <CountdownUnit value={hours} label={lang("Home.time.hours")} />
       <Dot />
-      <CountdownUnit value={minutes} label="Minutes" />
+      <CountdownUnit value={minutes} label={lang("Home.time.mins")} />
       <Dot />
-      <CountdownUnit value={seconds} label="Seconds" />
+      <CountdownUnit value={seconds} label={lang("Home.time.sec")} />
     </Stack>
   );
 };

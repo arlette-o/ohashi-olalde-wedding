@@ -1,6 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 
-// ── Reusable framed image component ──────────────────────────────────────────
+const itemData: { img: string; title: string }[] = [
+  { img: "public/mosaic pics/car1.png", title: "Car ride in 2023" },
+  { img: "public/mosaic pics/kyoto.jpeg", title: "Walking through Tokyo!" },
+  {
+    img: "public/mosaic pics/yosemite1.jpeg",
+    title: "Arlette in Taka in Yosemite",
+  },
+  {
+    img: "public/mosaic pics/yosemite2.jpeg",
+    title: "Arlette and Take in Yosemite",
+  },
+];
+
 const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
   <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
     <Box
@@ -112,7 +124,6 @@ export default function OurStory() {
         }}
       />
 
-      {/* ── Section 2: The Proposal ── */}
       <Box
         sx={{
           display: "grid",
@@ -120,7 +131,6 @@ export default function OurStory() {
           minHeight: "100vh",
         }}
       >
-        {/* Left: text */}
         <Box
           sx={{
             display: "flex",
@@ -157,20 +167,18 @@ export default function OurStory() {
             shopping in Tokyo, sightseeing in Kyoto and relaxing in Kinosaki.
             Taka was particularly excited for Kinosaki as he had planned to
             propose at this beautiful, quiet, hot spring town. He made sure to
-            book a fancy ryokan with all the amenities and peace money could
-            buy. On the second day of their Kinosaki stay, November 19th, Taka
-            asked Arlette to go for a walk in the surrounding area. They came to
-            a quiet secluded park with a view of the whole town and mountains in
-            the background and breathed in the crisp cool air. He asked Arlette
-            to turn around and reached into his pocket and knelt down. Arlette
-            turned and accepted immediately. They embraced, it was just them two
-            in this beautiful park, only the river and mountains kept them
-            company. The proposal was intimate, peaceful, and the ring was
-            gorgeous.
+            book a fancy ryokan with all the amenities and peace that money
+            could buy. On the second day of their Kinosaki stay, November 19th,
+            Taka asked Arlette to go for a walk in the surrounding area. They
+            came to a quiet secluded park with a view of the whole town and
+            mountains in the background and breathed in the crisp cool air. He
+            asked Arlette to turn around and reached into his pocket and knelt
+            down. Arlette turned and accepted immediately. They embraced, it was
+            just them two in this beautiful park, only the river and mountains
+            kept them company. The proposal was intimate, peaceful, and the ring
+            was gorgeous.
           </Typography>
         </Box>
-
-        {/* Right: two stacked photos */}
         <Box
           sx={{
             display: "flex",
@@ -207,6 +215,20 @@ export default function OurStory() {
             <FramedImage src="/proposal-2.jpg" alt="The proposal" />
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ width: 500, height: 450, overflowY: "scroll" }}>
+        <ImageList variant="masonry" cols={3} gap={8}>
+          {itemData.map((item) => (
+            <ImageListItem key={item.img}>
+              <img
+                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`${item.img}?w=248&fit=crop&auto=format`}
+                alt={item.title}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
       </Box>
     </Box>
   );

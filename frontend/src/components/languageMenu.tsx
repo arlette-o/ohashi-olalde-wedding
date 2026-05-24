@@ -9,6 +9,7 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CheckIcon from "@mui/icons-material/Check";
 import LanguageIcon from "@mui/icons-material/Language";
+import { useLanguage, type Language } from "../context/languageContext";
 
 const languages = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -17,6 +18,7 @@ const languages = [
 ];
 
 export default function LanguageMenu() {
+  const { setLanguage } = useLanguage();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selected, setSelected] = useState("en");
 
@@ -51,6 +53,7 @@ export default function LanguageMenu() {
             key={lang.code}
             onClick={() => {
               setSelected(lang.code);
+              setLanguage(lang.code as Language);
               setAnchorEl(null);
             }}
             sx={{
