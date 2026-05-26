@@ -13,6 +13,7 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import LanguageMenu from "../components/languageMenu";
 import { useLanguage } from "../context/languageContext";
+import MonogramIcon from "../components/svg/monogram";
 
 const weddingTheme = createTheme({
   palette: {
@@ -69,28 +70,6 @@ const globalStyles = (
   />
 );
 
-const Monogram = () => (
-  <svg
-    width="46"
-    height="46"
-    viewBox="0 0 46 46"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <text
-      x="3"
-      y="36"
-      fontFamily="'Cormorant Garamond', serif"
-      fontSize="38"
-      fontWeight="300"
-      fill="white"
-      letterSpacing="-4"
-    >
-      AT
-    </text>
-  </svg>
-);
-
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
@@ -141,7 +120,7 @@ export default function Home() {
             sx={{ opacity: 0.92, cursor: "pointer" }}
             onClick={() => navigate("/")}
           >
-            <Monogram />
+            <MonogramIcon />
           </Box>
 
           <Stack

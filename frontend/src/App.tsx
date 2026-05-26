@@ -12,6 +12,7 @@ import OurStory from "./pages/ourStory";
 import RSVP from "./pages/rsvp";
 import Home from "./pages/home";
 import { LanguageProvider } from "./context/languageContext";
+import GuestTable from "./pages/testTable";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "travelstay", element: <TravelAndStay /> },
       { path: "rsvp", element: <RSVP /> },
       { path: "faqs", element: <FAQs /> },
+      { path: "test", element: <GuestTable /> },
     ],
   },
 ]);
