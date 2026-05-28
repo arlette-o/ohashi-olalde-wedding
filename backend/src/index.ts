@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { guestRouter } from "./routes/guestRouter.js";
+import { addCodes } from "./scripts/scripts.js";
 
 dotenv.config();
 const MONGOURL = process.env.MONGO_URL || "";

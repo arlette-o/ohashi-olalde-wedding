@@ -1,7 +1,13 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import RsvpForm from "../components/rsvpform";
+import InviteCodeForm from "../components/inviteCode";
+import { useState } from "react";
 
 export default function RSVP() {
+  const [unlocked, setUnlocked] = useState(
+    () => sessionStorage.getItem("unlocked") === "true",
+  );
+
   return (
     <Grid
       container
@@ -26,7 +32,7 @@ export default function RSVP() {
         </Typography>
       </Grid>
       <Grid size={8}>
-        <RsvpForm />
+        {!unlocked ? <InviteCodeForm setAuth={setUnlocked} /> : <RsvpForm />}
       </Grid>
     </Grid>
   );

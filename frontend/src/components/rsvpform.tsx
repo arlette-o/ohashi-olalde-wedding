@@ -55,6 +55,10 @@ export default function RsvpForm() {
     display: "block",
   };
 
+  const submitForm = async () => {
+    console.log(name, email, attending, guests);
+  };
+
   return (
     <Box
       sx={{
@@ -90,8 +94,6 @@ export default function RsvpForm() {
             sx={inputSx}
           />
         </Box>
-
-        {/* Email */}
         <Box>
           <Typography sx={labelSx}>Email Address</Typography>
           <TextField
@@ -102,8 +104,6 @@ export default function RsvpForm() {
             sx={inputSx}
           />
         </Box>
-
-        {/* Attending */}
         <Box>
           <FormControl component="fieldset">
             <FormLabel
@@ -210,9 +210,7 @@ export default function RsvpForm() {
         <Button
           fullWidth
           disableElevation
-          onClick={() => {
-            // handle submit
-          }}
+          onClick={submitForm}
           sx={{
             backgroundColor: OLIVE,
             color: "#fff",

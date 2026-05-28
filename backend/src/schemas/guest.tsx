@@ -10,6 +10,7 @@ interface IGuest extends Document {
   guests_accepted: number;
   whatsapp: string;
   line: string;
+  invite_code: string;
 }
 
 const GuestSchema = new Schema<IGuest>(
@@ -23,6 +24,7 @@ const GuestSchema = new Schema<IGuest>(
     email: { type: String, sparse: true, unique: true },
     whatsapp: { type: String },
     line: { type: String },
+    invite_code: { type: String, unique: true },
   },
   { timestamps: true },
 );
