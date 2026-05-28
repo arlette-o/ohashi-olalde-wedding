@@ -18,8 +18,8 @@ export async function getAllGuests(): Promise<Guest[]> {
   return response.json();
 }
 
-export async function postGuestCode(code: string): Promise<Guest[]> {
-  const response = await fetch(`api/guests/${code}`);
+export async function postGuestCode(code: string): Promise<Guest> {
+  const response = await fetch(`/api/guests/${code}`);
   if (!response.ok) {
     throw new Error("Could not find user this code belonged to");
   }

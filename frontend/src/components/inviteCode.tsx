@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { postGuestCode } from "../api/guestAPI";
+import { postGuestCode, type Guest } from "../api/guestAPI";
 
 const OLIVE = "#6b7048";
 const BORDER = "#c8c9b8";
@@ -37,18 +37,24 @@ const inputSx = {
 };
 
 interface Props {
-  setAuth: (value: boolean) => void;
+  setGuest: (value: Guest) => void;
 }
 
-export default function InviteCodeForm({ setAuth }: Props) {
+export default function InviteCodeForm({ setGuest }: Props) {
   const [code, setCode] = useState("");
 
   const submitCode = async () => {
     console.log(code);
     const response = await postGuestCode(code);
-    console.log(response);
-    setAuth(true);
-    sessionStorage.setItem("unlocked", "true");
+    if (!response) {
+      console.log("Bad Code");
+      //Error handling here
+      return;
+    }
+
+    setGuest(response);
+    //setAuth(true);
+    sessionStorage.setItem("guest", JSON.stringify(response));
   };
 
   return (
@@ -83,7 +89,7 @@ export default function InviteCodeForm({ setAuth }: Props) {
           <TextField
             fullWidth
             placeholder="Enter your code"
-            value={name}
+            value={code}
             onChange={(e) => setCode(e.target.value)}
             sx={inputSx}
           />

@@ -14,6 +14,8 @@ export const getGuestInfoByCode = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invite code is required" });
     }
     const guestInfo = await Guest.findOne({ invite_code: code });
+
+    res.status(200).json(guestInfo);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
     console.log(error.message);

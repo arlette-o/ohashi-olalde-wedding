@@ -13,18 +13,23 @@ import {
   type SelectChangeEvent,
 } from "@mui/material";
 import { useState } from "react";
+import type { Guest } from "../api/guestAPI";
 
 const OLIVE = "#6b7048";
 const OLIVE_DARK = "#4f5233";
-const CREAM_BG = "#f0ede8";
+//const CREAM_BG = "#f0ede8";
 const LABEL_COLOR = "#2e2e1f";
 const BORDER = "#c8c9b8";
 
-export default function RsvpForm() {
+interface Props {
+  guest: Guest;
+}
+
+export default function RsvpForm({ guest }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [attending, setAttending] = useState("accepts");
-  const [guests, setGuests] = useState("1");
+  const [guests, setGuests] = useState("0");
 
   const inputSx = {
     "& .MuiOutlinedInput-root": {
@@ -59,6 +64,14 @@ export default function RsvpForm() {
     console.log(name, email, attending, guests);
   };
 
+  const generateMenuItems = (max: number) => {
+    return Array.from({ length: max }, (_, i) => (
+      <MenuItem key={i} value={i}>
+        {i + 1} {i === 0 ? " Guest" : " Guests"}
+      </MenuItem>
+    ));
+  };
+
   return (
     <Box
       sx={{
@@ -85,14 +98,14 @@ export default function RsvpForm() {
         }}
       >
         <Box>
-          <Typography sx={labelSx}>Full Name</Typography>
-          <TextField
+          <Typography sx={labelSx}>Hi {guest.fname}!</Typography>
+          {/* <TextField
             fullWidth
             placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             sx={inputSx}
-          />
+          /> */}
         </Box>
         <Box>
           <Typography sx={labelSx}>Email Address</Typography>
@@ -194,15 +207,7 @@ export default function RsvpForm() {
               "& .MuiSelect-select": { padding: "14px 16px" },
             }}
           >
-            {[1, 2, 3, 4, 5, 6].map((n) => (
-              <MenuItem
-                key={n}
-                value={String(n)}
-                sx={{ fontFamily: "'Georgia', serif" }}
-              >
-                {n} {n === 1 ? "Guest" : "Guests"}
-              </MenuItem>
-            ))}
+            {generateMenuItems(guest.allowed_invitees)}
           </Select>
         </Box>
 

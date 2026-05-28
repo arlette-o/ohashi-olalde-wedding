@@ -1,12 +1,25 @@
 import { Grid, Typography } from "@mui/material";
 import RsvpForm from "../components/rsvpform";
 import InviteCodeForm from "../components/inviteCode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { Guest } from "../api/guestAPI";
 
 export default function RSVP() {
+  const [guest, setGuest] = useState<Guest | null>(() => {
+    const sessionGuest = sessionStorage.getItem("guest");
+    return sessionGuest ? (JSON.parse(sessionGuest) as Guest) : null;
+  });
+  //TODO: Get guest from session storageß
   const [unlocked, setUnlocked] = useState(
     () => sessionStorage.getItem("unlocked") === "true",
   );
+
+  useEffect(() => {
+    if (guest !== null) {
+      setUnlocked(true);
+      sessionStorage.setItem("unlocked", "true");
+    }
+  }, [guest]);
 
   return (
     <Grid
@@ -32,7 +45,11 @@ export default function RSVP() {
         </Typography>
       </Grid>
       <Grid size={8}>
-        {!unlocked ? <InviteCodeForm setAuth={setUnlocked} /> : <RsvpForm />}
+        {!unlocked ? (
+          <InviteCodeForm setGuest={setGuest} />
+        ) : (
+          <RsvpForm guest={guest} />
+        )}
       </Grid>
     </Grid>
   );
