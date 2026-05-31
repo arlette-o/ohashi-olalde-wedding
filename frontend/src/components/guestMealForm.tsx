@@ -13,7 +13,7 @@ import {
   type SelectChangeEvent,
 } from "@mui/material";
 import { useId, useState } from "react";
-import { updateRSVP, type Guest } from "../api/guestAPI";
+import type { Guest } from "../api/guestAPI";
 
 const OLIVE = "#6b7048";
 const OLIVE_DARK = "#4f5233";
@@ -25,11 +25,11 @@ interface Props {
   guest: Guest;
 }
 
-export default function RsvpForm({ guest }: Props) {
+export default function GuestMealForm({ guest }: Props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [attending, setAttending] = useState("accepts");
-  const [guests, setGuests] = useState("1");
-  const [meal, setMeal] = useState("");
-  const [notes, setNotes] = useState("");
+  const [guests, setGuests] = useState("0");
 
   const inputSx = {
     "& .MuiOutlinedInput-root": {
@@ -72,21 +72,15 @@ export default function RsvpForm({ guest }: Props) {
   };
 
   const submitForm = async () => {
-    console.log(guest._id, attending, meal, notes, guests);
-    const payload = { id: guest._id, attending, guests };
-
-    await updateRSVP(payload);
-  };
-
-  const generateMenuItems = (max: number) => {
-    return Array.from({ length: max }, (_, i) => (
-      <MenuItem key={i} value={i + 1}>
-        {i + 1} {i === 0 ? " Guest" : " Guests"}
-      </MenuItem>
-    ));
+    console.log(name, email, attending, guests);
   };
 
   const id = useId();
+  const [value, setValue] = useState("female");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((event.target as HTMLInputElement).value);
+  };
 
   return (
     <Box
@@ -125,11 +119,26 @@ export default function RsvpForm({ guest }: Props) {
               display: "block",
               textAlign: "center",
             }}
-          >
-            Hi {guest.fname}!
-          </Typography>
+          ></Typography>
+          <TextField
+            fullWidth
+            placeholder="Guest name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={inputSx}
+          />
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        {/* <Box>
+          <Typography sx={labelSx}>Email Address</Typography>
+          <TextField
+            fullWidth
+            placeholder="your.email@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={inputSx}
+          />
+        </Box> */}
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           <FormControl component="fieldset">
             <FormLabel
               component="legend"
@@ -148,14 +157,14 @@ export default function RsvpForm({ guest }: Props) {
               sx={{ gap: 3, mt: 0.5 }}
             >
               <FormControlLabel
-                value={true}
+                value="accepts"
                 control={<Radio sx={radioSX} />}
                 label={
                   <Typography sx={radioTextSX}>Joyfully accepts</Typography>
                 }
               />
               <FormControlLabel
-                value={false}
+                value="declines"
                 control={<Radio sx={radioSX} />}
                 label={
                   <Typography sx={radioTextSX}>Regretfully declines</Typography>
@@ -177,17 +186,17 @@ export default function RsvpForm({ guest }: Props) {
             <RadioGroup
               aria-labelledby={`${id}-label`}
               name="meal"
-              value={meal}
-              onChange={(e) => setMeal(e.target.value)}
+              value={value}
+              onChange={handleChange}
             >
               <FormControlLabel
-                value="meat"
+                value="mean"
                 control={<Radio sx={radioSX} />}
                 label="Meat Protein"
                 sx={radioTextSX}
               />
               <FormControlLabel
-                value="veg"
+                value="Vegetarian"
                 control={<Radio sx={radioSX} />}
                 label="Vegetarian"
                 sx={radioTextSX}
@@ -195,45 +204,7 @@ export default function RsvpForm({ guest }: Props) {
             </RadioGroup>
           </FormControl>
         </Box>
-        <Box>
-          <Typography sx={labelSx}>
-            Dietary Restrictions or Allergies
-          </Typography>
-          <TextField
-            fullWidth
-            placeholder="List any allergies or special requests"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            sx={inputSx}
-          />
-        </Box>
 
-        <Box>
-          <Typography sx={labelSx}>Number of Guests</Typography>
-          <Select
-            value={guests}
-            onChange={(e: SelectChangeEvent) => setGuests(e.target.value)}
-            fullWidth
-            sx={{
-              borderRadius: "12px",
-              backgroundColor: "#fff",
-              fontFamily: "'Georgia', serif",
-              fontSize: "1rem",
-              color: LABEL_COLOR,
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: BORDER },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: OLIVE,
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: OLIVE,
-                borderWidth: 1,
-              },
-              "& .MuiSelect-select": { padding: "14px 16px" },
-            }}
-          >
-            {generateMenuItems(guest.allowed_invitees)}
-          </Select>
-        </Box>
         <Button
           fullWidth
           disableElevation

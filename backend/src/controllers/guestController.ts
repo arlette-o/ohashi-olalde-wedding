@@ -21,3 +21,21 @@ export const getGuestInfoByCode = async (req: Request, res: Response) => {
     console.log(error.message);
   }
 };
+
+export const updateGuestRSVPInfo = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { attending, guests } = req.body;
+
+  console.log(id, attending, guests);
+  try {
+    if (!id) throw new Error("Guest ID is required");
+    const update = await Guest.updateOne(
+      { _id: id },
+      { $set: { attending, guests_accepted: guests } },
+    );
+    res.status(200).json(update);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+    console.log(error.message);
+  }
+};

@@ -14,6 +14,11 @@ import DiscoballIcon from "../components/svg/discoBall";
 import ClockIcon from "../components/svg/clock";
 import RingsIcon from "../components/svg/rings";
 
+import PlaceIcon from "@mui/icons-material/Place";
+
+const OLIVE = "#4f5233";
+const BORDER = "#c8c9b8";
+
 const CREAM = "#f5f0e8";
 const GOLD = "#c9bb8e";
 
@@ -180,17 +185,49 @@ export default function WeddingInfo() {
             boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
           }}
         ></Box>
-        <Typography
+        <Box
           sx={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            color: CREAM,
-            letterSpacing: "0.08em",
-            mb: 6,
+            border: `1px solid ${BORDER}`,
+            borderRadius: "16px",
+            p: 3,
+            display: "flex",
+            alignItems: "flex-start",
+            gap: 2,
+            backgroundColor: "#fff",
+            maxWidth: 360,
           }}
         >
-          Via Rapida Oriente #14580 Col. Gpe. Victoria Tijuana B.C.{" "}
-        </Typography>
+          <Box
+            sx={{
+              bgcolor: "#f0efea",
+              borderRadius: "50%",
+              width: 48,
+              height: 48,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
+          </Box>
+          <Box>
+            <Typography
+              sx={{ fontWeight: 700, color: OLIVE, fontSize: "1rem", mb: 0.5 }}
+            >
+              Venue
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              The Garden Estate
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              123 Blossom Lane
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              Napa Valley, CA
+            </Typography>
+          </Box>
+        </Box>
       </Grid>
     </Grid>
   );
