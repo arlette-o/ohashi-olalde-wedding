@@ -1,4 +1,5 @@
 import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
+import { useLanguage } from "../context/languageContext";
 
 const itemData: { img: string; title: string }[] = [
   { img: "public/mosaic pics/car1.png", title: "Car ride in 2023" },
@@ -45,6 +46,8 @@ const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
 );
 
 export default function OurStory() {
+  const { lang } = useLanguage();
+
   return (
     <Box sx={{ bgcolor: "#6a6b4a", pt: "72px" }}>
       {/* ── Section 1: How We Met ── */}
@@ -89,7 +92,7 @@ export default function OurStory() {
               mb: 6,
             }}
           >
-            Our Story
+            {lang("OurStory.ourStory.title")}
           </Typography>
           <Typography
             sx={{
@@ -101,15 +104,7 @@ export default function OurStory() {
               mb: 4,
             }}
           >
-            Taka and Arlette met in this exact hallway at Cal Poly SLO in
-            Engineering East on the first day of their Networks lab in 2019.
-            They had both waited until the last minute to print their lab
-            worksheets. Arlette spotted Taka at a computer with the lab printout
-            pulled up, she approached him and asked if he could print her a copy
-            as well. They walked together over to the lab room and Arlette asked
-            Taka, "Do you have a lab partner for this class?" Taka replied, "No"
-            and Arlette asked, "Well would you like one?" and that is how
-            Arlette and Taka became lab partners.
+            {lang("OurStory.ourStory.content")}
           </Typography>
         </Box>
       </Box>
@@ -151,7 +146,7 @@ export default function OurStory() {
               mb: 6,
             }}
           >
-            The Proposal
+            {lang("OurStory.theProposal.title")}
           </Typography>
           <Typography
             sx={{
@@ -163,20 +158,7 @@ export default function OurStory() {
               mb: 4,
             }}
           >
-            Taka and Arlette booked a second trip to Japan in 2025. They went
-            shopping in Tokyo, sightseeing in Kyoto and relaxing in Kinosaki.
-            Taka was particularly excited for Kinosaki as he had planned to
-            propose at this beautiful, quiet, hot spring town. He made sure to
-            book a fancy ryokan with all the amenities and peace that money
-            could buy. On the second day of their Kinosaki stay, November 19th,
-            Taka asked Arlette to go for a walk in the surrounding area. They
-            came to a quiet secluded park with a view of the whole town and
-            mountains in the background and breathed in the crisp cool air. He
-            asked Arlette to turn around and reached into his pocket and knelt
-            down. Arlette turned and accepted immediately. They embraced, it was
-            just them two in this beautiful park, only the river and mountains
-            kept them company. The proposal was intimate, peaceful, and the ring
-            was gorgeous.
+            {lang("OurStory.theProposal.content")}
           </Typography>
         </Box>
         <Box
