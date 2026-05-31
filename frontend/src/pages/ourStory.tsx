@@ -46,6 +46,7 @@ const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
 );
 
 export default function OurStory() {
+  //Use language context
   const { lang } = useLanguage();
 
   return (
