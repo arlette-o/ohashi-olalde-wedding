@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # --- FRONTEND UI SERVICE ---
+  ui:
+    build: ./frontend    # Path to your local frontend folder
+    ports:
+      - "3000:80"        # Maps localhost:3000 -> container Nginx port 80
+    restart: always
+
+  # --- BACKEND API SERVICE ---
+  backend:
+    build: ./backend     # Path to your local backend folder
+    ports:
+      - "5001:3000"      # Maps localhost:5001 -> container Node/API port 3000
+    environment:
+      - NODE_ENV=development
+      # Seamlessly injects your 3 MongoDB keys straight into memory
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_URL=${MONGO_URL}
+    restart: always

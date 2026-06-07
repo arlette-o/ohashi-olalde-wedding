@@ -1,5 +1,5 @@
 import { SvgIcon, type SvgIconProps } from "@mui/material";
-import discoballUrl from "../../../public/discoball.svg";
+import discoballUrl from "../../../public/DiscoBall.svg";
 
 export default function DiscoballIcon(props: SvgIconProps) {
   return (

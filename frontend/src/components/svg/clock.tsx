@@ -1,5 +1,5 @@
 import { SvgIcon, type SvgIconProps } from "@mui/material";
-import clockUrl from "../../../public/clock.svg";
+import clockUrl from "../../../public/Clock.svg";
 
 export default function ClockIcon(props: SvgIconProps) {
   return (
