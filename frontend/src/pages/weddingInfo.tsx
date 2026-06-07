@@ -76,6 +76,7 @@ export default function WeddingInfo() {
             color: CREAM,
             letterSpacing: "0.08em",
             mb: 6,
+            mt: 8,
           }}
         >
           The Wedding Day Schedule
@@ -172,6 +173,7 @@ export default function WeddingInfo() {
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "flex-start",
+          gap: 7,
         }}
       >
         <Box
@@ -183,23 +185,24 @@ export default function WeddingInfo() {
             height: "50%",
             objectFit: "cover",
             boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+            borderRadius: "16px",
           }}
-        ></Box>
+        />
         <Box
           sx={{
             border: `1px solid ${BORDER}`,
             borderRadius: "16px",
-            p: 3,
+            p: 4,
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
             gap: 2,
             backgroundColor: "#fff",
-            maxWidth: 360,
+            minWidth: 360,
           }}
         >
           <Box
             sx={{
-              bgcolor: "#f0efea",
+              bgcolor: "#f2f1ee",
               borderRadius: "50%",
               width: 48,
               height: 48,
@@ -218,13 +221,56 @@ export default function WeddingInfo() {
               Venue
             </Typography>
             <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              The Garden Estate
+              Hacienda Santa Monica
             </Typography>
             <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              123 Blossom Lane
+              Mesa de Otay, Vía Rápida Ote., Guadalupe Victoria, 22426
             </Typography>
             <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Napa Valley, CA
+              Tijuana, B.C., Mexico
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            border: `1px solid ${BORDER}`,
+            borderRadius: "16px",
+            p: 4,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            backgroundColor: "#fff",
+            minWidth: 360,
+          }}
+        >
+          <Box
+            sx={{
+              bgcolor: "#f2f1ee",
+              borderRadius: "50%",
+              width: 48,
+              height: 48,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
+          </Box>
+          <Box>
+            <Typography
+              sx={{ fontWeight: 700, color: OLIVE, fontSize: "1rem", mb: 0.5 }}
+            >
+              Ceremony & Party
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              Saturday, August 21st,2027
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              4:00pm - 11pm
+            </Typography>
+            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              Tijuana, B.C., Mexico
             </Typography>
           </Box>
         </Box>

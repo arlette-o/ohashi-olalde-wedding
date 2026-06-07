@@ -163,6 +163,32 @@ export default function RsvpForm({ guest }: Props) {
               />
             </RadioGroup>
           </FormControl>
+          <Box>
+            <Typography sx={labelSx}>Number of Total Guests</Typography>
+            <Select
+              value={guests}
+              onChange={(e: SelectChangeEvent) => setGuests(e.target.value)}
+              fullWidth
+              sx={{
+                borderRadius: "12px",
+                backgroundColor: "#fff",
+                fontFamily: "'Georgia', serif",
+                fontSize: "1rem",
+                color: LABEL_COLOR,
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: BORDER },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: OLIVE,
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: OLIVE,
+                  borderWidth: 1,
+                },
+                "& .MuiSelect-select": { padding: "14px 16px" },
+              }}
+            >
+              {generateMenuItems(guest.allowed_invitees)}
+            </Select>
+          </Box>
           <FormControl>
             <FormLabel
               id={`${id}-label`}
@@ -206,33 +232,6 @@ export default function RsvpForm({ guest }: Props) {
             onChange={(e) => setNotes(e.target.value)}
             sx={inputSx}
           />
-        </Box>
-
-        <Box>
-          <Typography sx={labelSx}>Number of Guests</Typography>
-          <Select
-            value={guests}
-            onChange={(e: SelectChangeEvent) => setGuests(e.target.value)}
-            fullWidth
-            sx={{
-              borderRadius: "12px",
-              backgroundColor: "#fff",
-              fontFamily: "'Georgia', serif",
-              fontSize: "1rem",
-              color: LABEL_COLOR,
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: BORDER },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: OLIVE,
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: OLIVE,
-                borderWidth: 1,
-              },
-              "& .MuiSelect-select": { padding: "14px 16px" },
-            }}
-          >
-            {generateMenuItems(guest.allowed_invitees)}
-          </Select>
         </Box>
         <Button
           fullWidth
