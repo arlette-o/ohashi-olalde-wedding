@@ -1,5 +1,5 @@
 import { SvgIcon, type SvgIconProps } from "@mui/material";
-import dinnerPlateUrl from "../../../public/dinnerPlate.svg";
+import dinnerPlateUrl from "../../../public/DinnerPlate.svg";
 
 export default function DinnerPlateIcon(props: SvgIconProps) {
   return (

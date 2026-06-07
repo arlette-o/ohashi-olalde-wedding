@@ -1,5 +1,5 @@
 import { SvgIcon, type SvgIconProps } from "@mui/material";
-import celebrateUrl from "../../../public/celebrate.svg";
+import celebrateUrl from "../../../public/Celebrate.svg";
 
 export default function CelebrateIcon(props: SvgIconProps) {
   return (
