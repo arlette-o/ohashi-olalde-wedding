@@ -78,19 +78,7 @@ export default function RSVP() {
           Please RSVP by June 26, 2027
         </Typography>
       </Grid>
-      <Grid size={4}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            color: "#fff",
-          }}
-        >
-          RSVP
-        </Typography>
-      </Grid>
-      <Grid size={8}>
+      <Grid size={{ xs: 12, md: 8 }}>
         {!isUnlocked || !guest ? (
           <InviteCodeForm setGuest={handleInviteSuccess} />
         ) : (

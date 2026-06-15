@@ -82,7 +82,7 @@ export default function WeddingInfo() {
           The Wedding Day Schedule
         </Typography>
       </Grid>
-      <Grid size={5}>
+      <Grid size={{ xs: 12, md: 5 }}>
         <Timeline sx={{ maxWidth: 700, width: "100%" }}>
           {events.map((event, i) => (
             <TimelineItem key={event.label}>
@@ -166,7 +166,7 @@ export default function WeddingInfo() {
         </Timeline>
       </Grid>
       <Grid
-        size={7}
+        size={{ xs: 12, md: 7 }}
         sx={{
           display: "flex",
           textAlign: "center",
@@ -181,8 +181,9 @@ export default function WeddingInfo() {
           src="/HaciendaSanMon.jpg"
           alt="Hacienda Santa Monica"
           sx={{
-            width: "75%",
-            height: "50%",
+            width: { xs: "100%", md: "75%" },
+            height: "auto",
+            maxHeight: "50vh",
             objectFit: "cover",
             boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
             borderRadius: "16px",
@@ -197,7 +198,7 @@ export default function WeddingInfo() {
             alignItems: "center",
             gap: 2,
             backgroundColor: "#fff",
-            minWidth: 360,
+            minWidth: { xs: 0, sm: 360 },
           }}
         >
           <Box
@@ -240,7 +241,7 @@ export default function WeddingInfo() {
             alignItems: "center",
             gap: 2,
             backgroundColor: "#fff",
-            minWidth: 360,
+            minWidth: { xs: 0, sm: 360 },
           }}
         >
           <Box

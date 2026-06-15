@@ -199,7 +199,7 @@ export default function OurStory() {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ width: 500, height: 450, overflowY: "scroll" }}>
+      <Box sx={{ width: "100%", maxWidth: 500, height: 450, overflowY: "scroll", mx: "auto", px: { xs: 2, md: 0 } }}>
         <ImageList variant="masonry" cols={3} gap={8}>
           {itemData.map((item) => (
             <ImageListItem key={item.img}>
