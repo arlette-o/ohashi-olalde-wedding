@@ -9,7 +9,15 @@ import {
   ThemeProvider,
   CssBaseline,
   GlobalStyles,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  IconButton,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { Outlet, useNavigate } from "react-router-dom";
 import LanguageMenu from "../components/languageMenu";
 import { useLanguage } from "../context/languageContext";
@@ -72,6 +80,7 @@ const globalStyles = (
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const { lang } = useLanguage();
 
@@ -140,9 +149,64 @@ export default function Home() {
             ))}
           </Stack>
 
-          <LanguageMenu />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <LanguageMenu />
+            <IconButton
+              onClick={() => setDrawerOpen(true)}
+              sx={{ display: { xs: "flex", sm: "none" }, color: "#fff" }}
+              aria-label="open menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        PaperProps={{
+          sx: { width: 260, bgcolor: "#1a1610" },
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+          <IconButton
+            onClick={() => setDrawerOpen(false)}
+            sx={{ color: "rgba(255,255,255,0.7)" }}
+            aria-label="close menu"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <List>
+          {NAV_ITEMS.map((item) => (
+            <ListItem key={item.label} disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  navigate(item.path);
+                  setDrawerOpen(false);
+                }}
+                sx={{ px: 3, py: 1.5 }}
+              >
+                <ListItemText
+                  primary={item.label}
+                  slotProps={{
+                    primary: {
+                      sx: {
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1rem",
+                        letterSpacing: "0.08em",
+                        color: "rgba(255,255,255,0.88)",
+                      },
+                    },
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
 
       {/* Page content renders here */}
       <Box component="main">

@@ -81,7 +81,7 @@ export default function WeddingInfo() {
           The Wedding Day
         </Typography>
       </Grid>
-      <Grid size={5}>
+      <Grid size={{ xs: 12, md: 5 }}>
         <Box
           sx={{
             border: `8px solid ${BORDER}`,
@@ -174,7 +174,7 @@ export default function WeddingInfo() {
         </Box>
       </Grid>
       <Grid
-        size={7}
+        size={{ xs: 12, md: 7 }}
         sx={{
           display: "flex",
           textAlign: "center",
