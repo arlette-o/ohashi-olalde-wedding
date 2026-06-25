@@ -13,7 +13,8 @@ export default function RSVP() {
 
   // 2. Derive "unlocked" state directly! No useEffect needed.
   // The form is unlocked if the session says so OR if we have a valid guest in state.
-  const isUnlocked = sessionStorage.getItem("unlocked") === "true" || guest !== null;
+  const isUnlocked =
+    sessionStorage.getItem("unlocked") === "true" || guest !== null;
 
   // 3. Helper function to handle successful invite codes
   const handleInviteSuccess = (authenticatedGuest: Guest) => {
@@ -27,10 +28,11 @@ export default function RSVP() {
       container
       spacing={2}
       sx={{
-        minHeight: "100vh",
+        //minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#6a6b4a",
       }}
     >
       <Grid size={12} sx={{ textAlign: "center", pb: 2, mt: 8 }}>
@@ -78,18 +80,20 @@ export default function RSVP() {
           Please RSVP by June 26, 2027
         </Typography>
       </Grid>
-      <Grid size={4}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            color: "#fff",
-          }}
-        >
-          RSVP
-        </Typography>
-      </Grid>
+      {isUnlocked && (
+        <Grid size={4}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 300,
+              color: "#fff",
+            }}
+          >
+            RSVP
+          </Typography>
+        </Grid>
+      )}
       <Grid size={8}>
         {!isUnlocked || !guest ? (
           <InviteCodeForm setGuest={handleInviteSuccess} />

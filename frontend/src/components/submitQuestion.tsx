@@ -40,22 +40,11 @@ interface Props {
   setGuest: (value: Guest) => void;
 }
 
-export default function InviteCodeForm({ setGuest }: Props) {
-  const [code, setCode] = useState("");
+export default function submitQuestion() {
+  const [email, setEmail] = useState("");
+  const [question, setQuestion] = useState("");
 
-  const submitCode = async () => {
-    console.log(code);
-    const response = await postGuestCode(code);
-    if (!response) {
-      console.log("Bad Code");
-      //Error handling here
-      return;
-    }
-
-    setGuest(response);
-    //setAuth(true);
-    sessionStorage.setItem("guest", JSON.stringify(response));
-  };
+  const submitQuestion = async () => {};
 
   return (
     <Box
@@ -83,21 +72,29 @@ export default function InviteCodeForm({ setGuest }: Props) {
         }}
       >
         <Box>
-          <Typography sx={labelSx}>
-            Enter your Invite Code to proceed
-          </Typography>
+          <Typography sx={labelSx}>Your Email</Typography>
           <TextField
             fullWidth
-            placeholder="Enter your code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             sx={inputSx}
+          />
+        </Box>
+        <Box>
+          <Typography sx={labelSx}>Send Us a Question</Typography>
+          <TextField
+            multiline
+            fullWidth
+            sx={inputSx}
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
           />
         </Box>
         <Button
           fullWidth
           disableElevation
-          onClick={submitCode}
+          onClick={submitQuestion}
           sx={{
             backgroundColor: OLIVE,
             color: "#fff",
@@ -112,7 +109,7 @@ export default function InviteCodeForm({ setGuest }: Props) {
             mt: 0.5,
           }}
         >
-          Submit Code
+          Submit
         </Button>
       </Box>
     </Box>

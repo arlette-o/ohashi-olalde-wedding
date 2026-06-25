@@ -123,7 +123,7 @@ export default function RsvpForm({ guest }: Props) {
               color: LABEL_COLOR,
               mb: 1,
               display: "block",
-              textAlign: "center",
+              textAlign: "left",
             }}
           >
             Hi {guest.fname}!

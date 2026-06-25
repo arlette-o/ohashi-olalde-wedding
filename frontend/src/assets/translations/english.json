@@ -23,7 +23,7 @@
     },
     "theProposal": {
       "title": "The Proposal",
-      "content": "Taka and Arlette booked a second trip to Japan in 2025. They went shopping in Tokyo, sightseeing in Kyoto and relaxing in Kinosaki. Taka was particularly excited for Kinosaki as he had planned to propose at this beautiful, quiet, hot spring town. He made sure to book a fancy ryokan with all the amenities and peace that money could buy. On the second day of their Kinosaki stay, November 19th, Taka asked Arlette to go for a walk in the surrounding area. They came to a quiet secluded park with a view of the whole town and mountains in the background and breathed in the crisp cool air. He asked Arlette to turn around and reached into his pocket and knelt down. Arlette turned and accepted immediately. They embraced, it was just them two in this beautiful park, only the river and mountains kept them company. The proposal was intimate, peaceful, and the ring was gorgeous."
+      "content": "Taka and Arlette booked a second trip to Japan in 2025. They went shopping in Tokyo, sightseeing in Kyoto and relaxing in Kinosaki. Taka was particularly excited for Kinosaki as he had planned to propose at this beautiful, quiet, hot spring town. He made sure to book a fancy ryokan with all the amenities and peace that money could buy. On the second day of their Kinosaki stay, November 19th, Taka asked Arlette to go for a walk in the surrounding area. They came to a quiet secluded park with a view of the whole town and mountains in the background. He asked Arlette to turn around and reached into his pocket and knelt down. Arlette turned and accepted immediately. They embraced, it was just them two in this beautiful park, only the river and mountains kept them company. The proposal was intimate, peaceful, and the ring was gorgeous."
     }
   },
   "WeddingInfo": {
@@ -38,5 +38,12 @@
   },
   "TravelandStay": {},
   "RSVP": {},
-  "FAQs": {}
+  "FAQs": {
+    "Questions": ["Where can I park?", "Test Question 2", "Test Question 3"],
+    "Responses": [
+      "There is onsite parking at Hacienda Santa Monica. There will be security guards watching over cars at all times.",
+      "Test Response 2",
+      "Test Response 3"
+    ]
+  }
 }

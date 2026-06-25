@@ -1,18 +1,42 @@
-import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  IconButton,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Typography,
+} from "@mui/material";
 import { useLanguage } from "../context/languageContext";
+import InfoIcon from "@mui/icons-material/Info";
 
-const itemData: { img: string; title: string }[] = [
-  { img: "public/mosaic pics/car1.png", title: "Car ride in 2023" },
-  { img: "public/mosaic pics/kyoto.jpeg", title: "Walking through Tokyo!" },
-  {
-    img: "public/mosaic pics/yosemite1.jpeg",
-    title: "Arlette in Taka in Yosemite",
-  },
-  {
-    img: "public/mosaic pics/yosemite2.jpeg",
-    title: "Arlette and Take in Yosemite",
-  },
-];
+const itemData: { img: string; title: string; rows?: number; cols?: number }[] =
+  [
+    {
+      img: "public/mosaic pics/car1.png",
+      title: "Car ride in 2023",
+      rows: 1,
+      cols: 2,
+    },
+    {
+      img: "public/mosaic pics/kyoto.jpeg",
+      title: "Walking through Kyoto!",
+      rows: 1,
+      cols: 1,
+    },
+    {
+      img: "public/mosaic pics/yosemite1.jpeg",
+      title: "Arlette and Taka in Yosemite",
+      rows: 1,
+      cols: 1,
+    },
+    {
+      img: "public/mosaic pics/yosemite2.jpeg",
+      title: "Arlette and Taka in Yosemite",
+      rows: 2,
+      cols: 2,
+    },
+  ];
 
 const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
   <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
@@ -45,72 +69,118 @@ const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
   </Box>
 );
 
+function srcset(image: string, size: number, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
+
 export default function OurStory() {
   //Use language context
   const { lang } = useLanguage();
 
   return (
-    <Box sx={{ bgcolor: "#6a6b4a", pt: "72px" }}>
-      {/* ── Section 1: How We Met ── */}
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          minHeight: "calc(100vh - 72px)",
-        }}
-      >
-        {/* Left: photo */}
+    <Grid container spacing={2} sx={{ bgcolor: "#6a6b4a" }}>
+      <Grid size={6} sx={{ minHeight: "60vh", padding: 8, mt: 8 }}>
         <Box
           sx={{
             position: "relative",
-            ml: { xs: 3, md: 8 },
-            mt: { xs: 4, md: 6 },
-            mb: { xs: 4, md: 6 },
-            width: "75%",
-            height: "85%",
+            width: "100%",
+            height: "100%",
           }}
         >
           <FramedImage src="/Hallway.jpg" alt="Where we met" />
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              bgcolor: "rgba(0,0,0,0.45)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              width: "90%",
+              height: "40%",
+              p: 4,
+              borderRadius: 12,
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 300,
+                fontSize: { xs: "2.2rem", md: "3.2rem", lg: "3.8rem" },
+                lineHeight: 1.15,
+                color: "#f5f0e8",
+                mb: 2,
+              }}
+            >
+              {lang("OurStory.ourStory.title")}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 400,
+                fontSize: { xs: "0.95rem", md: "1rem" },
+                lineHeight: 1.8,
+                color: "#f5f0e8",
+              }}
+            >
+              {lang("OurStory.ourStory.content")}
+            </Typography>
+          </Box>
         </Box>
-
-        {/* Right: text */}
+      </Grid>
+      <Grid size={6} sx={{ minHeight: "60vh", padding: 8, mt: 8 }}>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            px: { xs: 4, md: 8 },
-            py: { xs: 6, md: 10 },
+            position: "relative",
+            width: "100%",
+            height: "100%",
           }}
         >
-          <Typography
+          <FramedImage src="/proposal-1.jpg" alt="The proposal" />
+          <Box
             sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: { xs: "2.2rem", md: "3.2rem", lg: "3.8rem" },
-              lineHeight: 1.15,
-              color: "#f5f0e8",
-              mb: 6,
+              position: "absolute",
+              bottom: 0,
+              bgcolor: "rgba(0,0,0,0.45)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              width: "90%",
+              height: "40%",
+              p: 4,
+              borderRadius: 12,
             }}
           >
-            {lang("OurStory.ourStory.title")}
-          </Typography>
-          <Typography
-            sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 400,
-              fontSize: { xs: "0.95rem", md: "1rem" },
-              lineHeight: 1.8,
-              color: "#f5f0e8",
-              mb: 4,
-            }}
-          >
-            {lang("OurStory.ourStory.content")}
-          </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 300,
+                fontSize: { xs: "2.2rem", md: "3.2rem", lg: "3.8rem" },
+                lineHeight: 1.15,
+                color: "#f5f0e8",
+                mb: 2,
+              }}
+            >
+              {lang("OurStory.theProposal.title")}{" "}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 400,
+                fontSize: { xs: "0.95rem", md: "1rem" },
+                lineHeight: 1.8,
+                color: "#f5f0e8",
+              }}
+            >
+              {lang("OurStory.theProposal.content")}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
+      </Grid>
 
-      {/* ── Divider ── */}
       <Box
         sx={{
           width: "80%",
@@ -120,99 +190,115 @@ export default function OurStory() {
         }}
       />
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          minHeight: "100vh",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            px: { xs: 4, md: 8 },
-            py: { xs: 6, md: 10 },
-            order: { xs: 2, md: 1 },
-          }}
-        >
-          <Typography
-            sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: { xs: "2.2rem", md: "3.2rem", lg: "3.8rem" },
-              lineHeight: 1.15,
-              color: "#f5f0e8",
-              mb: 6,
-            }}
-          >
-            {lang("OurStory.theProposal.title")}
-          </Typography>
-          <Typography
-            sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 400,
-              fontSize: { xs: "0.95rem", md: "1rem" },
-              lineHeight: 1.8,
-              color: "#f5f0e8",
-              mb: 4,
-            }}
-          >
-            {lang("OurStory.theProposal.content")}
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            gap: 6,
-            pr: { xs: 3, md: 8 },
-            pl: { xs: 3, md: 4 },
-            py: { xs: 4, md: 8 },
-            order: { xs: 1, md: 2 },
-          }}
-        >
-          {/* Top photo */}
-          <Box
-            sx={{
-              position: "relative",
-              width: "80%",
-              aspectRatio: "3 / 4",
-              alignSelf: "flex-end",
-            }}
-          >
-            <FramedImage src="/proposal-1.jpg" alt="The proposal" />
-          </Box>
-
-          {/* Bottom photo — offset left for a staggered feel */}
-          <Box
-            sx={{
-              position: "relative",
-              width: "80%",
-              aspectRatio: "3 / 4",
-              alignSelf: "flex-start",
-            }}
-          >
-            <FramedImage src="/proposal-2.jpg" alt="The proposal" />
-          </Box>
-        </Box>
-      </Box>
-      <Box sx={{ width: 500, height: 450, overflowY: "scroll" }}>
-        <ImageList variant="masonry" cols={3} gap={8}>
+      <Grid size={12}>
+        <ImageList variant="quilted" cols={3} gap={8}>
           {itemData.map((item) => (
-            <ImageListItem key={item.img}>
+            <ImageListItem
+              key={item.img}
+              cols={item.cols || 1}
+              rows={item.rows || 1}
+              sx={{
+                "&:hover .MuiImageListItemBar-root": {
+                  opacity: 1,
+                },
+              }}
+            >
               <img
                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 src={`${item.img}?w=248&fit=crop&auto=format`}
                 alt={item.title}
                 loading="lazy"
               />
+              <ImageListItemBar
+                title={item.title}
+                //subtitle={item.author}
+                sx={{
+                  opacity: 0,
+                  transition: "opacity 0.3s ease",
+                }}
+              />
             </ImageListItem>
           ))}
         </ImageList>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
+}
+{
+  /*
+  
+<Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            minHeight: "100vh",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              px: { xs: 4, md: 8 },
+              py: { xs: 6, md: 10 },
+              order: { xs: 2, md: 1 },
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 300,
+                fontSize: { xs: "2.2rem", md: "3.2rem", lg: "3.8rem" },
+                lineHeight: 1.15,
+                color: "#f5f0e8",
+                mb: 6,
+              }}
+            >
+             
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 400,
+                fontSize: { xs: "0.95rem", md: "1rem" },
+                lineHeight: 1.8,
+                color: "#f5f0e8",
+                mb: 4,
+              }}
+            >
+            </Typography>
+          </Box>
+        </Box>
+
+
+
+  
+  
+  
+  <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: 6,
+              pr: { xs: 3, md: 8 },
+              pl: { xs: 3, md: 4 },
+              py: { xs: 4, md: 8 },
+              order: { xs: 1, md: 2 },
+            }}
+          >
+            
+
+            
+            <Box
+              sx={{
+                position: "relative",
+                width: "80%",
+                aspectRatio: "3 / 4",
+                alignSelf: "flex-start",
+              }}
+            >
+              <FramedImage src="/proposal-2.jpg" alt="The proposal" />
+            </Box>
+          </Box> */
 }

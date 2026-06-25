@@ -63,8 +63,7 @@ export default function WeddingInfo() {
       sx={{
         minHeight: "100vh",
         display: "flex",
-        //alignItems: "center",
-        //justifyContent: "center",
+        backgroundColor: "#6a6b4a",
       }}
     >
       <Grid size={12}>
@@ -79,91 +78,100 @@ export default function WeddingInfo() {
             mt: 8,
           }}
         >
-          The Wedding Day Schedule
+          The Wedding Day
         </Typography>
       </Grid>
       <Grid size={5}>
-        <Timeline sx={{ maxWidth: 700, width: "100%" }}>
-          {events.map((event, i) => (
-            <TimelineItem key={event.label}>
-              {/* Alternates: even = icon left, odd = icon right */}
-              <TimelineOppositeContent
-                sx={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-end",
-                  mr: 10,
-                }}
-              >
-                <Box
+        <Box
+          sx={{
+            border: `8px solid ${BORDER}`,
+            borderRadius: 12,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Timeline sx={{ maxWidth: 700, width: "100%", mx: "auto" }}>
+            {events.map((event, i) => (
+              <TimelineItem key={event.label}>
+                {/* Alternates: even = icon left, odd = icon right */}
+                <TimelineOppositeContent
                   sx={{
-                    "& svg": {
-                      fontSize: 40,
-                      color: GOLD,
-                      stroke: GOLD,
-                    },
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-end",
+                    mr: 10,
                   }}
                 >
-                  {event.icon}
-                </Box>
-              </TimelineOppositeContent>
-
-              <TimelineSeparator>
-                <TimelineDot
-                  sx={{
-                    bgcolor: "transparent",
-                    border: `2px solid ${GOLD}`,
-                    boxShadow: "none",
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-                {i < events.length - 1 && (
-                  <TimelineConnector
+                  <Box
                     sx={{
-                      bgcolor: GOLD,
-                      opacity: 0.4,
-                      width: "1px",
-                      minHeight: "140px",
+                      "& svg": {
+                        fontSize: 40,
+                        color: GOLD,
+                        stroke: GOLD,
+                      },
+                    }}
+                  >
+                    {event.icon}
+                  </Box>
+                </TimelineOppositeContent>
+
+                <TimelineSeparator>
+                  <TimelineDot
+                    sx={{
+                      bgcolor: "transparent",
+                      border: `2px solid ${GOLD}`,
+                      boxShadow: "none",
+                      width: 20,
+                      height: 20,
                     }}
                   />
-                )}
-              </TimelineSeparator>
+                  {i < events.length - 1 && (
+                    <TimelineConnector
+                      sx={{
+                        bgcolor: GOLD,
+                        opacity: 0.4,
+                        width: "1px",
+                        minHeight: "140px",
+                      }}
+                    />
+                  )}
+                </TimelineSeparator>
 
-              <TimelineContent
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  pb: 4,
-                }}
-              >
-                <Typography
+                <TimelineContent
                   sx={{
-                    fontFamily: "'Cormorant SC', serif",
-                    fontWeight: 400,
-                    fontSize: { xs: "1rem", md: "1.3rem" },
-                    color: CREAM,
-                    letterSpacing: "0.06em",
+                    display: "flex",
+                    flexDirection: "column",
+                    pb: 4,
                   }}
                 >
-                  {event.label}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontStyle: "italic",
-                    fontWeight: 300,
-                    fontSize: "0.85rem",
-                    color: GOLD,
-                    mt: 0.5,
-                  }}
-                >
-                  {event.time}
-                </Typography>
-              </TimelineContent>
-            </TimelineItem>
-          ))}
-        </Timeline>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Cormorant SC', serif",
+                      fontWeight: 400,
+                      fontSize: { xs: "1rem", md: "1.3rem" },
+                      color: CREAM,
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    {event.label}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: "italic",
+                      fontWeight: 300,
+                      fontSize: "0.85rem",
+                      color: GOLD,
+                      mt: 0.5,
+                    }}
+                  >
+                    {event.time}
+                  </Typography>
+                </TimelineContent>
+              </TimelineItem>
+            ))}
+          </Timeline>
+        </Box>
       </Grid>
       <Grid
         size={7}
@@ -176,102 +184,106 @@ export default function WeddingInfo() {
           gap: 7,
         }}
       >
-        <Box
-          component="img"
-          src="/HaciendaSanMon.jpg"
-          alt="Hacienda Santa Monica"
-          sx={{
-            width: "75%",
-            height: "50%",
-            objectFit: "cover",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
-            borderRadius: "16px",
-          }}
-        />
-        <Box
-          sx={{
-            border: `1px solid ${BORDER}`,
-            borderRadius: "16px",
-            p: 4,
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            backgroundColor: "#fff",
-            minWidth: 360,
-          }}
-        >
+        <Box sx={{ border: `8px solid ${BORDER}`, borderRadius: 12 }}>
+          <Box
+            component="img"
+            src="/HaciendaSanMon.jpg"
+            alt="Hacienda Santa Monica"
+            sx={{
+              width: "75%",
+              height: "50%",
+              objectFit: "cover",
+              boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+              borderRadius: "16px",
+            }}
+          />
           <Box
             sx={{
-              bgcolor: "#f2f1ee",
-              borderRadius: "50%",
-              width: 48,
-              height: 48,
+              p: 4,
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
+              gap: 2,
             }}
           >
-            <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
-          </Box>
-          <Box>
-            <Typography
-              sx={{ fontWeight: 700, color: OLIVE, fontSize: "1rem", mb: 0.5 }}
+            <Box
+              sx={{
+                bgcolor: "#f2f1ee",
+                borderRadius: "50%",
+                width: 48,
+                height: 48,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
             >
-              Venue
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Hacienda Santa Monica
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Mesa de Otay, Vía Rápida Ote., Guadalupe Victoria, 22426
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Tijuana, B.C., Mexico
-            </Typography>
+              <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  color: OLIVE,
+                  fontSize: "1rem",
+                  mb: 0.5,
+                }}
+              >
+                Venue
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                Hacienda Santa Monica
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                Mesa de Otay, Vía Rápida Ote., Guadalupe Victoria, 22426
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                Tijuana, B.C., Mexico
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            border: `1px solid ${BORDER}`,
-            borderRadius: "16px",
-            p: 4,
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            backgroundColor: "#fff",
-            minWidth: 360,
-          }}
-        >
           <Box
             sx={{
-              bgcolor: "#f2f1ee",
-              borderRadius: "50%",
-              width: 48,
-              height: 48,
+              p: 4,
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
+              gap: 2,
             }}
           >
-            <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
-          </Box>
-          <Box>
-            <Typography
-              sx={{ fontWeight: 700, color: OLIVE, fontSize: "1rem", mb: 0.5 }}
+            <Box
+              sx={{
+                bgcolor: "#f2f1ee",
+                borderRadius: "50%",
+                width: 48,
+                height: 48,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
             >
-              Ceremony & Party
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Saturday, August 21st,2027
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              4:00pm - 11pm
-            </Typography>
-            <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
-              Tijuana, B.C., Mexico
-            </Typography>
+              <PlaceIcon sx={{ color: OLIVE, fontSize: 24 }} />
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  color: OLIVE,
+                  fontSize: "1rem",
+                  mb: 0.5,
+                }}
+              >
+                Ceremony & Party
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                Saturday, August 21st,2027
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                4:00pm - 11pm
+              </Typography>
+              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+                Tijuana, B.C., Mexico
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Grid>

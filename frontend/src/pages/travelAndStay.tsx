@@ -8,6 +8,7 @@ export default function TravelAndStay() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#6a6b4a",
       }}
     >
       <Typography

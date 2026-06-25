@@ -64,7 +64,7 @@ export default function Weddingpage() {
             mb: 1.5,
           }}
         >
-          08 . 22 . 2027
+          08 . 21 . 2027
         </Typography>
 
         <Typography
