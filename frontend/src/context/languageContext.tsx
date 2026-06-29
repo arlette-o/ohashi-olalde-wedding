@@ -12,7 +12,7 @@ export type Translations = typeof en; // the shape of your JSON
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  lang: (path: string) => string;
+  lang: (path: string) => any;
 }
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
