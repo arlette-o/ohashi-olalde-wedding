@@ -5,7 +5,7 @@ services:
   ui:
     build: ./frontend    # Path to your local frontend folder
     ports:
-      - "3000:80"        # Maps localhost:3000 -> container Nginx port 80
+      - "80:80"          # Maps host port 80 -> container Nginx port 80
     restart: always
 
   # --- BACKEND API SERVICE ---
