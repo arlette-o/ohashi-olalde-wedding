@@ -1,0 +1,13 @@
+arlettetakawedding.com {
+	encode gzip
+
+	# API traffic -> backend Express service
+	handle /api/* {
+		reverse_proxy backend:3000
+	}
+
+	# Everything else -> static frontend (nginx)
+	handle {
+		reverse_proxy ui:80
+	}
+}
