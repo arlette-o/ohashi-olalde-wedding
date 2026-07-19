@@ -11,3 +11,8 @@ arlettetakawedding.com {
 		reverse_proxy ui:80
 	}
 }
+
+# www resolves to the same IP, so it needs its own block or it fails TLS.
+www.arlettetakawedding.com {
+	redir https://arlettetakawedding.com{uri} permanent
+}

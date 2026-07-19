@@ -19,3 +19,6 @@ jobs:
             cd ~/ohashi-olalde-wedding
             git pull origin main
             docker compose up -d --build
+            # Caddy's image never changes, so `up -d` alone won't restart it and
+            # a Caddyfile edit would silently not apply. Recreate it explicitly.
+            docker compose up -d --force-recreate caddy

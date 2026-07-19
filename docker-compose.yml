@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # --- REVERSE PROXY + AUTOMATIC HTTPS ---
   caddy:
@@ -8,7 +6,11 @@ services:
       - "80:80"          # HTTP (ACME challenge + redirect to HTTPS)
       - "443:443"        # HTTPS
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Mount the DIRECTORY, not the file. Docker binds a single-file mount by
+      # inode, and git replaces files rather than editing in place, so a
+      # file mount silently keeps serving the config from when the container
+      # was created. Directory mounts resolve paths live.
+      - ./caddy:/etc/caddy:ro
       - caddy_data:/data       # persists Let's Encrypt certificates across restarts
       - caddy_config:/config
     depends_on:
