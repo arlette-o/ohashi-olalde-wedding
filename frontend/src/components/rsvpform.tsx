@@ -91,12 +91,11 @@ export default function RsvpForm({ guest }: Props) {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "start",
-        p: 2,
+        py: { xs: 2, md: 4 },
       }}
     >
       <Box
@@ -142,10 +141,15 @@ export default function RsvpForm({ guest }: Props) {
               Will you be attending?
             </FormLabel>
             <RadioGroup
-              row
               value={attending}
               onChange={(e) => setAttending(e.target.value)}
-              sx={{ gap: 3, mt: 0.5 }}
+              sx={{
+                // Side by side once there's room; the two labels are too long
+                // to share a line on a phone.
+                flexDirection: { xs: "column", sm: "row" },
+                gap: { xs: 0, sm: 3 },
+                mt: 0.5,
+              }}
             >
               <FormControlLabel
                 value={true}

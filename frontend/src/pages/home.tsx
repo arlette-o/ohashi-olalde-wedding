@@ -50,10 +50,18 @@ const weddingTheme = createTheme({
 const globalStyles = (
   <GlobalStyles
     styles={`
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;600&display=swap');
-
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+      html { scroll-behavior: smooth; }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
 
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(28px); }
@@ -115,7 +123,8 @@ export default function Home() {
           background: scrolled ? "rgba(10,9,8,0.55)" : "transparent",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           transition: "background 0.4s ease, backdrop-filter 0.4s ease",
-          px: { xs: 2, md: 4 },
+          pl: "max(16px, env(safe-area-inset-left))",
+          pr: "max(16px, env(safe-area-inset-right))",
         }}
       >
         <Toolbar
@@ -134,15 +143,20 @@ export default function Home() {
 
           <Stack
             direction="row"
-            spacing={{ xs: 2, md: 4 }}
-            sx={{ display: { xs: "none", sm: "flex" } }}
+            spacing={{ md: 2, lg: 4 }}
+            sx={{ display: { xs: "none", md: "flex" } }}
           >
             {NAV_ITEMS.map((item) => (
               <Button
                 key={item.label}
                 disableRipple
                 onClick={() => navigate(item.path)}
-                sx={{ color: " #494b25" }}
+                sx={{
+                  color: "rgba(255,255,255,0.88)",
+                  whiteSpace: "nowrap",
+                  textShadow: "0 1px 12px rgba(0,0,0,0.55)",
+                  "&:hover": { color: "#fff" },
+                }}
               >
                 {item.label}
               </Button>
@@ -153,7 +167,7 @@ export default function Home() {
             <LanguageMenu />
             <IconButton
               onClick={() => setDrawerOpen(true)}
-              sx={{ display: { xs: "flex", sm: "none" }, color: "#fff" }}
+              sx={{ display: { xs: "flex", md: "none" }, color: "#fff" }}
               aria-label="open menu"
             >
               <MenuIcon />
@@ -166,8 +180,10 @@ export default function Home() {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{
-          sx: { width: 260, bgcolor: "#1a1610" },
+        slotProps={{
+          paper: {
+            sx: { width: { xs: "78vw", sm: 300 }, maxWidth: 320, bgcolor: "#1a1610" },
+          },
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>

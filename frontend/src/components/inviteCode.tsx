@@ -60,12 +60,11 @@ export default function InviteCodeForm({ setGuest }: Props) {
   return (
     <Box
       sx={{
-        minHeight: "60vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "start",
-        p: 2,
+        py: { xs: 2, md: 4 },
       }}
     >
       <Box

@@ -30,12 +30,12 @@ function useCountdown(target: Date): TimeLeft {
 }
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
-  <Box sx={{ textAlign: "center", minWidth: { xs: 52, md: 72 } }}>
+  <Box sx={{ textAlign: "center", minWidth: { xs: 44, sm: 56, md: 72 } }}>
     <Typography
       sx={{
         fontFamily: "'Cormorant SC', serif",
         fontWeight: 300,
-        fontSize: { xs: "2rem", md: "2.8rem" },
+        fontSize: { xs: "1.7rem", sm: "2rem", md: "2.8rem" },
         lineHeight: 1,
         color: "#fff",
         letterSpacing: "0.04em",
@@ -82,8 +82,8 @@ export const CountdownTimer = () => {
     <Stack
       className="countdown-fade"
       direction="row"
-      spacing={{ xs: 1.5, md: 2.5 }}
-      sx={{ mt: 4 }}
+      spacing={{ xs: 0.5, sm: 1.5, md: 2.5 }}
+      sx={{ mt: { xs: 3, md: 4 }, maxWidth: "100%" }}
     >
       <CountdownUnit value={days} label={lang("Home.time.days")} />
       <Dot />

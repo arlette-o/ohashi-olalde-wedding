@@ -5,12 +5,9 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Select,
-  MenuItem,
   Button,
   FormControl,
   FormLabel,
-  type SelectChangeEvent,
 } from "@mui/material";
 import { useId, useState } from "react";
 import type { Guest } from "../api/guestAPI";
@@ -25,11 +22,11 @@ interface Props {
   guest: Guest;
 }
 
-export default function GuestMealForm({ guest }: Props) {
+export default function GuestMealForm(_props: Props) {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email] = useState("");
   const [attending, setAttending] = useState("accepts");
-  const [guests, setGuests] = useState("0");
+  const [guests] = useState("0");
 
   const inputSx = {
     "& .MuiOutlinedInput-root": {

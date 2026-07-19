@@ -8,8 +8,8 @@ export default function Weddingpage() {
     <Box
       sx={{
         position: "relative",
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        minHeight: ["100vh", "100svh"],
         overflow: "hidden",
         bgcolor: "#0e0d0b",
         backgroundImage: `url('/Kinosaki.JPG')`,
@@ -22,7 +22,12 @@ export default function Weddingpage() {
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url('/WeddingFrame.png')`,
+          // The decorative frame is a wide graphic — it shrinks to a sliver on
+          // portrait phones, so only draw it once there's room for it.
+          backgroundImage: {
+            xs: "none",
+            md: `url('/WeddingFrame.png')`,
+          },
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "top center",
@@ -47,7 +52,8 @@ export default function Weddingpage() {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-          px: 2,
+          px: { xs: 3, md: 2 },
+          py: { xs: 10, md: 0 },
           zIndex: 1,
         }}
       >
@@ -73,12 +79,14 @@ export default function Weddingpage() {
           sx={{
             fontFamily: "'Cormorant SC', serif",
             fontWeight: 400,
-            fontSize: "clamp(2.2rem, 8vw, 5.5rem)",
+            fontSize: "clamp(2rem, 8vw, 5.5rem)",
             lineHeight: 1.05,
-            letterSpacing: { xs: "0.06em", md: "0.1em" },
+            letterSpacing: { xs: "0.04em", md: "0.1em" },
             color: "#ffffff",
             textShadow: "0 2px 40px rgba(0,0,0,0.3)",
-            whiteSpace: "nowrap",
+            // Long names ("Arlette & Takanori") overflow a phone on one line.
+            whiteSpace: { xs: "normal", md: "nowrap" },
+            maxWidth: "100%",
           }}
         >
           {lang("Home.names")}

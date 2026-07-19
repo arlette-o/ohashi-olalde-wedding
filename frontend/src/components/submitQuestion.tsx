@@ -1,6 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { postGuestCode, type Guest } from "../api/guestAPI";
 
 const OLIVE = "#6b7048";
 const BORDER = "#c8c9b8";
@@ -36,11 +35,7 @@ const inputSx = {
   },
 };
 
-interface Props {
-  setGuest: (value: Guest) => void;
-}
-
-export default function submitQuestion() {
+export default function SubmitQuestion() {
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
 
@@ -49,12 +44,11 @@ export default function submitQuestion() {
   return (
     <Box
       sx={{
-        minHeight: "60vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "start",
-        p: 2,
+        py: { xs: 4, md: 6 },
       }}
     >
       <Box

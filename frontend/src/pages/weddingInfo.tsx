@@ -64,6 +64,11 @@ export default function WeddingInfo() {
         minHeight: "100vh",
         display: "flex",
         backgroundColor: "#6a6b4a",
+        px: { xs: 2, sm: 3, md: 6 },
+        pt: { xs: 10, md: 12 },
+        pb: { xs: 6, md: 10 },
+        mx: 0,
+        width: "100%",
       }}
     >
       <Grid size={12}>
@@ -71,11 +76,11 @@ export default function WeddingInfo() {
           sx={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300,
-            fontSize: { xs: "2.4rem", md: "3.5rem" },
+            fontSize: { xs: "2.2rem", md: "3.5rem" },
             color: CREAM,
             letterSpacing: "0.08em",
-            mb: 6,
-            mt: 8,
+            textAlign: "center",
+            mb: { xs: 3, md: 6 },
           }}
         >
           The Wedding Day
@@ -85,12 +90,20 @@ export default function WeddingInfo() {
         <Box
           sx={{
             border: `8px solid ${BORDER}`,
-            borderRadius: 12,
+            borderRadius: "24px",
             display: "flex",
             justifyContent: "center",
+            px: { xs: 0, sm: 1 },
           }}
         >
-          <Timeline sx={{ maxWidth: 700, width: "100%", mx: "auto" }}>
+          <Timeline
+            sx={{
+              maxWidth: 700,
+              width: "100%",
+              mx: "auto",
+              px: { xs: 0, sm: 2 },
+            }}
+          >
             {events.map((event, i) => (
               <TimelineItem key={event.label}>
                 {/* Alternates: even = icon left, odd = icon right */}
@@ -99,13 +112,17 @@ export default function WeddingInfo() {
                     display: "flex",
                     alignItems: "flex-start",
                     justifyContent: "flex-end",
-                    mr: 10,
+                    // Keep the icon gutter narrow on phones so the event
+                    // labels aren't squeezed into a two-word column.
+                    flex: { xs: "0 0 auto", md: 1 },
+                    px: { xs: 1, md: 2 },
+                    mr: { xs: 0, md: 6, lg: 10 },
                   }}
                 >
                   <Box
                     sx={{
                       "& svg": {
-                        fontSize: 40,
+                        fontSize: { xs: 28, md: 40 },
                         color: GOLD,
                         stroke: GOLD,
                       },
@@ -131,7 +148,7 @@ export default function WeddingInfo() {
                         bgcolor: GOLD,
                         opacity: 0.4,
                         width: "1px",
-                        minHeight: "140px",
+                        minHeight: { xs: "70px", md: "140px" },
                       }}
                     />
                   )}
@@ -181,33 +198,45 @@ export default function WeddingInfo() {
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "flex-start",
-          gap: 7,
+          gap: { xs: 4, md: 7 },
+          mt: { xs: 4, md: 0 },
         }}
       >
-        <Box sx={{ border: `8px solid ${BORDER}`, borderRadius: 12 }}>
+        <Box
+          sx={{
+            border: `8px solid ${BORDER}`,
+            borderRadius: "24px",
+            width: "100%",
+            overflow: "hidden",
+            // Cream surface so the olive body text has something to read
+            // against — it was olive-on-olive before.
+            bgcolor: CREAM,
+          }}
+        >
           <Box
             component="img"
             src="/HaciendaSanMon.jpg"
             alt="Hacienda Santa Monica"
             sx={{
-              width: "75%",
-              height: "50%",
+              width: "100%",
+              aspectRatio: "16 / 9",
               objectFit: "cover",
+              display: "block",
               boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
-              borderRadius: "16px",
             }}
           />
           <Box
             sx={{
-              p: 4,
+              p: { xs: 2.5, md: 4 },
               display: "flex",
               alignItems: "center",
+              textAlign: "left",
               gap: 2,
             }}
           >
             <Box
               sx={{
-                bgcolor: "#f2f1ee",
+                bgcolor: "rgba(79,82,51,0.12)",
                 borderRadius: "50%",
                 width: 48,
                 height: 48,
@@ -243,15 +272,16 @@ export default function WeddingInfo() {
           </Box>
           <Box
             sx={{
-              p: 4,
+              p: { xs: 2.5, md: 4 },
               display: "flex",
               alignItems: "center",
+              textAlign: "left",
               gap: 2,
             }}
           >
             <Box
               sx={{
-                bgcolor: "#f2f1ee",
+                bgcolor: "rgba(79,82,51,0.12)",
                 borderRadius: "50%",
                 width: 48,
                 height: 48,

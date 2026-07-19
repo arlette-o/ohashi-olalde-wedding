@@ -248,12 +248,14 @@ export default function GuestTable() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: MUTED, fontSize: 18 }} />
-              </InputAdornment>
-            ),
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: MUTED, fontSize: 18 }} />
+                </InputAdornment>
+              ),
+            },
           }}
           sx={{
             width: { xs: "100%", md: 360 },

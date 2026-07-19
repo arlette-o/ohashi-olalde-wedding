@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import TravelAndStay from "./pages/travelAndStay";
 import FAQs from "./pages/faqs";

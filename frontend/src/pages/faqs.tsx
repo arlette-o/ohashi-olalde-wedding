@@ -27,6 +27,11 @@ export default function FAQs() {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#6a6b4a",
+        px: { xs: 2, sm: 4, md: 6 },
+        pt: { xs: 10, md: 12 },
+        pb: { xs: 6, md: 10 },
+        width: "100%",
+        mx: 0,
       }}
       spacing={2}
     >
@@ -37,14 +42,16 @@ export default function FAQs() {
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300,
             color: "#fff",
-            m: 12,
+            fontSize: { xs: "2rem", md: "3rem" },
+            textAlign: "center",
+            my: { xs: 3, md: 6 },
           }}
         >
           Frequently Asked Questions
         </Typography>
       </Grid>
 
-      <Grid size={8}>
+      <Grid size={{ xs: 12, md: 10, lg: 8 }}>
         <Accordion sx={{ background: "#C5C0AD" }}>
           <AccordionSummary
             expandIcon={<ControlPointIcon sx={{ color: "#2e2e1f" }} />}
@@ -59,13 +66,15 @@ export default function FAQs() {
             <Box
               component="img"
               src="/ColorPalette.png"
+              alt="Wedding colour palette"
               sx={{
-                position: "relative",
-                ml: { xs: 3, md: 8 },
-                mt: { xs: 4, md: 6 },
-                mb: { xs: 4, md: 6 },
+                display: "block",
+                maxWidth: "100%",
+                height: "auto",
+                mx: "auto",
+                my: { xs: 3, md: 6 },
               }}
-            ></Box>
+            />
           </AccordionDetails>
         </Accordion>
 

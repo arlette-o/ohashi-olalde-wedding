@@ -23,7 +23,6 @@ export default function LanguageMenu() {
   const [selected, setSelected] = useState("en");
 
   const open = Boolean(anchorEl);
-  const current = languages.find((lang) => lang.code === selected);
 
   return (
     <>
