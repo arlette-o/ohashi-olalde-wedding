@@ -1,8 +1,0 @@
-services:
-  caddy:
-    ports:
-      - "80:80"
-    volumes:
-      - ./Caddyfile.dev:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
