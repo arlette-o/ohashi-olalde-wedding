@@ -38,6 +38,17 @@ const itemData: { img: string; title: string; rows?: number; cols?: number }[] =
     },
   ];
 
+// Measured from the alpha channel of frame.png (752x971): the lace border
+// occupies these margins, leaving a 90.7% x 92.9% transparent opening. The
+// photo is sized to that opening so it sits *inside* the lace instead of
+// underneath it.
+const OPENING = {
+  left: "4.65%",
+  top: "3.5%",
+  width: "90.7%",
+  height: "92.9%",
+};
+
 const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
   <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
     <Box
@@ -45,8 +56,12 @@ const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
       src={src}
       alt={alt}
       sx={{
-        width: "100%",
-        height: "100%",
+        position: "absolute",
+        // Full-bleed on phones, where the frame overlay is hidden entirely.
+        top: { xs: 0, sm: OPENING.top },
+        left: { xs: 0, sm: OPENING.left },
+        width: { xs: "100%", sm: OPENING.width },
+        height: { xs: "100%", sm: OPENING.height },
         objectFit: "cover",
         display: "block",
         boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
@@ -59,11 +74,12 @@ const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
       aria-hidden="true"
       sx={{
         position: "absolute",
-        inset: "-4%",
-        width: "108%",
-        height: "108%",
+        // The frame defines the outer bounds; stretching it to the container
+        // keeps the opening aligned with the photo at any aspect ratio.
+        inset: 0,
+        width: "100%",
+        height: "100%",
         objectFit: "fill",
-        mixBlendMode: "screen",
         pointerEvents: "none",
         display: { xs: "none", sm: "block" },
       }}
