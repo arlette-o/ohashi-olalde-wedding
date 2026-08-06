@@ -38,35 +38,182 @@
   },
   "TravelandStay": {
     "title": "アクセスと宿泊",
-    "nav": {
-      "travel": "アクセス",
-      "stay": "宿泊"
+    "subtitle": "ティフアナの会場までのご案内",
+    "mapHint": "地図は横にスワイプできます · タップすると大きく表示されます",
+    "fullGuide": "イラスト版ガイドを開く",
+    "jumpTo": {
+      "label": "セクションへ移動",
+      "backToTop": "トップへ戻る",
+      "gettingThere": "会場まで",
+      "finalMiles": "最後の数マイル",
+      "turnByTurn": "道順",
+      "shuttles": "シャトルバス",
+      "stay": "宿泊先",
+      "directions": "会場の場所"
     },
-    "travel": {
-      "title": "アクセス",
-      "subtitle": "会場への行き方",
-      "guides": {
-        "gettingThere": {
-          "title": "会場まで — サンディエゴと国境から",
-          "description": "ティフアナへの入国ガイドです。2つの国境検問所、サンディエゴからの距離と所要時間、出発前に知っておきたいことをまとめました。会場はサン・イシドロ検問所から約15分です。"
-        },
-        "findingTheHacienda": {
-          "title": "最後の数マイル — アシエンダへの道",
-          "description": "国境を越えたら、もうすぐそこです。各検問所やティフアナ空港からの最後の道のり、目印となる建物や出口、会場までの詳しい道順をご案内します。"
-        }
+    "gettingThere": {
+      "title": "会場まで",
+      "subtitle": "サンディエゴと国境から",
+      "facts": [
+        { "value": "15分", "label": "サン・イシドロ検問所から" },
+        { "value": "幹線道路で一直線", "label": "ヴィア・ラピダ通りをまっすぐ" },
+        { "value": "駐車場無料", "label": "会場内・ゲスト全員ご利用いただけます" }
+      ],
+      "bigPicture": {
+        "title": "全体図",
+        "subtitle": "サンディエゴ · 国境 · アシエンダ・サンタモニカ"
       },
-      "shuttle": {
-        "title": "シャトルバス",
-        "description": "ゲストの皆様のためにシャトルバスを手配しています。乗車場所・時間などの詳細は、決まり次第こちらに掲載します。"
+      "distance": {
+        "title": "距離と所要時間",
+        "subtitle": "国境の待ち時間を含まないおおよその目安",
+        "headings": {
+          "start": "出発地",
+          "distance": "距離",
+          "time": "所要時間"
+        },
+        "rows": [
+          {
+            "from": "サン・イシドロ検問所",
+            "note": "州間高速5号線 — メインの検問所",
+            "distance": "8 km · 5 mi",
+            "time": "15分"
+          },
+          {
+            "from": "オタイメサ検問所",
+            "note": "州道905号線 — 比較的空いています",
+            "distance": "7 km · 4.5 mi",
+            "time": "12分"
+          },
+          {
+            "from": "ティフアナ空港 · CBXブリッジ",
+            "note": "サンディエゴから徒歩で越えられます",
+            "distance": "6 km · 4 mi",
+            "time": "10分"
+          },
+          {
+            "from": "チュラビスタ",
+            "note": "I-805号線を南へ",
+            "distance": "24 km · 15 mi",
+            "time": "25分 ＋ 国境"
+          },
+          {
+            "from": "サンディエゴ中心部",
+            "note": "I-5号線を南へ",
+            "distance": "35 km · 22 mi",
+            "time": "30分 ＋ 国境"
+          },
+          {
+            "from": "サンディエゴ国際空港",
+            "note": "I-5号線を南へ",
+            "distance": "40 km · 25 mi",
+            "time": "35分 ＋ 国境"
+          }
+        ],
+        "footnote": "所要時間は目安です。ご出発前に国境の待ち時間をご確認ください。"
+      },
+      "crossing": {
+        "title": "国境を越える",
+        "subtitle": "出発前に知っておきたいこと",
+        "tips": [
+          {
+            "lead": "南下（メキシコ入国）はスムーズです。",
+            "body": "通常5〜15分ほどで、行列になることはほとんどありません。"
+          },
+          {
+            "lead": "帰りは時間がかかります。",
+            "body": "北行き（米国入国）のサン・イシドロでは1〜3時間かかることも。オタイメサの方が早い場合が多いです。"
+          },
+          {
+            "lead": "パスポートをお持ちください。",
+            "body": "パスポートカードでも可。米国へ再入国する際に全員必要です。"
+          },
+          {
+            "lead": "ご自身の車で来られますか？",
+            "body": "メキシコの自動車保険に必ずご加入ください。米国の保険はメキシコでは無効です。"
+          },
+          {
+            "lead": "運転しない場合は？",
+            "body": "米国側に駐車し、PedWestまたはPedEastから徒歩で越えて、正規のタクシーや配車サービスをご利用ください。"
+          },
+          {
+            "lead": "飛行機でお越しの方へ",
+            "body": "CBXブリッジでサンディエゴからティフアナ空港へ直接渡れます。会場までは10分です。"
+          }
+        ]
       }
     },
+    "finalMiles": {
+      "title": "最後の数マイル",
+      "subtitle": "国境を越えたら、もうすぐそこです",
+      "airport": {
+        "title": "空港と会場",
+        "subtitle": "どちらの検問所からも最後のひと区間"
+      },
+      "pleaseNote": {
+        "title": "ご注意ください",
+        "body": "地図アプリには、西へ約5キロのマデロ・スル地区に「Salón Ex Hacienda Santa Mónica」という別の施設も表示されますが、そちらは会場ではありません。会場は空港のすぐ南、ヴィア・ラピダ・オリエンテ沿いの「Hacienda Santa Mónica」です。迷われた場合は、座標 32.5165, -116.9725 をGoogleマップまたはWazeにそのまま入力してください。"
+      },
+      "landmarks": {
+        "title": "目印と出口",
+        "subtitle": "会場周辺で見える景色"
+      },
+      "streetNames": {
+        "intro": "道路標識はスペイン語表記です —",
+        "items": [
+          { "term": "Vía Rápida Poniente", "gloss": "西行き" },
+          { "term": "Vía Rápida Oriente", "gloss": "東行き" },
+          { "term": "Puente Ermita", "gloss": "エルミタ橋" },
+          { "term": "Garita", "gloss": "国境検問所" }
+        ]
+      },
+      "turnByTurn": {
+        "title": "道順のご案内",
+        "subtitle": "2通りの行き方",
+        "routes": [
+          {
+            "title": "サン・イシドロから",
+            "subtitle": "州間高速5号線の検問所",
+            "steps": [
+              "国境を越えたら、右車線を保ちながら Rosarito / Ensenada の標識に従います。",
+              "川沿いの Vía Rápida Oriente に合流し、東へ進みます。",
+              "ソナ・リオ地区を過ぎて、そのまま約10分進みます。",
+              "エルミタ橋（Puente Ermita）を過ぎると、すぐ右手が会場です。"
+            ]
+          },
+          {
+            "title": "オタイメサから",
+            "subtitle": "州道905号線の検問所",
+            "steps": [
+              "オタイの検問所を越え、Blvd. Bellas Artes を南へ進みます。",
+              "標識に従って Blvd. Lázaro Cárdenas とセントラルバスターミナル方面へ。",
+              "ループ状のランプから Vía Rápida に入り、西へ向かいます。",
+              "エルミタ橋の手前、左手が会場です。"
+            ]
+          }
+        ]
+      }
+    },
+    "shuttle": {
+      "title": "シャトルバス",
+      "description": "ゲストの皆様のためにシャトルバスを手配しています。乗車場所・時間などの詳細は、決まり次第こちらに掲載します。"
+    },
     "stay": {
-      "title": "宿泊",
+      "title": "宿泊先",
       "subtitle": "おすすめの宿泊先",
+      "comingSoonTitle": "ホテル・団体予約枠",
       "comingSoon": "おすすめのホテル、団体予約枠、料金の情報を準備中です。近日中に掲載しますので、しばらくお待ちください。",
       "perNight": "1泊あたり",
       "distanceToVenue": "会場から",
       "bookNow": "予約する"
+    },
+    "venue": {
+      "eyebrow": "お待ちしています",
+      "name": "Hacienda Santa Mónica",
+      "address": "Vía Rápida Oriente #14580 · Col. Guadalupe Victoria · ティフアナ, B.C., メキシコ",
+      "coordinates": "32.5165, -116.9725",
+      "phone": "+52 664 647 9294",
+      "googleMaps": "Googleマップで開く",
+      "waze": "Wazeで開く"
     }
   },
   "RSVP": {},

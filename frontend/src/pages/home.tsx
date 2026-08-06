@@ -51,7 +51,14 @@ const globalStyles = (
   <GlobalStyles
     styles={`
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+      html, body, #root { width: 100%; max-width: 100%; }
+      /* Only <html> gets 'hidden' — it propagates to the viewport, which is
+         what actually suppresses sideways scrolling. On <body> and #root the
+         same value would instead make each a scroll container, and that
+         quietly breaks 'position: sticky' for every descendant (the jump bar
+         on Travel & Stay). 'clip' guards the same overflow without one. */
+      html { overflow-x: hidden; }
+      body, #root { overflow-x: clip; }
       html { scroll-behavior: smooth; }
 
       @media (prefers-reduced-motion: reduce) {

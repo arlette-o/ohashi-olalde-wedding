@@ -38,35 +38,182 @@
   },
   "TravelandStay": {
     "title": "Viaje y Hospedaje",
-    "nav": {
-      "travel": "Viaje",
-      "stay": "Hospedaje"
+    "subtitle": "una pequeña guía para encontrarnos en Tijuana",
+    "mapHint": "Desliza el mapa para explorarlo · tócalo para verlo en grande",
+    "fullGuide": "Abrir la guía ilustrada completa",
+    "jumpTo": {
+      "label": "Ir a una sección",
+      "backToTop": "Volver arriba",
+      "gettingThere": "Cómo Llegar",
+      "finalMiles": "Últimas Millas",
+      "turnByTurn": "Paso a Paso",
+      "shuttles": "Transporte",
+      "stay": "Hospedaje",
+      "directions": "Ubicación"
     },
-    "travel": {
-      "title": "Viaje",
-      "subtitle": "cómo llegar a la hacienda",
-      "guides": {
-        "gettingThere": {
-          "title": "Cómo Llegar — Desde San Diego y la Frontera",
-          "description": "Una guía para cruzar a Tijuana: los dos cruces fronterizos, distancias y tiempos de manejo desde San Diego, y lo que conviene saber antes de salir. La hacienda está a unos 15 minutos del cruce de San Ysidro."
-        },
-        "findingTheHacienda": {
-          "title": "Las Últimas Millas — Encontrando la Hacienda",
-          "description": "Una vez que cruzaste, ya casi llegas. Los últimos kilómetros desde cualquiera de los cruces o el aeropuerto de Tijuana, los puntos de referencia y salidas a observar, e indicaciones paso a paso hasta el lugar."
-        }
+    "gettingThere": {
+      "title": "Cómo Llegar",
+      "subtitle": "desde San Diego y la frontera",
+      "facts": [
+        { "value": "15 min", "label": "desde el cruce de San Ysidro" },
+        { "value": "Directo por la vía", "label": "todo derecho por la Vía Rápida" },
+        { "value": "Estacionamiento gratis", "label": "en el lugar para todos los invitados" }
+      ],
+      "bigPicture": {
+        "title": "El Panorama",
+        "subtitle": "San Diego · la frontera · Hacienda Santa Mónica"
       },
-      "shuttle": {
-        "title": "Transporte",
-        "description": "Estamos organizando servicio de transporte para nuestros invitados. Los puntos de salida, horarios y detalles se publicarán aquí pronto."
+      "distance": {
+        "title": "Distancia y Tiempo de Manejo",
+        "subtitle": "aproximado, sin contar la espera en la frontera",
+        "headings": {
+          "start": "Punto de partida",
+          "distance": "Distancia",
+          "time": "Tiempo de manejo"
+        },
+        "rows": [
+          {
+            "from": "Garita de San Ysidro",
+            "note": "Interestatal 5 — el cruce principal",
+            "distance": "8 km · 5 mi",
+            "time": "15 minutos"
+          },
+          {
+            "from": "Garita de Otay Mesa",
+            "note": "Carretera Estatal 905 — suele ser más rápida",
+            "distance": "7 km · 4.5 mi",
+            "time": "12 minutos"
+          },
+          {
+            "from": "Aeropuerto de Tijuana · puente CBX",
+            "note": "se cruza a pie desde San Diego",
+            "distance": "6 km · 4 mi",
+            "time": "10 minutos"
+          },
+          {
+            "from": "Chula Vista",
+            "note": "por la I-805 sur",
+            "distance": "24 km · 15 mi",
+            "time": "25 minutos + frontera"
+          },
+          {
+            "from": "Centro de San Diego",
+            "note": "por la I-5 sur",
+            "distance": "35 km · 22 mi",
+            "time": "30 minutos + frontera"
+          },
+          {
+            "from": "Aeropuerto Intl. de San Diego",
+            "note": "por la I-5 sur",
+            "distance": "40 km · 25 mi",
+            "time": "35 minutos + frontera"
+          }
+        ],
+        "footnote": "Los tiempos son aproximados y pueden cambiar — consulta la espera en la frontera antes de salir."
+      },
+      "crossing": {
+        "title": "Cruzar la Frontera",
+        "subtitle": "algunas cosas que conviene saber antes de salir",
+        "tips": [
+          {
+            "lead": "Ir hacia el sur es rápido.",
+            "body": "Entrar a México normalmente toma de cinco a quince minutos — casi nunca hay fila."
+          },
+          {
+            "lead": "El regreso toma más tiempo.",
+            "body": "La espera hacia el norte en San Ysidro puede ser de una a tres horas; Otay Mesa suele ser más rápida."
+          },
+          {
+            "lead": "Trae tu pasaporte",
+            "body": "o tarjeta de pasaporte — todos lo necesitan para volver a entrar a Estados Unidos."
+          },
+          {
+            "lead": "¿Vienes en tu propio carro?",
+            "body": "Contrata primero un seguro mexicano — las pólizas estadounidenses no son válidas en México."
+          },
+          {
+            "lead": "¿Prefieres no manejar?",
+            "body": "Estaciónate del lado estadounidense, cruza a pie por PedWest o PedEast y toma un taxi autorizado o servicio de aplicación."
+          },
+          {
+            "lead": "¿Llegas en avión?",
+            "body": "El puente CBX conecta San Diego directamente con el aeropuerto de Tijuana — a diez minutos de la hacienda."
+          }
+        ]
       }
     },
+    "finalMiles": {
+      "title": "Las Últimas Millas",
+      "subtitle": "una vez que cruzaste, ya casi llegas",
+      "airport": {
+        "title": "El Aeropuerto y el Lugar",
+        "subtitle": "los últimos kilómetros, desde cualquiera de los cruces"
+      },
+      "pleaseNote": {
+        "title": "Toma nota",
+        "body": "Las aplicaciones de mapas también muestran un Salón Ex Hacienda Santa Mónica unos cinco kilómetros al oeste, en la Col. Madero Sur — ese no es nuestro lugar. El nuestro es la Hacienda Santa Mónica sobre la Vía Rápida Oriente, justo al sur del aeropuerto. Si tienes dudas, pon las coordenadas 32.5165, -116.9725 directamente en Google Maps o Waze."
+      },
+      "landmarks": {
+        "title": "Puntos de Referencia y Salidas",
+        "subtitle": "lo que verás alrededor del lugar"
+      },
+      "streetNames": {
+        "intro": "Así aparecen los nombres en los señalamientos —",
+        "items": [
+          { "term": "Vía Rápida Poniente", "gloss": "hacia el oeste" },
+          { "term": "Vía Rápida Oriente", "gloss": "hacia el este" },
+          { "term": "Puente Ermita", "gloss": "junto a la hacienda" },
+          { "term": "Garita", "gloss": "cruce fronterizo" }
+        ]
+      },
+      "turnByTurn": {
+        "title": "Paso a Paso",
+        "subtitle": "dos formas fáciles de llegar",
+        "routes": [
+          {
+            "title": "Desde San Ysidro",
+            "subtitle": "cruce de la Interestatal 5",
+            "steps": [
+              "Cruza la frontera y sigue los señalamientos hacia Rosarito / Ensenada, manteniéndote a la derecha.",
+              "Incorpórate a la Vía Rápida Oriente junto al canal del río, en dirección este.",
+              "Continúa pasando la Zona Río durante unos diez minutos.",
+              "Pasa el Puente Ermita — la hacienda queda a tu derecha, justo después."
+            ]
+          },
+          {
+            "title": "Desde Otay Mesa",
+            "subtitle": "cruce de la Carretera Estatal 905",
+            "steps": [
+              "Cruza por la garita de Otay y toma hacia el sur por el Blvd. Bellas Artes.",
+              "Sigue los señalamientos hasta el Blvd. Lázaro Cárdenas y la Central de Autobuses.",
+              "Toma el retorno hacia la Vía Rápida, en dirección oeste.",
+              "La hacienda queda a tu izquierda, justo antes del Puente Ermita."
+            ]
+          }
+        ]
+      }
+    },
+    "shuttle": {
+      "title": "Transporte",
+      "description": "Estamos organizando servicio de transporte para nuestros invitados. Los puntos de salida, horarios y detalles se publicarán aquí pronto."
+    },
     "stay": {
-      "title": "Hospedaje",
+      "title": "Dónde Hospedarse",
       "subtitle": "dónde descansar",
+      "comingSoonTitle": "Hoteles y bloques de habitaciones",
       "comingSoon": "Estamos preparando una lista de hoteles recomendados, bloques de habitaciones y precios. ¡Vuelve pronto!",
       "perNight": "por noche",
       "distanceToVenue": "del lugar",
       "bookNow": "Reservar"
+    },
+    "venue": {
+      "eyebrow": "nos vemos ahí",
+      "name": "Hacienda Santa Mónica",
+      "address": "Vía Rápida Oriente #14580 · Col. Guadalupe Victoria · Tijuana, B.C., México",
+      "coordinates": "32.5165, -116.9725",
+      "phone": "+52 664 647 9294",
+      "googleMaps": "Abrir en Google Maps",
+      "waze": "Abrir en Waze"
     }
   },
   "RSVP": {},

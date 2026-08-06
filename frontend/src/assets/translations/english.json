@@ -38,35 +38,182 @@
   },
   "TravelandStay": {
     "title": "Travel & Stay",
-    "nav": {
-      "travel": "Travel",
-      "stay": "Stay"
+    "subtitle": "a little guide to finding us in Tijuana",
+    "mapHint": "Swipe the map to look around · tap to open it full size",
+    "fullGuide": "Open the full illustrated guide",
+    "jumpTo": {
+      "label": "Jump to a section",
+      "backToTop": "Back to top",
+      "gettingThere": "Getting There",
+      "finalMiles": "Final Miles",
+      "turnByTurn": "Turn by Turn",
+      "shuttles": "Shuttles",
+      "stay": "Where to Stay",
+      "directions": "Directions"
     },
-    "travel": {
-      "title": "Travel",
-      "subtitle": "getting to the hacienda",
-      "guides": {
-        "gettingThere": {
-          "title": "Getting There — From San Diego & the Border",
-          "description": "A guide for crossing into Tijuana: both border crossings, distances and drive times from San Diego, and what to know before you set out. The hacienda is about 15 minutes from the San Ysidro crossing."
-        },
-        "findingTheHacienda": {
-          "title": "The Final Miles — Finding the Hacienda",
-          "description": "Once you have crossed, you are almost there. The last few miles from either crossing or the Tijuana airport, the landmarks and exits to watch for, and turn-by-turn directions to the venue."
-        }
+    "gettingThere": {
+      "title": "Getting There",
+      "subtitle": "from San Diego & the border",
+      "facts": [
+        { "value": "15 min", "label": "from the San Ysidro crossing" },
+        { "value": "Freeway direct", "label": "straight down the Vía Rápida" },
+        { "value": "Free parking", "label": "on site for all guests" }
+      ],
+      "bigPicture": {
+        "title": "The Big Picture",
+        "subtitle": "San Diego · the border · Hacienda Santa Mónica"
       },
-      "shuttle": {
-        "title": "Shuttles",
-        "description": "We are arranging shuttle service for our guests. Pick-up points, times, and details will be posted here soon."
+      "distance": {
+        "title": "Distance & Drive Time",
+        "subtitle": "approximate, before any border wait",
+        "headings": {
+          "start": "Starting point",
+          "distance": "Distance",
+          "time": "Drive time"
+        },
+        "rows": [
+          {
+            "from": "San Ysidro Port of Entry",
+            "note": "Interstate 5 — the main crossing",
+            "distance": "5 mi · 8 km",
+            "time": "15 minutes"
+          },
+          {
+            "from": "Otay Mesa Port of Entry",
+            "note": "State Route 905 — often quicker",
+            "distance": "4.5 mi · 7 km",
+            "time": "12 minutes"
+          },
+          {
+            "from": "Tijuana Airport · CBX bridge",
+            "note": "walk across from San Diego",
+            "distance": "4 mi · 6 km",
+            "time": "10 minutes"
+          },
+          {
+            "from": "Chula Vista",
+            "note": "via I-805 south",
+            "distance": "15 mi · 24 km",
+            "time": "25 minutes + border"
+          },
+          {
+            "from": "Downtown San Diego",
+            "note": "via I-5 south",
+            "distance": "22 mi · 35 km",
+            "time": "30 minutes + border"
+          },
+          {
+            "from": "San Diego Intl. Airport",
+            "note": "via I-5 south",
+            "distance": "25 mi · 40 km",
+            "time": "35 minutes + border"
+          }
+        ],
+        "footnote": "Times are estimates and can change — please check current border waits before you leave."
+      },
+      "crossing": {
+        "title": "Crossing the Border",
+        "subtitle": "a few things worth knowing before you set out",
+        "tips": [
+          {
+            "lead": "Going south is quick.",
+            "body": "Driving into Mexico usually takes only five to fifteen minutes — there is rarely a line."
+          },
+          {
+            "lead": "Coming back takes longer.",
+            "body": "Northbound waits at San Ysidro can run one to three hours; Otay Mesa is often faster."
+          },
+          {
+            "lead": "Bring your passport",
+            "body": "or passport card — everyone needs one to re-enter the United States."
+          },
+          {
+            "lead": "Driving your own car?",
+            "body": "Please arrange Mexican auto insurance first — U.S. policies are not valid in Mexico."
+          },
+          {
+            "lead": "Rather not drive?",
+            "body": "Park on the U.S. side, walk across at PedWest or PedEast, and take an authorized taxi or rideshare."
+          },
+          {
+            "lead": "Flying in?",
+            "body": "The CBX bridge connects San Diego straight into Tijuana Airport — ten minutes from the hacienda."
+          }
+        ]
       }
     },
+    "finalMiles": {
+      "title": "The Final Miles",
+      "subtitle": "once you have crossed, you are almost there",
+      "airport": {
+        "title": "The Airport & the Venue",
+        "subtitle": "the last few miles, from either crossing"
+      },
+      "pleaseNote": {
+        "title": "Please note",
+        "body": "Maps apps also list a Salón Ex Hacienda Santa Mónica about three miles west, in Col. Madero Sur — that is not our venue. Ours is Hacienda Santa Mónica on the Vía Rápida Oriente, just south of the airport. If in doubt, drop the coordinates 32.5165, -116.9725 straight into Google Maps or Waze."
+      },
+      "landmarks": {
+        "title": "Landmarks & Exits",
+        "subtitle": "what you will see around the venue"
+      },
+      "streetNames": {
+        "intro": "Street names are left in Spanish, as they appear on the road signs —",
+        "items": [
+          { "term": "Vía Rápida Poniente", "gloss": "westbound" },
+          { "term": "Vía Rápida Oriente", "gloss": "eastbound" },
+          { "term": "Puente Ermita", "gloss": "Ermita Bridge" },
+          { "term": "Garita", "gloss": "border crossing" }
+        ]
+      },
+      "turnByTurn": {
+        "title": "Turn by Turn",
+        "subtitle": "two easy ways in",
+        "routes": [
+          {
+            "title": "From San Ysidro",
+            "subtitle": "Interstate 5 crossing",
+            "steps": [
+              "Cross the border and follow signs for Rosarito / Ensenada, staying right.",
+              "Merge onto the Vía Rápida Oriente alongside the river channel, heading east.",
+              "Continue past Zona Río for about ten minutes.",
+              "Pass the Ermita Bridge — the hacienda is on your right, just after it."
+            ]
+          },
+          {
+            "title": "From Otay Mesa",
+            "subtitle": "State Route 905 crossing",
+            "steps": [
+              "Cross at the Otay gate and head south on Blvd. Bellas Artes.",
+              "Follow signs down to Blvd. Lázaro Cárdenas and the Central Bus Station.",
+              "Take the loop ramp onto the Vía Rápida, heading west.",
+              "The hacienda is on your left, just before the Ermita Bridge."
+            ]
+          }
+        ]
+      }
+    },
+    "shuttle": {
+      "title": "Shuttles",
+      "description": "We are arranging shuttle service for our guests. Pick-up points, times, and details will be posted here soon."
+    },
     "stay": {
-      "title": "Stay",
+      "title": "Where to Stay",
       "subtitle": "where to rest your head",
+      "comingSoonTitle": "Hotels & room blocks",
       "comingSoon": "We are putting together a list of recommended hotels, room blocks, and pricing. Check back soon!",
       "perNight": "per night",
       "distanceToVenue": "from the venue",
       "bookNow": "Book"
+    },
+    "venue": {
+      "eyebrow": "see you there",
+      "name": "Hacienda Santa Mónica",
+      "address": "Vía Rápida Oriente #14580 · Col. Guadalupe Victoria · Tijuana, B.C., Mexico",
+      "coordinates": "32.5165, -116.9725",
+      "phone": "+52 664 647 9294",
+      "googleMaps": "Open in Google Maps",
+      "waze": "Open in Waze"
     }
   },
   "RSVP": {},
