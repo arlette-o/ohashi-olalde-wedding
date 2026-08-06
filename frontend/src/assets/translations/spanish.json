@@ -36,7 +36,39 @@
       "end": "Despedida"
     }
   },
-  "TravelandStay": {},
+  "TravelandStay": {
+    "title": "Viaje y Hospedaje",
+    "nav": {
+      "travel": "Viaje",
+      "stay": "Hospedaje"
+    },
+    "travel": {
+      "title": "Viaje",
+      "subtitle": "cómo llegar a la hacienda",
+      "guides": {
+        "gettingThere": {
+          "title": "Cómo Llegar — Desde San Diego y la Frontera",
+          "description": "Una guía para cruzar a Tijuana: los dos cruces fronterizos, distancias y tiempos de manejo desde San Diego, y lo que conviene saber antes de salir. La hacienda está a unos 15 minutos del cruce de San Ysidro."
+        },
+        "findingTheHacienda": {
+          "title": "Las Últimas Millas — Encontrando la Hacienda",
+          "description": "Una vez que cruzaste, ya casi llegas. Los últimos kilómetros desde cualquiera de los cruces o el aeropuerto de Tijuana, los puntos de referencia y salidas a observar, e indicaciones paso a paso hasta el lugar."
+        }
+      },
+      "shuttle": {
+        "title": "Transporte",
+        "description": "Estamos organizando servicio de transporte para nuestros invitados. Los puntos de salida, horarios y detalles se publicarán aquí pronto."
+      }
+    },
+    "stay": {
+      "title": "Hospedaje",
+      "subtitle": "dónde descansar",
+      "comingSoon": "Estamos preparando una lista de hoteles recomendados, bloques de habitaciones y precios. ¡Vuelve pronto!",
+      "perNight": "por noche",
+      "distanceToVenue": "del lugar",
+      "bookNow": "Reservar"
+    }
+  },
   "RSVP": {},
   "FAQs": {}
 }
