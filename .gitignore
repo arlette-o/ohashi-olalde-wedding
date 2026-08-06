@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 *.env
 **/.env
+
+# Local dev only. Compose auto-merges this file, and committing it made
+# production load Caddyfile.dev (:80, no TLS), which silently disabled HTTPS.
+docker-compose.override.yml
