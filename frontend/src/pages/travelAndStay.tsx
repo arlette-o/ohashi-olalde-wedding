@@ -72,7 +72,7 @@ interface JumpItem {
 
 /**
  * The pill bar. Sits inline under the page subtitle, then parks below the nav
- * once you scroll past it, so it's reachable from anywhere on a very long page.
+ * once you scroll past it, so it's reachable from anywhere on a very long page
  * The active pill tracks whatever you're currently reading; on phones the row
  * scrolls sideways and keeps that pill in view.
  */
