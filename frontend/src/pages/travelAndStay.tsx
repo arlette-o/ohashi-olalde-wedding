@@ -50,12 +50,16 @@ const ANCHOR_OFFSET = {
   md: `${NAV_H.md + JUMP_BAR_H + 20}px`,
 };
 
-/** The jump targets, in page order. Labels come from `TravelandStay.jumpTo`. */
+/**
+ * The jump targets, in page order. Labels come from `TravelandStay.jumpTo`.
+ * Shuttles has no pill of its own: it now sits near the top inside Getting
+ * There, so a pill for it would stay lit through the maps, drive times and
+ * border tips that follow it — mislabelling most of that section.
+ */
 const SECTIONS = [
   "gettingThere",
   "finalMiles",
   "turnByTurn",
-  "shuttles",
   "stay",
   "directions",
 ] as const;
@@ -615,6 +619,17 @@ export default function TravelAndStay() {
             </Card>
           </Grid>
 
+          {/* Sits up here rather than further down: guests planning how they'll
+              get to the venue want to know a shuttle exists before they start
+              reading maps and drive times. */}
+          <Grid size={12}>
+            <NoteCard
+              icon={<DirectionsBusIcon sx={{ color: OLIVE, fontSize: 24 }} />}
+              title={lang("TravelandStay.shuttle.title")}
+              body={lang("TravelandStay.shuttle.description")}
+            />
+          </Grid>
+
           <Grid size={12}>
             <MapCard
               title={lang("TravelandStay.gettingThere.bigPicture.title")}
@@ -944,15 +959,6 @@ export default function TravelAndStay() {
             <FullGuideLink
               href={FULL_GUIDES.finalMiles}
               label={fullGuideLabel}
-            />
-          </Grid>
-
-          {/* No section heading here, so the grid item carries the anchor. */}
-          <Grid size={12} id="shuttles" sx={{ scrollMarginTop: ANCHOR_OFFSET }}>
-            <NoteCard
-              icon={<DirectionsBusIcon sx={{ color: OLIVE, fontSize: 24 }} />}
-              title={lang("TravelandStay.shuttle.title")}
-              body={lang("TravelandStay.shuttle.description")}
             />
           </Grid>
 
