@@ -47,6 +47,10 @@ const OPENING = {
   height: "92.9%",
 };
 
+// Gap the opening leaves below the photo (100% − top − height). The caption
+// panel anchors here so its bottom edge lands on the photo, not on the lace.
+const OPENING_BOTTOM = "3.6%";
+
 const FramedImage = ({ src, alt }: { src: string; alt: string }) => (
   <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
     <Box
@@ -111,11 +115,14 @@ const StoryPanel = ({
     <Box
       sx={{
         // Overlaps the image on wide screens; sits directly beneath it on
-        // phones, where an overlay would cover the photo entirely.
+        // phones, where an overlay would cover the photo entirely. Anchored to
+        // the frame's opening, not the container, so its bottom-left corner
+        // sits flush on the photo instead of spilling onto the lace border.
         position: { xs: "static", md: "absolute" },
-        bottom: { md: 0 },
-        left: { md: 0 },
-        width: { xs: "100%", md: "90%" },
+        bottom: { md: OPENING_BOTTOM },
+        left: { md: OPENING.left },
+        // 90% of the photo's width, keeping the offset look on the right.
+        width: { xs: "100%", md: "81.6%" },
         bgcolor: "rgba(0,0,0,0.55)",
         backdropFilter: "blur(2px)",
         p: { xs: 2.5, md: 4 },
