@@ -17,6 +17,14 @@
     }
   },
   "OurStory": {
+    "title": "Our Story",
+    "subtitle": "how the two of us got here",
+    "mosaic": [
+      "Car ride in 2023",
+      "Walking through Kyoto!",
+      "Arlette and Taka in Yosemite",
+      "Arlette and Taka in Yosemite"
+    ],
     "ourStory": {
       "title": "Our Story",
       "content": "Taka and Arlette met in this exact hallway at Cal Poly SLO in Engineering East on the first day of their Networks lab in 2019. They had both waited until the last minute to print their lab worksheets. Arlette spotted Taka at a computer with the lab printout pulled up, she approached him and asked if he could print her a copy as well. They walked together over to the lab room and Arlette asked Taka, “Do you have a lab partner for this class?” Taka replied, “No” and Arlette asked, “Well would you like one?” and that is how Arlette and Taka became lab partners."
@@ -27,6 +35,12 @@
     }
   },
   "WeddingInfo": {
+    "title": "The Wedding Day",
+    "subtitle": "how the celebration unfolds",
+    "venueTitle": "Venue",
+    "whenTitle": "Ceremony & Party",
+    "date": "Saturday, August 21, 2027",
+    "time": "4:00 PM – 11:00 PM",
     "events": {
       "ceremony": "Ceremony",
       "cocktailHour": "Cocktail Hour",
@@ -215,13 +229,47 @@
       "waze": "Open in Waze"
     }
   },
-  "RSVP": {},
+  "RSVP": {
+    "title": "RSVP",
+    "deadline": "Please RSVP by June 26, 2027",
+    "invite": {
+      "prompt": "Enter your Invite Code to proceed",
+      "placeholder": "Enter your code",
+      "submit": "Submit Code"
+    },
+    "form": {
+      "greeting": "Hi {name}!",
+      "attending": "Will you be attending?",
+      "accepts": "Joyfully accepts",
+      "declines": "Regretfully declines",
+      "guests": "Number of Total Guests",
+      "guestSingular": "Guest",
+      "guestPlural": "Guests",
+      "meal": "What is your meal preference?",
+      "meat": "Meat Protein",
+      "veg": "Vegetarian",
+      "dietary": "Dietary Restrictions or Allergies",
+      "dietaryPlaceholder": "List any allergies or special requests",
+      "submit": "Submit RSVP"
+    }
+  },
   "FAQs": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "answers to the things we get asked most",
+    "dressCode": "What's the dress code?",
     "Questions": ["Where can I park?", "Test Question 2", "Test Question 3"],
     "Responses": [
       "There is onsite parking at Hacienda Santa Monica. There will be security guards watching over cars at all times.",
       "Test Response 2",
       "Test Response 3"
-    ]
+    ],
+    "ask": {
+      "title": "Still have a question?",
+      "subtitle": "send it our way and we will get back to you",
+      "email": "Your Email",
+      "emailPlaceholder": "Enter your email",
+      "question": "Send Us a Question",
+      "submit": "Submit"
+    }
   }
 }

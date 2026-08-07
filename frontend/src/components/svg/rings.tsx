@@ -4,9 +4,9 @@ import ringsUrl from "../../../public/Rings.svg";
 export default function RingsIcon(props: SvgIconProps) {
   return (
     <SvgIcon
+      viewBox="0 0 54 54"
       {...props}
       sx={{
-        overflow: "visible",
         fill: "none",
         ...props.sx,
       }}

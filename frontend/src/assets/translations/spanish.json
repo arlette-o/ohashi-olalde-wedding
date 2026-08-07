@@ -17,6 +17,14 @@
     }
   },
   "OurStory": {
+    "title": "Nuestra Historia",
+    "subtitle": "cómo llegamos hasta aquí",
+    "mosaic": [
+      "Paseo en carro, 2023",
+      "Caminando por Kioto",
+      "Arlette y Taka en Yosemite",
+      "Arlette y Taka en Yosemite"
+    ],
     "ourStory": {
       "title": "Nuestra Historia",
       "content": "Taka and Arlette met in this exact hallway at Cal Poly SLO in Engineering East on the first day of their Networks lab in 2019. They had both waited until the last minute to print their lab worksheets. Arlette spotted Taka at a computer with the lab printout pulled up, she approached him and asked if he could print her a copy as well. They walked together over to the lab room and Arlette asked Taka, “Do you have a lab partner for this class?” Taka replied, “No” and Arlette asked, “Well would you like one?” and that is how Arlette and Taka became lab partners."
@@ -27,6 +35,12 @@
     }
   },
   "WeddingInfo": {
+    "title": "El Día de la Boda",
+    "subtitle": "así se vivirá la celebración",
+    "venueTitle": "El Lugar",
+    "whenTitle": "Ceremonia y Fiesta",
+    "date": "Sábado, 21 de agosto de 2027",
+    "time": "4:00 PM – 11:00 PM",
     "events": {
       "ceremony": "Ceremonia",
       "cocktailHour": "Coctel de Bienvenida",
@@ -215,6 +229,51 @@
       "waze": "Abrir en Waze"
     }
   },
-  "RSVP": {},
-  "FAQs": {}
+  "RSVP": {
+    "title": "RSVP",
+    "deadline": "Confirma tu asistencia antes del 26 de junio de 2027",
+    "invite": {
+      "prompt": "Ingresa tu código de invitación para continuar",
+      "placeholder": "Escribe tu código",
+      "submit": "Enviar código"
+    },
+    "form": {
+      "greeting": "¡Hola, {name}!",
+      "attending": "¿Nos acompañarás?",
+      "accepts": "Acepta con gusto",
+      "declines": "Lamenta no asistir",
+      "guests": "Número total de invitados",
+      "guestSingular": "invitado",
+      "guestPlural": "invitados",
+      "meal": "¿Cuál es tu preferencia de comida?",
+      "meat": "Carne",
+      "veg": "Vegetariano",
+      "dietary": "Restricciones alimentarias o alergias",
+      "dietaryPlaceholder": "Indica cualquier alergia o petición especial",
+      "submit": "Confirmar asistencia"
+    }
+  },
+  "FAQs": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "respuestas a lo que más nos preguntan",
+    "dressCode": "¿Cuál es el código de vestimenta?",
+    "Questions": [
+      "¿Dónde puedo estacionarme?",
+      "Test Question 2",
+      "Test Question 3"
+    ],
+    "Responses": [
+      "Hay estacionamiento en la Hacienda Santa Mónica, con guardias de seguridad cuidando los autos en todo momento.",
+      "Test Response 2",
+      "Test Response 3"
+    ],
+    "ask": {
+      "title": "¿Tienes otra pregunta?",
+      "subtitle": "envíanosla y te responderemos pronto",
+      "email": "Tu correo",
+      "emailPlaceholder": "Escribe tu correo",
+      "question": "Envíanos tu pregunta",
+      "submit": "Enviar"
+    }
+  }
 }

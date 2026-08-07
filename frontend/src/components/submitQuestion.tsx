@@ -1,41 +1,16 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-
-const OLIVE = "#6b7048";
-const BORDER = "#c8c9b8";
-const OLIVE_DARK = "#4f5233";
-const LABEL_COLOR = "#2e2e1f";
-
-const labelSx = {
-  fontFamily: "'Georgia', serif",
-  fontWeight: 700,
-  fontSize: "1rem",
-  color: LABEL_COLOR,
-  mb: 1,
-  display: "block",
-};
-
-const inputSx = {
-  "& .MuiOutlinedInput-root": {
-    borderRadius: "12px",
-    backgroundColor: "#fff",
-    "& fieldset": { borderColor: BORDER },
-    "&:hover fieldset": { borderColor: OLIVE },
-    "&.Mui-focused fieldset": { borderColor: OLIVE, borderWidth: 1 },
-  },
-  "& .MuiInputBase-input": {
-    fontFamily: "'Georgia', serif",
-    fontSize: "1rem",
-    color: LABEL_COLOR,
-    padding: "14px 16px",
-  },
-  "& .MuiInputBase-input::placeholder": {
-    color: "#aaa",
-    opacity: 1,
-  },
-};
+import { useLanguage } from "../context/languageContext";
+import {
+  formCardSx,
+  inputSx,
+  labelSx,
+  submitButtonSx,
+} from "./formStyles";
+import { CREAM, GOLD } from "../theme/colors";
 
 export default function SubmitQuestion() {
+  const { lang } = useLanguage();
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
 
@@ -45,40 +20,55 @@ export default function SubmitQuestion() {
     <Box
       sx={{
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
         textAlign: "start",
         py: { xs: 4, md: 6 },
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "#f2f1ee",
-          borderRadius: "16px",
-          border: `1px solid ${BORDER}`,
-          boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
-          p: { xs: 3, sm: 5 },
-          width: "100%",
-          maxWidth: 640,
-          display: "flex",
-          flexDirection: "column",
-          gap: 3.5,
-        }}
-      >
+      {/* A little context above the card — it used to float unannounced. */}
+      <Box sx={{ textAlign: "center", mb: 3 }}>
+        <Typography
+          sx={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300,
+            fontSize: { xs: "1.7rem", md: "2.2rem" },
+            color: CREAM,
+            letterSpacing: "0.06em",
+          }}
+        >
+          {lang("FAQs.ask.title")}
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: "italic",
+            fontWeight: 300,
+            fontSize: { xs: "1rem", md: "1.15rem" },
+            color: GOLD,
+            mt: 0.5,
+          }}
+        >
+          {lang("FAQs.ask.subtitle")}
+        </Typography>
+      </Box>
+
+      <Box sx={formCardSx}>
         <Box>
-          <Typography sx={labelSx}>Your Email</Typography>
+          <Typography sx={labelSx}>{lang("FAQs.ask.email")}</Typography>
           <TextField
             fullWidth
-            placeholder="Enter your email"
+            placeholder={lang("FAQs.ask.emailPlaceholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={inputSx}
           />
         </Box>
         <Box>
-          <Typography sx={labelSx}>Send Us a Question</Typography>
+          <Typography sx={labelSx}>{lang("FAQs.ask.question")}</Typography>
           <TextField
             multiline
+            minRows={3}
             fullWidth
             sx={inputSx}
             value={question}
@@ -89,21 +79,9 @@ export default function SubmitQuestion() {
           fullWidth
           disableElevation
           onClick={submitQuestion}
-          sx={{
-            backgroundColor: OLIVE,
-            color: "#fff",
-            fontFamily: "'Georgia', serif",
-            fontWeight: 700,
-            fontSize: "1rem",
-            letterSpacing: "0.04em",
-            borderRadius: "12px",
-            py: 2,
-            textTransform: "none",
-            "&:hover": { backgroundColor: OLIVE_DARK },
-            mt: 0.5,
-          }}
+          sx={submitButtonSx}
         >
-          Submit
+          {lang("FAQs.ask.submit")}
         </Button>
       </Box>
     </Box>

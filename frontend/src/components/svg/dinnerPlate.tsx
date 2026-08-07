@@ -4,9 +4,9 @@ import dinnerPlateUrl from "../../../public/DinnerPlate.svg";
 export default function DinnerPlateIcon(props: SvgIconProps) {
   return (
     <SvgIcon
+      viewBox="0 0 54 54"
       {...props}
       sx={{
-        overflow: "visible",
         fill: "none",
         ...props.sx,
       }}

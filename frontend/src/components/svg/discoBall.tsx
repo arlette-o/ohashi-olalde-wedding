@@ -4,9 +4,9 @@ import discoballUrl from "../../../public/DiscoBall.svg";
 export default function DiscoballIcon(props: SvgIconProps) {
   return (
     <SvgIcon
+      viewBox="0 0 54 54"
       {...props}
       sx={{
-        overflow: "visible",
         fill: "none",
         ...props.sx,
       }}

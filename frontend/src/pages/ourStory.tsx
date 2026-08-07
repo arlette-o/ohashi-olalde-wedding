@@ -9,34 +9,32 @@ import {
   useTheme,
 } from "@mui/material";
 import { useLanguage } from "../context/languageContext";
+import PageHeading from "../components/pageHeading";
+import { PAGE_BG } from "../theme/colors";
 
-const itemData: { img: string; title: string; rows?: number; cols?: number }[] =
-  [
-    {
-      img: "/mosaic pics/car1.png",
-      title: "Car ride in 2023",
-      rows: 1,
-      cols: 2,
-    },
-    {
-      img: "/mosaic pics/kyoto.jpeg",
-      title: "Walking through Kyoto!",
-      rows: 1,
-      cols: 1,
-    },
-    {
-      img: "/mosaic pics/yosemite1.jpeg",
-      title: "Arlette and Taka in Yosemite",
-      rows: 1,
-      cols: 1,
-    },
-    {
-      img: "/mosaic pics/yosemite2.jpeg",
-      title: "Arlette and Taka in Yosemite",
-      rows: 2,
-      cols: 2,
-    },
-  ];
+// Captions live in the translation files (`OurStory.mosaic`), matched by index.
+const itemData: { img: string; rows?: number; cols?: number }[] = [
+  {
+    img: "/mosaic pics/car1.png",
+    rows: 1,
+    cols: 2,
+  },
+  {
+    img: "/mosaic pics/kyoto.jpeg",
+    rows: 1,
+    cols: 1,
+  },
+  {
+    img: "/mosaic pics/yosemite1.jpeg",
+    rows: 1,
+    cols: 1,
+  },
+  {
+    img: "/mosaic pics/yosemite2.jpeg",
+    rows: 2,
+    cols: 2,
+  },
+];
 
 // Measured from the alpha channel of frame.png (752x971): the lace border
 // occupies these margins, leaving a 90.7% x 92.9% transparent opening. The
@@ -159,16 +157,21 @@ export default function OurStory() {
 
   // The quilted mosaic needs fewer columns on a phone or every tile is a stamp.
   const mosaicCols = isMobile ? 2 : 3;
+  const captions: string[] = lang("OurStory.mosaic");
 
   return (
     <Box
       sx={{
-        bgcolor: "#6a6b4a",
-        pt: { xs: 12, md: 16 },
+        bgcolor: PAGE_BG,
+        pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },
         px: { xs: 2, sm: 4, md: 8 },
       }}
     >
+      <PageHeading
+        title={lang("OurStory.title")}
+        subtitle={lang("OurStory.subtitle")}
+      />
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid size={{ xs: 12, md: 6 }}>
           <StoryPanel
@@ -181,8 +184,10 @@ export default function OurStory() {
 
         <Grid size={{ xs: 12, md: 6 }}>
           <StoryPanel
-            src="/proposal-1.jpg"
-            alt="The proposal"
+            // The park in Kinosaki where the proposal happened — a dedicated
+            // proposal photo can swap in here when one is picked.
+            src="/Kinosaki.JPG"
+            alt="Kinosaki, where the proposal happened"
             title={lang("OurStory.theProposal.title")}
             body={lang("OurStory.theProposal.content")}
           />
@@ -202,7 +207,7 @@ export default function OurStory() {
 
         <Grid size={12}>
           <ImageList variant="quilted" cols={mosaicCols} gap={8} sx={{ m: 0 }}>
-            {itemData.map((item) => (
+            {itemData.map((item, i) => (
               <ImageListItem
                 key={item.img}
                 cols={Math.min(item.cols || 1, mosaicCols)}
@@ -216,8 +221,8 @@ export default function OurStory() {
                   "&:hover .MuiImageListItemBar-root": { opacity: 1 },
                 }}
               >
-                <img src={item.img} alt={item.title} loading="lazy" />
-                <ImageListItemBar title={item.title} />
+                <img src={item.img} alt={captions[i]} loading="lazy" />
+                <ImageListItemBar title={captions[i]} />
               </ImageListItem>
             ))}
           </ImageList>

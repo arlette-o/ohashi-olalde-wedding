@@ -4,9 +4,9 @@ import celebrateUrl from "../../../public/Celebrate.svg";
 export default function CelebrateIcon(props: SvgIconProps) {
   return (
     <SvgIcon
+      viewBox="0 0 54 54"
       {...props}
       sx={{
-        overflow: "visible",
         fill: "none",
         ...props.sx,
       }}

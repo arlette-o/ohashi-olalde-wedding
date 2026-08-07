@@ -5,15 +5,16 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PlaceIcon from "@mui/icons-material/Place";
 import { useLanguage } from "../context/languageContext";
-
-const OLIVE = "#4f5233";
-const BORDER = "#c8c9b8";
-const CREAM = "#f5f0e8";
-const GOLD = "#c9bb8e";
-// Gold reads as washed-out on the cream cards, so accents inside a card use
-// this darker mix instead.
-const GOLD_DARK = "#9a8b57";
-const DARK_OLIVE = "#2f3a2b";
+import {
+  BORDER,
+  CREAM,
+  DARK_OLIVE,
+  GOLD,
+  GOLD_DARK,
+  OLIVE,
+  OLIVE_HOVER,
+  PAGE_BG,
+} from "../theme/colors";
 
 const COORDS = "32.5165,-116.9725";
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${COORDS}`;
@@ -45,10 +46,24 @@ const FULL_GUIDES = {
 // both bars or the heading you jumped to lands behind them.
 const NAV_H = { xs: 64, md: 72 };
 const JUMP_BAR_H = 52;
-const ANCHOR_OFFSET = {
-  xs: `${NAV_H.xs + JUMP_BAR_H + 16}px`,
-  md: `${NAV_H.md + JUMP_BAR_H + 20}px`,
+
+/**
+ * Where a jumped-to heading comes to rest, measured from the top of the
+ * viewport. Both `scrollMarginTop` and the scroll-spy read from this: they have
+ * to agree, or the section you just jumped to lands below the spy's line, fails
+ * its test, and the *previous* pill stays lit.
+ */
+const ANCHOR_OFFSET_PX = {
+  xs: NAV_H.xs + JUMP_BAR_H + 16,
+  md: NAV_H.md + JUMP_BAR_H + 20,
 };
+const ANCHOR_OFFSET = {
+  xs: `${ANCHOR_OFFSET_PX.xs}px`,
+  md: `${ANCHOR_OFFSET_PX.md}px`,
+};
+
+/** MUI's `md` breakpoint, so the spy can pick the matching offset above. */
+const MD_QUERY = "(min-width:900px)";
 
 /**
  * The jump targets, in page order. Labels come from `TravelandStay.jumpTo`.
@@ -82,15 +97,21 @@ interface JumpItem {
  */
 const JumpBar = ({ items, label }: { items: JumpItem[]; label: string }) => {
   const [active, setActive] = useState(items[0].id);
-  const barRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const pillRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     const sync = () => {
-      // Measuring the bar's own underside means the spy stays correct whether
-      // or not it has stuck yet, and survives any change to the heights above.
-      const line = (barRef.current?.getBoundingClientRect().bottom ?? 140) + 8;
+      // Built from the same number `scrollMarginTop` uses, so a heading that a
+      // jump has parked always counts as arrived. Measuring the bar's underside
+      // instead would put this line *above* that resting place and leave the
+      // previous pill lit. The slack absorbs fractional scroll offsets and
+      // smooth scrolls that stop a pixel or two short — landing exactly on the
+      // boundary would otherwise flip the highlight back by one.
+      const offset = window.matchMedia(MD_QUERY).matches
+        ? ANCHOR_OFFSET_PX.md
+        : ANCHOR_OFFSET_PX.xs;
+      const line = offset + 24;
       let current = items[0].id;
       for (const item of items) {
         const el = document.getElementById(item.id);
@@ -119,8 +140,13 @@ const JumpBar = ({ items, label }: { items: JumpItem[]; label: string }) => {
     const scroller = scrollerRef.current;
     const pill = pillRefs.current[active];
     if (!scroller || !pill) return;
+    // Centring only means anything when the row overflows, i.e. on phones —
+    // otherwise scrollLeft is pinned at 0 and this is busywork. Skipping it
+    // also avoids firing a redundant scroll request while the page may still
+    // be mid-jump from the click that changed `active`.
+    if (scroller.scrollWidth <= scroller.clientWidth) return;
     // Driving the scroller directly rather than scrollIntoView, so centring a
-    // pill can never nudge the page itself. No-op when the row already fits.
+    // pill can never nudge the page itself.
     scroller.scrollTo({
       left: Math.max(
         0,
@@ -132,7 +158,6 @@ const JumpBar = ({ items, label }: { items: JumpItem[]; label: string }) => {
 
   return (
     <Box
-      ref={barRef}
       component="nav"
       aria-label={label}
       sx={{
@@ -531,7 +556,7 @@ export default function TravelAndStay() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#6a6b4a",
+        backgroundColor: PAGE_BG,
         px: { xs: 2, sm: 3, md: 6 },
         pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },
@@ -1046,7 +1071,7 @@ export default function TravelAndStay() {
                           bgcolor: OLIVE,
                           px: 3,
                           borderRadius: "999px",
-                          "&:hover": { bgcolor: "#3d402a" },
+                          "&:hover": { bgcolor: OLIVE_HOVER },
                         }}
                       >
                         {lang("TravelandStay.stay.bookNow")}

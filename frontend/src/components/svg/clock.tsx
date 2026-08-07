@@ -4,10 +4,9 @@ import clockUrl from "../../../public/Clock.svg";
 export default function ClockIcon(props: SvgIconProps) {
   return (
     <SvgIcon
-      viewBox="-5 0 29 29"
+      viewBox="0 0 54 54"
       {...props}
       sx={{
-        overflow: "visible",
         fill: "none",
         ...props.sx,
       }}
