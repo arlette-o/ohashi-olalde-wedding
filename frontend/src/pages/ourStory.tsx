@@ -121,12 +121,15 @@ const StoryPanel = ({
         position: { xs: "static", md: "absolute" },
         bottom: { md: OPENING_BOTTOM },
         left: { md: OPENING.left },
-        // 90% of the photo's width, keeping the offset look on the right.
-        width: { xs: "100%", md: "81.6%" },
+        // Spans the full opening so the panel's left, right and bottom edges
+        // land exactly on the photo's.
+        width: { xs: "100%", md: OPENING.width },
         bgcolor: "rgba(0,0,0,0.55)",
         backdropFilter: "blur(2px)",
         p: { xs: 2.5, md: 4 },
-        borderRadius: { xs: "0 0 8px 8px", md: "12px" },
+        // Square where it meets the photo's edges; only the free top corners
+        // stay rounded.
+        borderRadius: { xs: "0 0 8px 8px", md: "12px 12px 0 0" },
       }}
     >
       <Typography
