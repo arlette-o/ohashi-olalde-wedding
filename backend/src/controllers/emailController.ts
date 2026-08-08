@@ -7,16 +7,24 @@ import { newRSVPEmail } from "../templates/newRSVPTemplate.js";
 
 const RESEND_API = process.env.RESEND_API || "";
 
-// Built once. Constructing a client per request was pointless work, and it hid
-// the fact that a missing key only ever surfaces as a 4xx from Resend.
-const resend = new Resend(RESEND_API);
-
 if (!RESEND_API) {
   console.error(
-    "RESEND_API is not set — every outgoing email will fail. Check the .env " +
-      "next to docker-compose.yml (compose reads it from there, not backend/.env).",
+    "RESEND_API is not set — outgoing email is disabled. Compose reads this " +
+      "from the .env next to docker-compose.yml, not backend/.env.",
   );
 }
+
+// Built once, but lazily: `new Resend("")` throws, and doing that at module
+// scope would take the whole API down at boot over a missing mail key rather
+// than just failing the two email routes.
+let client: Resend | null = null;
+const getResend = () => {
+  if (!RESEND_API) return null;
+  if (!client) client = new Resend(RESEND_API);
+  return client;
+};
+
+const NO_KEY = { error: "Email is not configured on this server (RESEND_API)" };
 
 export const sendGuestSubmission = async (req: Request, res: Response) => {
   const { email, message } = req.body;
@@ -24,6 +32,9 @@ export const sendGuestSubmission = async (req: Request, res: Response) => {
   if (!email || !message) {
     return res.status(400).json({ error: "email and message are required" });
   }
+
+  const resend = getResend();
+  if (!resend) return res.status(503).json(NO_KEY);
 
   try {
     const { data, error } = await resend.emails.send(
@@ -45,6 +56,9 @@ export const sendGuestSubmission = async (req: Request, res: Response) => {
 
 export const sendRSVPEmail = async (req: Request, res: Response) => {
   const { name, attending, guests } = req.body;
+
+  const resend = getResend();
+  if (!resend) return res.status(503).json(NO_KEY);
 
   try {
     const { data, error } = await resend.emails.send(
