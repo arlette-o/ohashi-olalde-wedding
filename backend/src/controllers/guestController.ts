@@ -3,8 +3,13 @@ import type { Request, Response } from "express";
 import Guest from "../schemas/guest.js";
 
 export const getAllGuests = async (_req: Request, res: Response) => {
-  const all = await Guest.find();
-  res.status(200).json(all);
+  try {
+    const all = await Guest.find();
+    res.status(200).json(all);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+    console.log(error.message);
+  }
 };
 
 export const getGuestInfoByCode = async (req: Request, res: Response) => {
@@ -26,7 +31,6 @@ export const updateGuestRSVPInfo = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { attending, guests } = req.body;
 
-  console.log(id, attending, guests);
   try {
     if (!id) throw new Error("Guest ID is required");
     const update = await Guest.updateOne(

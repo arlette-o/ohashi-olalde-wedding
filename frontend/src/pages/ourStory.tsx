@@ -15,22 +15,22 @@ import { PAGE_BG } from "../theme/colors";
 // Captions live in the translation files (`OurStory.mosaic`), matched by index.
 const itemData: { img: string; rows?: number; cols?: number }[] = [
   {
-    img: "/mosaic pics/car1.png",
+    img: "/mosaicpics/car1.png",
     rows: 1,
     cols: 2,
   },
   {
-    img: "/mosaic pics/kyoto.jpeg",
+    img: "/mosaicpics/kyoto.jpeg",
     rows: 1,
     cols: 1,
   },
   {
-    img: "/mosaic pics/yosemite1.jpeg",
+    img: "/mosaicpics/yosemite1.jpeg",
     rows: 1,
     cols: 1,
   },
   {
-    img: "/mosaic pics/yosemite2.jpeg",
+    img: "/mosaicpics/yosemite2.jpeg",
     rows: 2,
     cols: 2,
   },

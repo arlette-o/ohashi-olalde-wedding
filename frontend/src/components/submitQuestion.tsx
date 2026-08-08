@@ -1,5 +1,12 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
+import { submitGuestQuestion } from "../api/emailAPI";
 import { useLanguage } from "../context/languageContext";
 import {
   formCardSx,
@@ -13,8 +20,19 @@ export default function SubmitQuestion() {
   const { lang } = useLanguage();
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submitQuestion = async () => {};
+  const submitQuestion = async () => {
+    setLoading(true);
+    try {
+      await submitGuestQuestion(email, question);
+    } catch (err) {
+      console.log("Issue with emailing", err);
+      //TODO: error handling here
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Box
@@ -79,9 +97,14 @@ export default function SubmitQuestion() {
           fullWidth
           disableElevation
           onClick={submitQuestion}
+          disabled={loading}
           sx={submitButtonSx}
         >
-          {lang("FAQs.ask.submit")}
+          {loading ? (
+            <CircularProgress size={24} sx={{ color: "#fff" }} />
+          ) : (
+            lang("FAQs.ask.submit")
+          )}
         </Button>
       </Box>
     </Box>

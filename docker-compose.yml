@@ -3,8 +3,8 @@ services:
   caddy:
     image: caddy:2-alpine
     ports:
-      - "80:80"          # HTTP (ACME challenge + redirect to HTTPS)
-      - "443:443"        # HTTPS
+      - "80:80" # HTTP (ACME challenge + redirect to HTTPS)
+      - "443:443" # HTTPS
     volumes:
       # Mount the DIRECTORY, not the file. Docker binds a single-file mount by
       # inode, and git replaces files rather than editing in place, so a
@@ -20,23 +20,24 @@ services:
 
   # --- FRONTEND UI SERVICE ---
   ui:
-    build: ./frontend    # Path to your local frontend folder
+    build: ./frontend # Path to your local frontend folder
     expose:
-      - "80"             # Internal only; reached through caddy
+      - "80" # Internal only; reached through caddy
     restart: always
 
   # --- BACKEND API SERVICE ---
   backend:
-    build: ./backend     # Path to your local backend folder
+    build: ./backend # Path to your local backend folder
     expose:
-      - "3000"           # Internal only; reached through caddy at /api/*
+      - "3000" # Internal only; reached through caddy at /api/*
     environment:
       - NODE_ENV=development
-      - PORT=3000        # Pin the port the Express app listens on (matches Dockerfile EXPOSE)
+      - PORT=3000 # Pin the port the Express app listens on (matches Dockerfile EXPOSE)
       # Seamlessly injects your 3 MongoDB keys straight into memory
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_URL=${MONGO_URL}
+      - RESEND_API=${RESEND_API}
     restart: always
 
 volumes:

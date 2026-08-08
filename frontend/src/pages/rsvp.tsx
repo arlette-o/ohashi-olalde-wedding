@@ -1,8 +1,9 @@
 import { Box, Grid, Typography } from "@mui/material";
 import RsvpForm from "../components/rsvpform";
 import InviteCodeForm from "../components/inviteCode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Guest } from "../api/guestAPI";
+import ChangeRsvpForm from "../components/changeRsvpForm";
 import { useLanguage } from "../context/languageContext";
 import { BORDER, CREAM, GOLD, PAGE_BG } from "../theme/colors";
 
@@ -13,6 +14,9 @@ export default function RSVP() {
     const sessionGuest = sessionStorage.getItem("guest");
     return sessionGuest ? (JSON.parse(sessionGuest) as Guest) : null;
   });
+
+  // Guests who already RSVP'd get the edit form instead of a fresh one.
+  const [prevRsvp, setPrevRsvp] = useState(false);
 
   // 2. Derive "unlocked" state directly! No useEffect needed.
   // The form is unlocked if the session says so OR if we have a valid guest in state.
@@ -25,6 +29,12 @@ export default function RSVP() {
     sessionStorage.setItem("guest", JSON.stringify(authenticatedGuest));
     setGuest(authenticatedGuest);
   };
+
+  useEffect(() => {
+    if (guest) {
+      setPrevRsvp(guest.prev_rsvp);
+    }
+  }, [guest]);
 
   return (
     <Grid
@@ -99,6 +109,8 @@ export default function RSVP() {
       <Grid size={{ xs: 12, md: 10, lg: 8 }}>
         {!isUnlocked || !guest ? (
           <InviteCodeForm setGuest={handleInviteSuccess} />
+        ) : prevRsvp ? (
+          <ChangeRsvpForm guest={guest} />
         ) : (
           <RsvpForm guest={guest} />
         )}

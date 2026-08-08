@@ -15,33 +15,71 @@ import {
 import { useId, useState } from "react";
 import { updateRSVP, type Guest } from "../api/guestAPI";
 import { emailRSVPResponse } from "../api/emailAPI";
-import { useLanguage } from "../context/languageContext";
-import {
-  formCardSx,
-  inputSx,
-  labelSx,
-  radioSx,
-  radioTextSx,
-  submitButtonSx,
-} from "./formStyles";
-import { BORDER, OLIVE } from "../theme/colors";
+
+const OLIVE = "#6b7048";
+const OLIVE_DARK = "#4f5233";
+//const CREAM_BG = "#f0ede8";
+const LABEL_COLOR = "#2e2e1f";
+const BORDER = "#c8c9b8";
 
 interface Props {
   guest: Guest;
 }
 
-export default function RsvpForm({ guest }: Props) {
-  const { lang } = useLanguage();
-  const [attending, setAttending] = useState("accepts");
-  const [guests, setGuests] = useState("1");
+export default function ChangeRsvpForm({ guest }: Props) {
+  const [attending, setAttending] = useState(
+    guest.attending ? "true" : "false",
+  );
+  const [guests, setGuests] = useState(String(guest.guests_accepted));
   const [meal, setMeal] = useState("");
   const [notes, setNotes] = useState("");
 
+  const inputSx = {
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "12px",
+      backgroundColor: "#fff",
+      "& fieldset": { borderColor: BORDER },
+      "&:hover fieldset": { borderColor: OLIVE },
+      "&.Mui-focused fieldset": { borderColor: OLIVE, borderWidth: 1 },
+    },
+    "& .MuiInputBase-input": {
+      fontFamily: "'Georgia', serif",
+      fontSize: "1rem",
+      color: LABEL_COLOR,
+      padding: "14px 16px",
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: "#aaa",
+      opacity: 1,
+    },
+  };
+
+  const radioSX = {
+    color: BORDER,
+    "&.Mui-checked": { color: OLIVE },
+  };
+
+  const radioTextSX = {
+    fontFamily: "'Georgia', serif",
+    fontSize: "0.95rem",
+    color: LABEL_COLOR,
+  };
+
+  const labelSx = {
+    fontFamily: "'Georgia', serif",
+    fontWeight: 700,
+    fontSize: "1rem",
+    color: LABEL_COLOR,
+    mb: 1,
+    display: "block",
+  };
+
   const submitForm = async () => {
+    console.log(guest._id, attending, meal, notes, guests);
     const payload = { id: guest._id, attending, guests };
     const emailPayload = {
       name: guest.fname + " " + guest.lname,
-      attending: attending === "true",
+      attending: attending === "true" ? true : false,
       guests: Number(guests),
     };
 
@@ -52,8 +90,7 @@ export default function RsvpForm({ guest }: Props) {
   const generateMenuItems = (max: number) => {
     return Array.from({ length: max }, (_, i) => (
       <MenuItem key={i} value={i + 1}>
-        {i + 1}{" "}
-        {i === 0 ? lang("RSVP.form.guestSingular") : lang("RSVP.form.guestPlural")}
+        {i + 1} {i === 0 ? " Guest" : " Guests"}
       </MenuItem>
     ));
   };
@@ -63,26 +100,42 @@ export default function RsvpForm({ guest }: Props) {
   return (
     <Box
       sx={{
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "start",
-        py: { xs: 2, md: 4 },
+        p: 2,
       }}
     >
-      <Box sx={formCardSx}>
+      <Box
+        sx={{
+          backgroundColor: "#f2f1ee",
+          borderRadius: "16px",
+          border: `1px solid ${BORDER}`,
+          boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+          p: { xs: 3, sm: 5 },
+          width: "100%",
+          maxWidth: 640,
+          display: "flex",
+          flexDirection: "column",
+
+          gap: 3.5,
+        }}
+      >
         <Box>
           <Typography
             sx={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 600,
-              fontSize: "1.7rem",
-              color: OLIVE,
+              fontFamily: "'Georgia', serif",
+              fontWeight: 700,
+              fontSize: "1.5rem",
+              color: LABEL_COLOR,
+              mb: 1,
               display: "block",
               textAlign: "left",
             }}
           >
-            {lang("RSVP.form.greeting").replace("{name}", guest.fname)}
+            Hello again, {guest.fname}!
           </Typography>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -91,45 +144,36 @@ export default function RsvpForm({ guest }: Props) {
               component="legend"
               sx={{
                 ...labelSx,
-                "&.Mui-focused": { color: OLIVE },
-                color: `${OLIVE} !important`,
+                "&.Mui-focused": { color: LABEL_COLOR },
+                color: `${LABEL_COLOR} !important`,
               }}
             >
-              {lang("RSVP.form.attending")}
+              Would you like to change your RSVP?
             </FormLabel>
             <RadioGroup
+              row
               value={attending}
               onChange={(e) => setAttending(e.target.value)}
-              sx={{
-                // Side by side once there's room; the two labels are too long
-                // to share a line on a phone.
-                flexDirection: { xs: "column", sm: "row" },
-                gap: { xs: 0, sm: 3 },
-                mt: 0.5,
-              }}
+              sx={{ gap: 3, mt: 0.5 }}
             >
               <FormControlLabel
                 value={true}
-                control={<Radio sx={radioSx} />}
+                control={<Radio sx={radioSX} />}
                 label={
-                  <Typography sx={radioTextSx}>
-                    {lang("RSVP.form.accepts")}
-                  </Typography>
+                  <Typography sx={radioTextSX}>Joyfully accepts</Typography>
                 }
               />
               <FormControlLabel
                 value={false}
-                control={<Radio sx={radioSx} />}
+                control={<Radio sx={radioSX} />}
                 label={
-                  <Typography sx={radioTextSx}>
-                    {lang("RSVP.form.declines")}
-                  </Typography>
+                  <Typography sx={radioTextSX}>Regretfully declines</Typography>
                 }
               />
             </RadioGroup>
           </FormControl>
           <Box>
-            <Typography sx={labelSx}>{lang("RSVP.form.guests")}</Typography>
+            <Typography sx={labelSx}>Number of Total Guests</Typography>
             <Select
               value={guests}
               onChange={(e: SelectChangeEvent) => setGuests(e.target.value)}
@@ -137,8 +181,9 @@ export default function RsvpForm({ guest }: Props) {
               sx={{
                 borderRadius: "12px",
                 backgroundColor: "#fff",
+                fontFamily: "'Georgia', serif",
                 fontSize: "1rem",
-                color: OLIVE,
+                color: LABEL_COLOR,
                 "& .MuiOutlinedInput-notchedOutline": { borderColor: BORDER },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
                   borderColor: OLIVE,
@@ -148,6 +193,7 @@ export default function RsvpForm({ guest }: Props) {
                   borderWidth: 1,
                 },
                 "& .MuiSelect-select": { padding: "14px 16px" },
+                "& .MuiSelect-icon": { color: OLIVE },
               }}
             >
               {generateMenuItems(guest.allowed_invitees)}
@@ -158,11 +204,11 @@ export default function RsvpForm({ guest }: Props) {
               id={`${id}-label`}
               sx={{
                 ...labelSx,
-                "&.Mui-focused": { color: OLIVE },
-                color: `${OLIVE} !important`,
+                "&.Mui-focused": { color: LABEL_COLOR },
+                color: `${LABEL_COLOR} !important`,
               }}
             >
-              {lang("RSVP.form.meal")}
+              What is your meal preference?
             </FormLabel>
             <RadioGroup
               aria-labelledby={`${id}-label`}
@@ -172,30 +218,26 @@ export default function RsvpForm({ guest }: Props) {
             >
               <FormControlLabel
                 value="meat"
-                control={<Radio sx={radioSx} />}
-                label={
-                  <Typography sx={radioTextSx}>
-                    {lang("RSVP.form.meat")}
-                  </Typography>
-                }
+                control={<Radio sx={radioSX} />}
+                label="Meat Protein"
+                sx={radioTextSX}
               />
               <FormControlLabel
                 value="veg"
-                control={<Radio sx={radioSx} />}
-                label={
-                  <Typography sx={radioTextSx}>
-                    {lang("RSVP.form.veg")}
-                  </Typography>
-                }
+                control={<Radio sx={radioSX} />}
+                label="Vegetarian"
+                sx={radioTextSX}
               />
             </RadioGroup>
           </FormControl>
         </Box>
         <Box>
-          <Typography sx={labelSx}>{lang("RSVP.form.dietary")}</Typography>
+          <Typography sx={labelSx}>
+            Dietary Restrictions or Allergies
+          </Typography>
           <TextField
             fullWidth
-            placeholder={lang("RSVP.form.dietaryPlaceholder")}
+            placeholder="List any allergies or special requests"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             sx={inputSx}
@@ -205,9 +247,21 @@ export default function RsvpForm({ guest }: Props) {
           fullWidth
           disableElevation
           onClick={submitForm}
-          sx={submitButtonSx}
+          sx={{
+            backgroundColor: OLIVE,
+            color: "#fff",
+            fontFamily: "'Georgia', serif",
+            fontWeight: 700,
+            fontSize: "1rem",
+            letterSpacing: "0.04em",
+            borderRadius: "12px",
+            py: 2,
+            textTransform: "none",
+            "&:hover": { backgroundColor: OLIVE_DARK },
+            mt: 0.5,
+          }}
         >
-          {lang("RSVP.form.submit")}
+          Change RSVP
         </Button>
       </Box>
     </Box>
