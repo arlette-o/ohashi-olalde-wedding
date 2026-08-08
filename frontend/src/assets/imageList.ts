@@ -89,7 +89,7 @@ export const imageList: {
     cols: 3,
   },
   {
-    img: "public/mosaicpics/CookingTogether",
+    img: "public/mosaicpics/CookingTogether.JPG",
     title: "Filler title",
     rows: 2,
     cols: 2,

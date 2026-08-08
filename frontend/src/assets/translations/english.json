@@ -19,12 +19,12 @@
   "OurStory": {
     "title": "Our Story",
     "subtitle": "how the two of us got here",
-    "mosaic": [
-      "Car ride in 2023",
-      "Walking through Kyoto!",
-      "Arlette and Taka in Yosemite",
-      "Arlette and Taka in Yosemite"
-    ],
+    "mosaic": {
+      "car1.png": "Car ride in 2023",
+      "kyoto.jpeg": "Walking through Kyoto!",
+      "yosemite1.jpeg": "Arlette and Taka in Yosemite",
+      "yosemite2.jpeg": "Arlette and Taka in Yosemite"
+    },
     "ourStory": {
       "title": "Our Story",
       "content": "Taka and Arlette met in this exact hallway at Cal Poly SLO in Engineering East on the first day of their Networks lab in 2019. They had both waited until the last minute to print their lab worksheets. Arlette spotted Taka at a computer with the lab printout pulled up, she approached him and asked if he could print her a copy as well. They walked together over to the lab room and Arlette asked Taka, “Do you have a lab partner for this class?” Taka replied, “No” and Arlette asked, “Well would you like one?” and that is how Arlette and Taka became lab partners."
@@ -269,7 +269,9 @@
       "email": "Your Email",
       "emailPlaceholder": "Enter your email",
       "question": "Send Us a Question",
-      "submit": "Submit"
+      "submit": "Submit",
+      "success": "Thank you — your question is on its way to us!",
+      "errorMessage": "Sorry, that did not go through. Please check both fields and try again."
     }
   }
 }

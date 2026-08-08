@@ -21,14 +21,25 @@ export default function SubmitQuestion() {
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
+  // The form used to swallow failures silently, so a broken API looked
+  // identical to a successful send. Guests need to know which one happened.
+  const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
 
   const submitQuestion = async () => {
+    if (!email.trim() || !question.trim()) {
+      setStatus("error");
+      return;
+    }
     setLoading(true);
+    setStatus("idle");
     try {
       await submitGuestQuestion(email, question);
+      setStatus("sent");
+      setEmail("");
+      setQuestion("");
     } catch (err) {
-      console.log("Issue with emailing", err);
-      //TODO: error handling here
+      console.error("Issue with emailing", err);
+      setStatus("error");
     } finally {
       setLoading(false);
     }
@@ -106,6 +117,22 @@ export default function SubmitQuestion() {
             lang("FAQs.ask.submit")
           )}
         </Button>
+
+        {status !== "idle" && (
+          <Typography
+            role="status"
+            sx={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "1rem",
+              textAlign: "center",
+              color: status === "sent" ? GOLD : "#e8a0a0",
+            }}
+          >
+            {lang(
+              status === "sent" ? "FAQs.ask.success" : "FAQs.ask.errorMessage",
+            )}
+          </Typography>
+        )}
       </Box>
     </Box>
   );
