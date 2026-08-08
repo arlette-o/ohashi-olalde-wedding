@@ -3,7 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { guestRouter } from "./routes/guestRouter.js";
-import { addCodes } from "./scripts/scripts.js";
+import { emailRouter } from "./routes/emailRouter.js";
+import { addRSVPField } from "./scripts/addRsvpFieldtoGuests.js";
 
 dotenv.config();
 const MONGOURL = process.env.MONGO_URL || "";
@@ -25,7 +26,10 @@ app.use(cors());
 app.use(express.json());
 connectMongo();
 
+await addRSVPField();
+
 app.use("/api/guests", guestRouter);
+app.use("/api/email", emailRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend is running");

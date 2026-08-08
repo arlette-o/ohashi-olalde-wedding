@@ -84,6 +84,14 @@ export default function Home() {
   const navigate = useNavigate();
   const { lang } = useLanguage();
 
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    return (
+      location.pathname === `/${path}` ||
+      location.pathname.startsWith(`/${path}/`)
+    );
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
@@ -137,16 +145,35 @@ export default function Home() {
             spacing={{ xs: 2, md: 4 }}
             sx={{ display: { xs: "none", sm: "flex" } }}
           >
-            {NAV_ITEMS.map((item) => (
-              <Button
-                key={item.label}
-                disableRipple
-                onClick={() => navigate(item.path)}
-                sx={{ color: " #494b25" }}
-              >
-                {item.label}
-              </Button>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(item.path);
+              return (
+                <Button
+                  key={item.label}
+                  disableRipple
+                  onClick={() => navigate(item.path)}
+                  sx={{
+                    color: active ? "#fff" : "rgba(255,255,255,0.7)",
+                    fontWeight: active ? 600 : 400,
+                    position: "relative",
+                    "&::after": active
+                      ? {
+                          content: '""',
+                          position: "absolute",
+                          bottom: -4,
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          width: "60%",
+                          height: "1px",
+                          backgroundColor: "#e8ddd0",
+                        }
+                      : {},
+                  }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
           </Stack>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -166,9 +193,9 @@ export default function Home() {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{
+        /* PaperProps={{
           sx: { width: 260, bgcolor: "#1a1610" },
-        }}
+        }} */
       >
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
           <IconButton

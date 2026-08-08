@@ -44,7 +44,13 @@ export default function FAQs() {
         </Typography>
       </Grid>
 
-      <Grid size={8}>
+      <Grid
+        size={{ md: 8, xs: 11 }}
+        sx={{
+          borderRadius: 3,
+          overflow: "hidden",
+        }}
+      >
         <Accordion sx={{ background: "#C5C0AD" }}>
           <AccordionSummary
             expandIcon={<ControlPointIcon sx={{ color: "#2e2e1f" }} />}

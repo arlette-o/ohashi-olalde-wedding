@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useId, useState } from "react";
 import { updateRSVP, type Guest } from "../api/guestAPI";
+import { emailRSVPResponse } from "../api/emailAPI";
 
 const OLIVE = "#6b7048";
 const OLIVE_DARK = "#4f5233";
@@ -74,8 +75,14 @@ export default function RsvpForm({ guest }: Props) {
   const submitForm = async () => {
     console.log(guest._id, attending, meal, notes, guests);
     const payload = { id: guest._id, attending, guests };
+    const emailPayload = {
+      name: guest.fname + " " + guest.lname,
+      attending: attending === "true" ? true : false,
+      guests: Number(guests),
+    };
 
     await updateRSVP(payload);
+    await emailRSVPResponse(emailPayload);
   };
 
   const generateMenuItems = (max: number) => {
@@ -184,6 +191,7 @@ export default function RsvpForm({ guest }: Props) {
                   borderWidth: 1,
                 },
                 "& .MuiSelect-select": { padding: "14px 16px" },
+                "& .MuiSelect-icon": { color: OLIVE },
               }}
             >
               {generateMenuItems(guest.allowed_invitees)}

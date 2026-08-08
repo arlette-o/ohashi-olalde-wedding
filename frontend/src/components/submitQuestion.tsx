@@ -1,6 +1,12 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
-import { postGuestCode, type Guest } from "../api/guestAPI";
+import { submitGuestQuestion } from "../api/emailAPI";
 
 const OLIVE = "#6b7048";
 const BORDER = "#c8c9b8";
@@ -36,15 +42,54 @@ const inputSx = {
   },
 };
 
-interface Props {
-  setGuest: (value: Guest) => void;
-}
+const multiInputSx = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px",
+    backgroundColor: "#fff",
+    "& fieldset": { borderColor: BORDER },
+    "&:hover fieldset": { borderColor: OLIVE },
+    "&.Mui-focused fieldset": { borderColor: OLIVE, borderWidth: 1 },
+  },
+  "& .MuiInputBase-input": {
+    fontFamily: "'Georgia', serif",
+    fontSize: "1rem",
+    color: LABEL_COLOR,
+    padding: "0px 2px",
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: "#aaa",
+    opacity: 1,
+  },
+};
 
-export default function submitQuestion() {
+const buttonSx = {
+  backgroundColor: OLIVE,
+  color: "#fff",
+  fontFamily: "'Georgia', serif",
+  fontWeight: 700,
+  fontSize: "1rem",
+  letterSpacing: "0.04em",
+  borderRadius: "12px",
+  py: 2,
+  textTransform: "none",
+  "&:hover": { backgroundColor: OLIVE_DARK },
+  mt: 0.5,
+};
+
+export default function SubmitQuestion() {
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submitQuestion = async () => {};
+  const submitQuestion = async () => {
+    setLoading(true);
+    const response = await submitGuestQuestion(email, question);
+    if (!response) {
+      console.log("Issue with emailing");
+      //TODO: error handling here
+    }
+    setLoading(false);
+  };
 
   return (
     <Box
@@ -86,8 +131,10 @@ export default function submitQuestion() {
           <TextField
             multiline
             fullWidth
-            sx={inputSx}
+            minRows={4}
+            sx={multiInputSx}
             value={question}
+            placeholder="Ask Us Anything"
             onChange={(e) => setQuestion(e.target.value)}
           />
         </Box>
@@ -95,21 +142,9 @@ export default function submitQuestion() {
           fullWidth
           disableElevation
           onClick={submitQuestion}
-          sx={{
-            backgroundColor: OLIVE,
-            color: "#fff",
-            fontFamily: "'Georgia', serif",
-            fontWeight: 700,
-            fontSize: "1rem",
-            letterSpacing: "0.04em",
-            borderRadius: "12px",
-            py: 2,
-            textTransform: "none",
-            "&:hover": { backgroundColor: OLIVE_DARK },
-            mt: 0.5,
-          }}
+          sx={buttonSx}
         >
-          Submit
+          {loading ? <CircularProgress /> : "Submit"}
         </Button>
       </Box>
     </Box>

@@ -9,6 +9,7 @@ export type Guest = {
   whatsapp: string;
   line: string;
   _id: string;
+  prev_rsvp: boolean;
 };
 
 export async function getAllGuests(): Promise<Guest[]> {

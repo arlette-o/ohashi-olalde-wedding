@@ -22,7 +22,11 @@ export default function Weddingpage() {
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url('/WeddingFrame.png')`,
+          top: { xs: "80px", md: 0 },
+          backgroundImage: {
+            xs: `url('/iphoneframe.svg')`,
+            md: `url('/WeddingFrame.png')`,
+          },
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "top center",

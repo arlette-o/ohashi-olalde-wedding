@@ -1,34 +1,37 @@
 import { Box, Grid, Typography } from "@mui/material";
 import RsvpForm from "../components/rsvpform";
 import InviteCodeForm from "../components/inviteCode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Guest } from "../api/guestAPI";
+import ChangeRsvpForm from "../components/changeRsvpForm";
 
 export default function RSVP() {
-  // 1. Initialize guest from session storage
   const [guest, setGuest] = useState<Guest | null>(() => {
     const sessionGuest = sessionStorage.getItem("guest");
     return sessionGuest ? (JSON.parse(sessionGuest) as Guest) : null;
   });
+  const [prevRsvp, setPrevRsvp] = useState(false);
 
-  // 2. Derive "unlocked" state directly! No useEffect needed.
-  // The form is unlocked if the session says so OR if we have a valid guest in state.
   const isUnlocked =
     sessionStorage.getItem("unlocked") === "true" || guest !== null;
 
-  // 3. Helper function to handle successful invite codes
   const handleInviteSuccess = (authenticatedGuest: Guest) => {
     sessionStorage.setItem("unlocked", "true");
     sessionStorage.setItem("guest", JSON.stringify(authenticatedGuest));
     setGuest(authenticatedGuest);
   };
 
+  useEffect(() => {
+    if (guest) {
+      setPrevRsvp(guest?.prev_rsvp);
+    }
+  }, [guest]);
+
   return (
     <Grid
       container
       spacing={2}
       sx={{
-        //minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -94,9 +97,11 @@ export default function RSVP() {
           </Typography>
         </Grid>
       )}
-      <Grid size={8}>
+      <Grid size={{ md: 8, sm: 10 }}>
         {!isUnlocked || !guest ? (
           <InviteCodeForm setGuest={handleInviteSuccess} />
+        ) : prevRsvp ? (
+          <ChangeRsvpForm guest={guest} />
         ) : (
           <RsvpForm guest={guest} />
         )}

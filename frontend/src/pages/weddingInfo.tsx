@@ -59,11 +59,12 @@ export default function WeddingInfo() {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={6}
       sx={{
         minHeight: "100vh",
         display: "flex",
         backgroundColor: "#6a6b4a",
+        justifyContent: "center",
       }}
     >
       <Grid size={12}>
@@ -74,32 +75,33 @@ export default function WeddingInfo() {
             fontSize: { xs: "2.4rem", md: "3.5rem" },
             color: CREAM,
             letterSpacing: "0.08em",
-            mb: 6,
+            mb: { sm: 2, md: 6 },
             mt: 8,
           }}
         >
           The Wedding Day
         </Typography>
       </Grid>
-      <Grid size={{ xs: 12, md: 5 }}>
+      <Grid size={{ xs: 10, md: 4 }}>
         <Box
           sx={{
             border: `8px solid ${BORDER}`,
-            borderRadius: 12,
+            borderRadius: "34px",
             display: "flex",
             justifyContent: "center",
+            padding: { sm: 0, md: 5 },
           }}
         >
-          <Timeline sx={{ maxWidth: 700, width: "100%", mx: "auto" }}>
+          <Timeline>
             {events.map((event, i) => (
               <TimelineItem key={event.label}>
-                {/* Alternates: even = icon left, odd = icon right */}
                 <TimelineOppositeContent
                   sx={{
                     display: "flex",
                     alignItems: "flex-start",
-                    justifyContent: "flex-end",
-                    mr: 10,
+                    justifyContent: "flex-start",
+                    maxWidth: 170,
+                    margin: 0,
                   }}
                 >
                   <Box
@@ -142,6 +144,7 @@ export default function WeddingInfo() {
                     display: "flex",
                     flexDirection: "column",
                     pb: 4,
+                    maxWidth: 170,
                   }}
                 >
                   <Typography
@@ -173,18 +176,14 @@ export default function WeddingInfo() {
           </Timeline>
         </Box>
       </Grid>
-      <Grid
-        size={{ xs: 12, md: 7 }}
-        sx={{
-          display: "flex",
-          textAlign: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          gap: 7,
-        }}
-      >
-        <Box sx={{ border: `8px solid ${BORDER}`, borderRadius: 12 }}>
+      <Grid size={{ xs: 10, md: 7 }} sx={{ justifyContent: "center" }}>
+        <Box
+          sx={{
+            border: `8px solid ${BORDER}`,
+            borderRadius: "34px",
+            padding: { sm: 0, md: 5 },
+          }}
+        >
           <Box
             component="img"
             src="/HaciendaSanMon.jpg"
@@ -223,20 +222,20 @@ export default function WeddingInfo() {
               <Typography
                 sx={{
                   fontWeight: 700,
-                  color: OLIVE,
+                  color: CREAM,
                   fontSize: "1rem",
                   mb: 0.5,
                 }}
               >
                 Venue
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 Hacienda Santa Monica
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 Mesa de Otay, Vía Rápida Ote., Guadalupe Victoria, 22426
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 Tijuana, B.C., Mexico
               </Typography>
             </Box>
@@ -267,20 +266,20 @@ export default function WeddingInfo() {
               <Typography
                 sx={{
                   fontWeight: 700,
-                  color: OLIVE,
+                  color: CREAM,
                   fontSize: "1rem",
                   mb: 0.5,
                 }}
               >
                 Ceremony & Party
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 Saturday, August 21st,2027
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 4:00pm - 11pm
               </Typography>
-              <Typography sx={{ color: OLIVE, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: CREAM, fontSize: "0.95rem" }}>
                 Tijuana, B.C., Mexico
               </Typography>
             </Box>

@@ -11,6 +11,7 @@ interface IGuest extends Document {
   whatsapp: string;
   line: string;
   invite_code: string;
+  prev_rsvp: boolean;
 }
 
 const GuestSchema = new Schema<IGuest>(
@@ -25,6 +26,7 @@ const GuestSchema = new Schema<IGuest>(
     whatsapp: { type: String },
     line: { type: String },
     invite_code: { type: String, unique: true },
+    prev_rsvp: { type: Boolean },
   },
   { timestamps: true },
 );

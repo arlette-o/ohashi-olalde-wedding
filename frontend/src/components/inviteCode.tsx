@@ -44,23 +44,24 @@ export default function InviteCodeForm({ setGuest }: Props) {
   const [code, setCode] = useState("");
 
   const submitCode = async () => {
-    console.log(code);
+    //console.log(code);
     const response = await postGuestCode(code);
     if (!response) {
       console.log("Bad Code");
-      //Error handling here
+      //TODO: Error handling here
       return;
     }
 
     setGuest(response);
     //setAuth(true);
+    console.log(response);
     sessionStorage.setItem("guest", JSON.stringify(response));
   };
 
   return (
     <Box
       sx={{
-        minHeight: "60vh",
+        minHeight: { md: "60vh" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
