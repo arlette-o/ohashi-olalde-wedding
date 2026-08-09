@@ -20,14 +20,17 @@ services:
 
   # --- FRONTEND UI SERVICE ---
   ui:
-    build: ./frontend # Path to your local frontend folder
+    # Prebuilt in CI and pulled from GHCR. Building on the EC2 box took ~25 min
+    # and OOM-thrashed the instance; the runner does it in ~1 min with layer
+    # caching. docker-compose.override.yml restores a local `build:` for dev.
+    image: ghcr.io/arlette-o/ohashi-olalde-wedding/ui:${IMAGE_TAG:-latest}
     expose:
       - "80" # Internal only; reached through caddy
     restart: always
 
   # --- BACKEND API SERVICE ---
   backend:
-    build: ./backend # Path to your local backend folder
+    image: ghcr.io/arlette-o/ohashi-olalde-wedding/backend:${IMAGE_TAG:-latest}
     expose:
       - "3000" # Internal only; reached through caddy at /api/*
     environment:
