@@ -6,7 +6,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { submitGuestQuestion } from "../api/emailAPI";
+import {
+  checkBackendHealth,
+  EmailApiError,
+  submitGuestQuestion,
+} from "../api/emailAPI";
 import { useLanguage } from "../context/languageContext";
 import {
   formCardSx,
@@ -26,19 +30,42 @@ export default function SubmitQuestion() {
   const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
 
   const submitQuestion = async () => {
+    console.log("[submitQuestion] submit clicked", {
+      emailLength: email.trim().length,
+      questionLength: question.trim().length,
+      href: window.location.href,
+    });
+
     if (!email.trim() || !question.trim()) {
+      console.warn("[submitQuestion] blocked locally: empty email or question");
       setStatus("error");
       return;
     }
     setLoading(true);
     setStatus("idle");
     try {
-      await submitGuestQuestion(email, question);
+      const result = await submitGuestQuestion(email, question);
+      console.log("[submitQuestion] send succeeded", result);
       setStatus("sent");
       setEmail("");
       setQuestion("");
     } catch (err) {
-      console.error("Issue with emailing", err);
+      if (err instanceof EmailApiError) {
+        console.error("[submitQuestion] send failed", {
+          status: err.status,
+          reason: err.reason,
+          requestId: err.requestId,
+          message: err.message,
+          body: err.body,
+        });
+      } else {
+        console.error("[submitQuestion] send failed (unexpected error)", err);
+      }
+      // A failed send is the one moment worth probing the backend: it separates
+      // "the whole API is down" from "the API is up and the send itself was
+      // rejected", which look identical from the form.
+      console.log("[submitQuestion] probing /api/health to locate the fault...");
+      await checkBackendHealth();
       setStatus("error");
     } finally {
       setLoading(false);
