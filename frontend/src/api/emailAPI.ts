@@ -28,6 +28,8 @@ export class EmailApiError extends Error {
   }
 }
 
+import { apiUrl } from "./config";
+
 const log = (...args: unknown[]) => console.log("[emailAPI]", ...args);
 const logErr = (...args: unknown[]) => console.error("[emailAPI]", ...args);
 
@@ -66,7 +68,19 @@ const request = async (
     // fetch only rejects when the request never got an HTTP response at all:
     // DNS failure, TLS failure, connection refused, offline, or a CORS
     // preflight the browser blocked. A 500 from the server does NOT land here.
-    logErr(`${label} network-level failure (no HTTP response):`, networkError);
+    //
+    // Since the API moved to its own subdomain these calls are cross-origin,
+    // so a blocked preflight is now a live possibility and lands right here —
+    // note that the browser hides the reason from JS, and only the Network
+    // tab (or the backend's [cors] log lines) will name it.
+    logErr(`${label} network-level failure (no HTTP response):`, networkError, {
+      url,
+      hint:
+        "Cross-origin request failed before any response. Check, in order: " +
+        "DNS for the API host resolves; its TLS cert is valid (open the URL " +
+        "directly in a tab); the backend is up; and this page's origin is in " +
+        "the backend's CORS allowlist.",
+    });
     throw new EmailApiError(
       "Could not reach the server (network or CORS failure)",
       { status: 0, reason: "network_error", body: String(networkError) },
@@ -125,7 +139,7 @@ const request = async (
 };
 
 export async function submitGuestQuestion(email: string, message: string) {
-  return request("submitGuestQuestion", "/api/email/submission", {
+  return request("submitGuestQuestion", apiUrl("/api/email/submission"), {
     email,
     message,
   });
@@ -136,7 +150,7 @@ export async function emailRSVPResponse(payload: {
   guests: number;
   attending: boolean;
 }) {
-  return request("emailRSVPResponse", "/api/email/rsvp", {
+  return request("emailRSVPResponse", apiUrl("/api/email/rsvp"), {
     name: payload.name,
     attending: payload.attending,
     guests: payload.guests,
@@ -148,7 +162,7 @@ export async function emailRSVPResponse(payload: {
 // without shell access to the production host.
 export async function checkBackendHealth() {
   try {
-    const response = await fetch("/api/health");
+    const response = await fetch(apiUrl("/api/health"));
     const { parsed, raw } = await readBody(response);
     log("health check", { status: response.status, body: parsed ?? raw });
     return parsed ?? raw;

@@ -38,6 +38,10 @@ services:
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_URL=${MONGO_URL}
       - RESEND_API=${RESEND_API}
+      # Comma-separated CORS allowlist. Optional — the code defaults to the
+      # wedding domains plus localhost, so this only needs setting to add an
+      # origin (a preview deploy, a new domain).
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
     restart: always
 
 volumes:

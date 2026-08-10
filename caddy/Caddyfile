@@ -1,7 +1,11 @@
 arlettetakawedding.com {
 	encode gzip
 
-	# API traffic -> backend Express service
+	# API traffic -> backend Express service.
+	#
+	# Kept even though the frontend now calls api.arlettetakawedding.com: it
+	# costs nothing, keeps older cached bundles working, and gives a
+	# same-origin URL for checking /api/health without CORS in the way.
 	handle /api/* {
 		reverse_proxy backend:3000
 	}
@@ -10,6 +14,21 @@ arlettetakawedding.com {
 	handle {
 		reverse_proxy ui:80
 	}
+}
+
+# Dedicated API host. Needs its own block to get its own certificate — Caddy
+# issues per site block, and a cert for the apex does not cover a subdomain.
+#
+# REQUIRES a DNS A record for api.arlettetakawedding.com pointing at this
+# server's IP. Until that resolves, ACME cannot validate and Caddy will serve
+# TLS errors for this host while the other blocks keep working.
+api.arlettetakawedding.com {
+	encode gzip
+
+	# No path matcher: the backend mounts its routes under /api/* itself, so
+	# the full path is forwarded unchanged and the public URL is
+	# https://api.arlettetakawedding.com/api/email/submission.
+	reverse_proxy backend:3000
 }
 
 # www resolves to the same IP, so it needs its own block or it fails TLS.

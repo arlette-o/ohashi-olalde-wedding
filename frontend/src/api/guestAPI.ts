@@ -1,3 +1,5 @@
+import { apiUrl } from "./config";
+
 export type Guest = {
   fname: string;
   lname: string;
@@ -13,7 +15,7 @@ export type Guest = {
 };
 
 export async function getAllGuests(): Promise<Guest[]> {
-  const response = await fetch("/api/guests/all");
+  const response = await fetch(apiUrl("/api/guests/all"));
   if (!response.ok) {
     throw new Error("Failed to load assets");
   }
@@ -21,7 +23,7 @@ export async function getAllGuests(): Promise<Guest[]> {
 }
 
 export async function postGuestCode(code: string): Promise<Guest> {
-  const response = await fetch(`/api/guests/${code}`);
+  const response = await fetch(apiUrl(`/api/guests/${code}`));
   if (!response.ok) {
     throw new Error("Could not find user this code belonged to");
   }
@@ -29,7 +31,7 @@ export async function postGuestCode(code: string): Promise<Guest> {
 }
 
 export async function updateRSVP(payload: any): Promise<void> {
-  const response = await fetch(`/api/guests/rsvp/${payload.id}`, {
+  const response = await fetch(apiUrl(`/api/guests/rsvp/${payload.id}`), {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

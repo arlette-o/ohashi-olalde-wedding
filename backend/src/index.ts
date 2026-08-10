@@ -78,7 +78,49 @@ const connectMongo = async (): Promise<void> => {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// Now that the API answers on its own hostname, browser calls to it are
+// cross-origin and every one is preceded by a preflight. A bare `cors()`
+// reflects any origin, which is too open for a publicly addressable API, so
+// this is an explicit allowlist. CORS_ORIGINS (comma-separated) overrides it
+// without a code change.
+const ALLOWED_ORIGINS = (
+  process.env.CORS_ORIGINS ||
+  [
+    "https://arlettetakawedding.com",
+    "https://www.arlettetakawedding.com",
+    // Vite dev server. Harmless in production: an attacker cannot make a
+    // victim's browser originate from localhost on someone else's machine.
+    "http://localhost:3000",
+    "http://localhost:5173",
+  ].join(",")
+)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+log("boot", "CORS allowlist:", ALLOWED_ORIGINS);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // No Origin header at all: curl, server-to-server, same-origin GETs.
+      // Nothing to enforce, so allow it — CORS only governs browsers.
+      if (!origin) return callback(null, true);
+
+      if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+
+      // The browser deliberately hides the reason for a blocked preflight
+      // from JavaScript, so this log is the only place the real cause of a
+      // silent frontend failure is written down.
+      logErr(
+        "cors",
+        `BLOCKED origin ${origin} — not in allowlist. Add it to CORS_ORIGINS ` +
+          `in the .env next to docker-compose.yml if this is legitimate.`,
+      );
+      callback(null, false);
+    },
+  }),
+);
 app.use(express.json());
 
 // One line in, one line out, with a request id that also goes back to the
@@ -141,6 +183,7 @@ app.get("/api/health", (_req, res) => {
       hasResendApi: Boolean(process.env.RESEND_API),
       resendApiLength: (process.env.RESEND_API || "").length,
     },
+    corsAllowlist: ALLOWED_ORIGINS,
   };
   log("health", "health check served:", body);
   res.status(200).json(body);
