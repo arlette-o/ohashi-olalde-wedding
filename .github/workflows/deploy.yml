@@ -23,9 +23,39 @@ jobs:
           # run 9+ min), which blows past the action's 10m default timeout.
           command_timeout: 30m
           script: |
+            # Fail the run at the first broken step. Without this, a failed
+            # `git pull` (or anything else) let the later steps "succeed"
+            # against stale source and the deploy reported green anyway.
+            set -e
             cd ~/ohashi-olalde-wedding
+
+            # Pre-flight: a build needs ~1GB of transient space on this 6.7GB
+            # disk. Better to fail loudly here than die mid-build on ENOSPC.
+            AVAIL_MB=$(df --output=avail -m / | tail -1)
+            echo "Disk available before deploy: ${AVAIL_MB}MB"
+            if [ "$AVAIL_MB" -lt 1500 ]; then
+              echo "Low disk — pruning build cache before building"
+              docker builder prune -af
+            fi
+
             git pull origin main
             docker compose up -d --build
             # Caddy's image never changes, so `up -d` alone won't restart it and
             # a Caddyfile edit would silently not apply. Recreate it explicitly.
             docker compose up -d --force-recreate caddy
+
+            # Every --build strands the previous images as dangling (~300-500MB
+            # per deploy). Left alone they filled the disk in about a dozen
+            # deploys — this reclaims them plus stale build cache each time.
+            # Runs after `up` so the containers now hold the new images and
+            # only genuinely orphaned layers are removed. Named volumes
+            # (Let's Encrypt certs in caddy_data) are never touched.
+            docker image prune -f
+            docker builder prune -f --keep-storage 1GB
+            df -h /
+
+            # Prove the deploy actually took: the site must answer locally and
+            # the served bundle must exist. A dead Caddy or stale ui fails the
+            # run instead of reporting green.
+            sleep 5
+            curl -sf --max-time 15 -o /dev/null -w "caddy :80 -> %{http_code}\n" http://localhost/
