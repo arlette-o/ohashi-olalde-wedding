@@ -1,0 +1,76 @@
+# Manually-triggered remote hands for the EC2 box. Exists because the deploy
+# SSH key lives only in GitHub secrets — there is no local SSH access — so
+# when the site goes dark this is the only way to see the machine.
+#
+# Runs from any branch:  gh workflow run diagnose.yml --ref <branch> -f action=diagnose
+name: Diagnose EC2
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "diagnose = read-only | restart = recreate containers | rebuild = prune caches then rebuild"
+        required: true
+        default: "diagnose"
+        type: choice
+        options:
+          - diagnose
+          - restart
+          - rebuild
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run on EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          command_timeout: 30m
+          script: |
+            set -x
+            cd ~/ohashi-olalde-wedding
+
+            echo "================ SYSTEM ================"
+            uptime
+            free -m
+            df -h /
+            echo "================ GIT ================"
+            git log --oneline -3
+            git status --short
+            echo "================ DOCKER ================"
+            docker system df || true
+            docker compose ps -a || true
+            echo "================ CADDY LOGS ================"
+            docker compose logs --tail=60 caddy || true
+            echo "================ BACKEND LOGS ================"
+            docker compose logs --tail=60 backend || true
+            echo "================ UI LOGS ================"
+            docker compose logs --tail=20 ui || true
+
+            if [ "${{ inputs.action }}" = "restart" ]; then
+              echo "================ RESTART ================"
+              docker compose up -d --force-recreate
+              sleep 10
+              docker compose ps
+            fi
+
+            if [ "${{ inputs.action }}" = "rebuild" ]; then
+              echo "================ PRUNE + REBUILD ================"
+              # Reclaims dangling images and build cache from repeated
+              # `up -d --build` runs; does not touch named volumes, so the
+              # Let's Encrypt certs in caddy_data survive.
+              docker system prune -af
+              df -h /
+              git pull origin main
+              docker compose up -d --build
+              docker compose up -d --force-recreate caddy
+              sleep 10
+              docker compose ps
+            fi
+
+            echo "================ LOCAL PROBES ================"
+            curl -s --max-time 10 -o /dev/null -w "caddy :443 -> %{http_code}\n" -k https://localhost/ || true
+            curl -s --max-time 10 http://localhost:80 -o /dev/null -w "caddy :80 -> %{http_code}\n" || true
