@@ -3,6 +3,10 @@ name: Deploy to EC2
 on:
   push:
     branches: [main]
+    # Don't burn a ~20-min EC2 rebuild when a push only touches CI config.
+    # (Skipped only if EVERY file in the push matches; code pushes still deploy.)
+    paths-ignore:
+      - ".github/**"
 
 jobs:
   deploy:
