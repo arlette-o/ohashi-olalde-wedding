@@ -9,12 +9,13 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "diagnose = read-only | restart = recreate containers | rebuild = prune caches then rebuild"
+        description: "diagnose = read-only | cleanup = free disk (caches, logs) | restart = recreate containers | rebuild = prune caches then rebuild"
         required: true
         default: "diagnose"
         type: choice
         options:
           - diagnose
+          - cleanup
           - restart
           - rebuild
 
@@ -43,12 +44,39 @@ jobs:
             echo "================ DOCKER ================"
             docker system df || true
             docker compose ps -a || true
+            echo "================ DISK USAGE ================"
+            # Biggest directories, so a full disk can be traced to its cause
+            # instead of guessed at. -x stays on the root filesystem.
+            sudo du -xh --max-depth=1 / 2>/dev/null | sort -h | tail -12 || true
+            sudo du -xh --max-depth=1 /var /var/lib /home/ubuntu 2>/dev/null | sort -h | tail -15 || true
+            du -sh ~/ohashi-olalde-wedding/.git ~/.npm ~/.cache 2>/dev/null || true
+            sudo journalctl --disk-usage || true
+            snap list --all 2>/dev/null | awk '/disabled/' || true
             echo "================ CADDY LOGS ================"
             docker compose logs --tail=60 caddy || true
             echo "================ BACKEND LOGS ================"
             docker compose logs --tail=60 backend || true
             echo "================ UI LOGS ================"
             docker compose logs --tail=20 ui || true
+
+            if [ "${{ inputs.action }}" = "cleanup" ]; then
+              echo "================ CLEANUP ================"
+              df -h /
+              # Only throwaway data: build cache, untagged images, old system
+              # logs, downloaded package files and npm's download cache. The
+              # running containers, their images and the caddy_data volume
+              # (Let's Encrypt certs) are untouched.
+              docker builder prune -af
+              docker image prune -f
+              sudo journalctl --vacuum-size=50M
+              sudo apt-get clean
+              rm -rf ~/.npm/_cacache
+              # Snap keeps old revisions of every snap around; drop them.
+              snap list --all | awk '/disabled/{print $1, $3}' | while read name rev; do
+                sudo snap remove "$name" --revision="$rev"
+              done
+              df -h /
+            fi
 
             if [ "${{ inputs.action }}" = "restart" ]; then
               echo "================ RESTART ================"
