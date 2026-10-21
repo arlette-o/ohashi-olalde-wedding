@@ -99,6 +99,11 @@ The script keeps any hand-tuned `rows`/`cols` and titles, and records each
 photo's size so the layout doesn't jump while images load. Captions go in the
 translation files under `OurStory.mosaic`, keyed by filename.
 
+The site-wide marble background (`public/marble-bg.jpg`) was grown from the
+small portrait photo in `photo-originals/marble.jpeg` by
+`src/scripts/marbleQuilt.py`, so it covers wide screens without being
+stretched. See that script's header to regenerate it.
+
 Images are cached by browsers for 30 days (`frontend/nginx.conf`), so to replace
 a photo give the new one a **new filename** — otherwise returning visitors may
 keep seeing the old one.

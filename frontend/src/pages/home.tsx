@@ -73,7 +73,7 @@ const globalStyles = (
         z-index: -1;
         background:
           linear-gradient(${MARBLE_TINT}, ${MARBLE_TINT}),
-          url('/marble.jpeg') center / cover no-repeat,
+          url('/marble-bg.jpg') center / cover no-repeat,
           ${PAGE_BG};
       }
 
