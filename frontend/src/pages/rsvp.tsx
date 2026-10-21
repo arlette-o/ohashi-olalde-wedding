@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { Guest } from "../api/guestAPI";
 import ChangeRsvpForm from "../components/changeRsvpForm";
 import { useLanguage } from "../context/languageContext";
-import { BORDER, CREAM, GOLD, PAGE_BG } from "../theme/colors";
+import { BORDER, CREAM, GOLD } from "../theme/colors";
 
 export default function RSVP() {
   const { lang } = useLanguage();
@@ -46,7 +46,6 @@ export default function RSVP() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: PAGE_BG,
         px: { xs: 2, sm: 4 },
         pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },

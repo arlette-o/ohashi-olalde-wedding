@@ -14,7 +14,7 @@ import DiscoballIcon from "../components/svg/discoBall";
 import ClockIcon from "../components/svg/clock";
 import RingsIcon from "../components/svg/rings";
 import PageHeading from "../components/pageHeading";
-import { BORDER, CREAM, GOLD, OLIVE, PAGE_BG } from "../theme/colors";
+import { BORDER, CREAM, GOLD, OLIVE } from "../theme/colors";
 
 import PlaceIcon from "@mui/icons-material/Place";
 import EventIcon from "@mui/icons-material/Event";
@@ -103,7 +103,6 @@ export default function WeddingInfo() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: PAGE_BG,
         px: { xs: 2, sm: 3, md: 6 },
         pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },

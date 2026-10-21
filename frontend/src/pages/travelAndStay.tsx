@@ -13,7 +13,6 @@ import {
   GOLD_DARK,
   OLIVE,
   OLIVE_HOVER,
-  PAGE_BG,
 } from "../theme/colors";
 
 const COORDS = "32.5165,-116.9725";
@@ -556,7 +555,6 @@ export default function TravelAndStay() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: PAGE_BG,
         px: { xs: 2, sm: 3, md: 6 },
         pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },

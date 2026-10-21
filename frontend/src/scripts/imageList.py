@@ -42,39 +42,50 @@ def ratio_to_shape(ratio: float) -> dict:
     return {"rows": 1, "cols": 1}       # roughly square
 
 
-def load_existing_titles(path: str) -> dict:
+def load_existing_entries(path: str) -> dict:
     """
-    Best-effort: if an imagelist.ts already exists, preserve any titles
-    the user has hand-edited, keyed by image path.
+    Best-effort: if an imagelist.ts already exists, preserve any titles and
+    rows/cols the user has hand-edited, keyed by image path.
     """
-    titles = {}
+    entries = {}
     if not os.path.exists(path):
-        return titles
+        return entries
 
     try:
         content = Path(path).read_text(encoding="utf-8")
-        pattern = re.compile(
-            r'img:\s*"([^"]+)"[^}]*?title:\s*"([^"]*)"', re.DOTALL
-        )
-        for match in pattern.finditer(content):
-            titles[match.group(1)] = match.group(2)
+        for block in re.findall(r"\{([^{}]*)\}", content):
+            img = re.search(r'img:\s*"([^"]+)"', block)
+            if not img:
+                continue
+            entry = {}
+            title = re.search(r'title:\s*"([^"]*)"', block)
+            if title:
+                entry["title"] = title.group(1)
+            for key in ("rows", "cols"):
+                m = re.search(rf"{key}:\s*(\d+)", block)
+                if m:
+                    entry[key] = int(m.group(1))
+            entries[img.group(1)] = entry
     except Exception:
         # ignore parse failures, just fall back to defaults
         pass
-    return titles
+    return entries
 
 
 def main():
-    existing_titles = load_existing_titles(OUTPUT_FILE)
+    existing = load_existing_entries(OUTPUT_FILE)
 
     image_dir = Path(IMAGE_DIR)
     if not image_dir.is_dir():
         print(f"Image directory not found: {IMAGE_DIR}")
         return
 
+    # Case-insensitive so the mosaic order matches Finder's, which is what
+    # the hand-tuned rows/cols were laid out against.
     files = sorted(
-        f for f in os.listdir(image_dir)
-        if Path(f).suffix.lower() in VALID_EXT
+        (f for f in os.listdir(image_dir)
+         if Path(f).suffix.lower() in VALID_EXT),
+        key=str.lower,
     )
 
     items = []
@@ -92,12 +103,16 @@ def main():
 
         ratio = width / height
         shape = ratio_to_shape(ratio)
+        prev = existing.get(img_path, {})
 
         items.append({
             "img": img_path,
-            "title": existing_titles.get(img_path, DEFAULT_TITLE),
-            "rows": shape["rows"],
-            "cols": shape["cols"],
+            "title": prev.get("title", DEFAULT_TITLE),
+            "rows": prev.get("rows", shape["rows"]),
+            "cols": prev.get("cols", shape["cols"]),
+            # Written so the <img> can reserve its space before it loads.
+            "width": width,
+            "height": height,
         })
 
     body_lines = []
@@ -108,10 +123,22 @@ def main():
             f'    title: "{item["title"]}",\n'
             f'    rows: {item["rows"]},\n'
             f'    cols: {item["cols"]},\n'
+            f'    width: {item["width"]},\n'
+            f'    height: {item["height"]},\n'
             "  },"
         )
 
-    output = "export const imageList = [\n" + "\n".join(body_lines) + "\n];\n"
+    header = (
+        "export const imageList: {\n"
+        "  img: string;\n"
+        "  title: string;\n"
+        "  rows?: number;\n"
+        "  cols?: number;\n"
+        "  width: number;\n"
+        "  height: number;\n"
+        "}[] = [\n"
+    )
+    output = header + "\n".join(body_lines) + "\n];\n"
 
     output_path = Path(OUTPUT_FILE)
     output_path.parent.mkdir(parents=True, exist_ok=True)

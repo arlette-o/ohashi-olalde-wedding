@@ -12,7 +12,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useLanguage } from "../context/languageContext";
 import SubmitQuestion from "../components/submitQuestion";
 import PageHeading from "../components/pageHeading";
-import { BORDER, CREAM, GOLD_DARK, OLIVE, PAGE_BG } from "../theme/colors";
+import { BORDER, CREAM, GOLD_DARK, OLIVE } from "../theme/colors";
 
 // Cream cards with the site border, replacing the default gray accordions.
 const accordionSx = {
@@ -56,7 +56,6 @@ export default function FAQs() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: PAGE_BG,
         px: { xs: 2, sm: 4, md: 6 },
         pt: { xs: 10, md: 12 },
         pb: { xs: 6, md: 10 },

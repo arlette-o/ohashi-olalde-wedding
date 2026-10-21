@@ -22,6 +22,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import LanguageMenu from "../components/languageMenu";
 import { useLanguage } from "../context/languageContext";
 import MonogramIcon from "../components/svg/monogram";
+import { MARBLE_TINT, PAGE_BG } from "../theme/colors";
 
 const weddingTheme = createTheme({
   palette: {
@@ -60,6 +61,21 @@ const globalStyles = (
       html { overflow-x: hidden; }
       body, #root { overflow-x: clip; }
       html { scroll-behavior: smooth; }
+
+      /* Site-wide marble. A fixed layer rather than 'background-attachment:
+         fixed', which iOS Safari ignores — and sized to the viewport rather
+         than the page, so the photo isn't stretched down very long pages. */
+      body { background-color: ${PAGE_BG}; }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(${MARBLE_TINT}, ${MARBLE_TINT}),
+          url('/marble.jpeg') center / cover no-repeat,
+          ${PAGE_BG};
+      }
 
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {

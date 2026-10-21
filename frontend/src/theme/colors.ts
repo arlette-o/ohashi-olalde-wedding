@@ -8,7 +8,10 @@ export const GOLD = "#c9bb8e";
 // this darker mix instead.
 export const GOLD_DARK = "#9a8b57";
 export const DARK_OLIVE = "#2f3a2b";
-// The olive every page uses as its background.
+// The olive the marble background falls back to while it loads.
 export const PAGE_BG = "#6a6b4a";
+// Laid over the marble so cream text keeps roughly the contrast it had on
+// plain PAGE_BG (bare marble drops to ~1.5:1 in its lightest patches).
+export const MARBLE_TINT = "rgba(79, 82, 51, 0.6)";
 // Hover shade for solid-olive buttons (from the Travel & Stay "Book" button).
 export const OLIVE_HOVER = "#3d402a";
