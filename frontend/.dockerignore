@@ -4,4 +4,7 @@ dist
 .env
 .env.*
 .git
-.gitignorephoto-originals
+.gitignore
+# Full-size photo originals: never served, and ~150MB the EC2 build disk
+# cannot spare.
+photo-originals
